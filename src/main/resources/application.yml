@@ -18,7 +18,7 @@ spring:
   devtools:
     restart:
       enabled: true #开启热配置
-      additional-paths: src/main/java #热配置监听目录
+      additional-paths: src/main #热配置监听目录
 mybatis:
   mapper-locations: classpath:com.westos.Information.dao/*.xml #对应mapper映射xml文件的所在路径
   type-aliases-package: com.westos.Information.bean  # 对应实体类的路径
