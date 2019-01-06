@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+		<title>管理学生信息</title>
+		<link rel="stylesheet" href="css/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+		<script src="js/jquery.min.js" type="text/javascript"></script>
+		<script src="css/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/axios.min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/util.css"/>
+	</head>
+	<body style="background-color: #eee;" onload="getSheng();getCity()">
+		<div id="app" class="container">
+
+			<div class="row">
+				<div class="col-md-12">
+					<!-- 顶部大图 -->
+					<div style="background-color: #fff;">
+						<div style="height: 220px; background-image: url(img/wstop.jpg);" class="pm"></div>
+						<!-- 导航栏 -->
+						<nav class="navbar navbar-default" role="navigation">
+							<div class="container-fluid">
+								<div class="navbar-header">
+									<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+										<span class="sr-only">切换导航</span>
+										<span class="icon-bar"></span>
+										<span class="icon-bar"></span>
+										<span class="icon-bar"></span>
+									</button>
+									<a class="navbar-brand" href="/login/manager.html">管理员</a>
+								</div>
+								<div class="collapse navbar-collapse" id="example-navbar-collapse">
+									<ul class="nav navbar-nav">
+										<li>
+											<a href="/admin/managingStudents">学生管理</a>
+										</li>
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+												专业开设
+												<b class="caret"></b>
+											</a>
+											<ul class="dropdown-menu">
+												<li>
+													<a href="#">班级管理</a>
+												</li>
+												<li class="divider"></li>
+												<li>
+													<a href="#">专业管理</a>
+												</li>
+												<li class="divider"></li>
+												<li>
+													<a href="#">学院管理</a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a href="/admin/managingStudents">课程管理</a>
+										</li>
+										<li class="dropdown">
+											<a href="#">成绩管理</a>
+										</li>
+										<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+												信息查询
+												<b class="caret"></b>
+											</a>
+											<ul class="dropdown-menu">
+												<li>
+													<a href="#">学生查询</a>
+												</li>
+												<li class="divider"></li>
+												<li>
+													<a href="#">成绩查询</a>
+												</li>
+												<li class="divider"></li>
+												<li>
+													<a href="#">课程查询</a>
+												</li>
+												<li class="divider"></li>
+												<li>
+													<a href="#">班级查询</a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a href="/login/stulogout">注销</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</nav>
+						<!-- 学生信息输入 -->
+						<div class="row" style="margin: 0 10px;">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="name">学号</label>
+									<input type="text" class="form-control" placeholder="按班级号+编号的格式,只支持数字,最大6位" v-model="newstudent.stuid" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"
+									 onafterpaste="this.value=this.value.replace(/[^0-9]/g,'')" maxlength="6" />
+								</div>
+								<div class="form-group">
+									<label for="name">姓名</label>
+									<input type="text" class="form-control" placeholder="姓名" v-model="newstudent.name" />
+								</div>
+								<div class="form-group">
+									<label for="name">性别</label>
+									<select class="form-control" v-model="newstudent.sex">
+										<option>男</option>
+										<option>女</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="name">民族</label>
+									<input type="text" class="form-control" placeholder="民族" v-model="newstudent.nation" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<div class="row">
+										<div class="col-md-4">
+											<label for="name">出生年:</label>
+											<select class="form-control" v-on:change="spliceBirthday()" v-model="birthyear">
+												<option v-for="item in year">{{item}}</option>
+											</select>
+										</div>
+										<div class="col-md-4">
+											<label for="name">出生月:</label>
+											<select class="form-control" v-on:change="spliceBirthday()" v-model="birthmonth">
+												<option v-for="item in month">{{item}}</option>
+											</select>
+										</div>
+										<div class="col-md-4">
+											<label for="name">出生日:</label>
+											<select class="form-control" v-on:change="spliceBirthday()" v-model="birthday">
+												<option v-for="item in day">{{item}}</option>
+											</select>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<div class="row">
+										<div class="col-md-6">
+											<label for="name">省：</label>
+											<select class="form-control" v-model="city.shengfen" v-on:change="getshi()">
+												<option v-for="item in sheng">{{item}}</option>
+											</select>
+										</div>
+										<div class="col-md-6">
+											<label for="name">市：</label>
+											<select class="form-control" v-model="chengshi">
+												<option v-for="item in shi">{{item}}</option>
+											</select>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="name">手机</label>
+									<input type="text" class="form-control" placeholder="手机" v-model="newstudent.phone" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"
+									 onafterpaste="this.value=this.value.replace(/[^0-9]/g,'')" maxlength="11" />
+								</div>
+								<div class="form-group">
+									<label for="name">学院</label>
+									<select class="form-control" v-model="newstudent.xuename" v-on:change="packagingCollege()">
+										<option v-for="item in xuelist">{{item.xuename}}</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="name">专业</label>
+									<select class="form-control" v-model="newstudent.zhuanname" v-on:change="packagingSpecialty()">
+										<option v-for="item in zhuanlist">{{item.zhuanname}}</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="name">班级</label>
+									<select class="form-control" v-model="newstudent.banname" v-on:change="packageClass()">
+										<option v-for="item in banlist">{{item.banname}}</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<div class="row">
+										<div class="col-md-4">
+											<label for="name">入学年:</label>
+											<select class="form-control" v-on:change="spliceadmission()" v-model="rxyear">
+												<option v-for="item in schyear">{{item}}</option>
+											</select>
+										</div>
+										<div class="col-md-4">
+											<label for="name">入学月:</label>
+											<select class="form-control" v-on:change="spliceadmission()" v-model="rxyue">
+												<option v-for="item in month">{{item}}</option>
+											</select>
+										</div>
+										<div class="col-md-4">
+											<label for="name">入学日:</label>
+											<select class="form-control" v-on:change="spliceadmission()" v-model="rxday">
+												<option v-for="item in rday">{{item}}</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="name">密码</label>
+									<input type="text" class="form-control" placeholder="学生的账户密码,最大10位" v-model="newstudent.pass" maxlength="10" />
+								</div>
+							</div>
+						</div>
+						<!-- 按钮 -->
+						<div class="row" style="margin: 0 10px;">
+							<div class="col-md-12 text-center">
+								<p style="color: #ff6666; font-size: 15px">{{msg}}</p>
+							</div>
+							<div class="col-md-2 col-md-offset-3">
+								<p>
+									<button type="button" class="btn btn-info btn-block" v-on:click="add()">添加
+									</button>
+								</p>
+							</div>
+							<div class="col-md-2">
+								<p>
+									<button type="button" class="btn btn-warning btn-block" v-on:click="update()">修改
+									</button>
+								</p>
+							</div>
+							<div class="col-md-2">
+								<p>
+									<button type="button" class="btn btn-success btn-block" v-on:click="clear()">清除
+									</button>
+								</p>
+							</div>
+						</div>
+
+
+						<!-- 学生信息展示 -->
+						<div class="table-responsive" style="padding-left: 20px;padding-right: 20px;">
+							<table class="table table-hover table-condensed">
+								<caption>所有学生</caption>
+								<thead>
+									<tr>
+										<th>学号</th>
+										<th>姓名</th>
+										<th>性别</th>
+										<th>民族</th>
+										<th>生日</th>
+										<th>籍贯</th>
+										<th>手机</th>
+										<th>学院</th>
+										<th>专业</th>
+										<th>班级</th>
+										<th>入学时间</th>
+										<th>密码</th>
+										<th>删除</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr v-for="(item,index) in studentlist" v-on:click="updatehtml(item)">
+										<!--item当前对象-->
+										<!--index下标-->
+										<td>{{item.stuid}}</td>
+										<td>{{item.name}}</td>
+										<td>{{item.sex}}</td>
+										<td>{{item.nation}}</td>
+										<td>{{item.birth.substr(0, 10)}}</td>
+										<td>{{item.addr}}</td>
+										<td>{{item.phone}}</td>
+										<td>{{item.xuename}}</td>
+										<td>{{item.zhuanname}}</td>
+										<td>{{item.banname}}</td>
+										<td>{{item.enrol.substr(0, 10)}}</td>
+										<td>{{item.pass}}</td>
+										<td v-on:click="remove(item)">
+												删除
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!-- 页脚 -->
+						<div class="jumbotron text-center " style="margin-bottom: 0;margin-top: 35px;background-color: #eff4fa;padding-top: 12.5px;padding-bottom: 12.5px;">
+							<a href="#">关于项目</a> |
+							<a href="#">服务条款</a> |
+							<a href="#">隐私政策</a> |
+							<a href="#">客服中心</a> |
+							<a href="#">联系我们</a> |
+							<a href="#"> 帮助中心</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</body>
+
+	<script>
+		var vue = new Vue({
+			el: '#app',
+			data: {
+				msg: '',
+				studentlist: [],
+				xuelist: [],
+				zhuanlist: [],
+				banlist: [],
+				zhuanye: {
+					zhuanid: '',
+					xueid: '',
+					zhuanname: ''
+				},
+				xueyuan: {
+					xueid: '',
+					xuename: ''
+				},
+				banji: {
+					banid: '',
+					banname: '',
+					zhuanid: ''
+				},
+				student: {
+					stuid: '',
+					name: '',
+					sex: '',
+					nation: '',
+					birth: '',
+					addr: '',
+					phone: '',
+					xueid: '',
+					xuename: '',
+					zhuanid: '',
+					zhuanname: '',
+					banid: '',
+					banname: '',
+					enrol: '',
+					pass: ''
+				},
+				newstudent: {
+					stuid: '',
+					name: '',
+					sex: '男',
+					nation: '汉',
+					birth: '1990-12-01',
+					addr: '',
+					phone: '',
+					xueid: '',
+					xuename: '',
+					zhuanid: '',
+					zhuanname: '',
+					banid: '',
+					banname: '',
+					enrol: '2015-07-01',
+					pass: '123456'
+				},
+				schyear: [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016,
+					2017, 2018, 2019, 2020
+				],
+				year: [1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007,
+					2008, 2009, 2010
+				],
+				month: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+				day: ['01', '02', '03', '04', '05', '06', '07', '08', '09', 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+					23, 24, 25, 26, 27, 28, 29,
+					30
+				],
+				rday: ['01', '02', '03', '04', '05', '06', '07', '08', '09', 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+					23, 24, 25, 26, 27, 28, 29,
+					30
+				],
+				birthyear: '1990',
+				birthmonth: '12',
+				birthday: '01',
+				rxyear: '2015',
+				rxyue: '07',
+				rxday: '01',
+				sheng: [],
+				shi: [],
+				chengshi: '',
+				city: {
+					shengfen: '陕西省'
+				},
+				snapid:""
+			},
+			methods: {
+				// 查找所有的学生
+				refresh: function() {
+					axios.get('/admin/listall').then(function(result) {
+						vue.studentlist = [];
+						for (var i = 0; i < result.data.length; i++) {
+							//注意vue下的数组操作一定使用push等
+							vue.studentlist.push(result.data[i]);
+						}
+						vue.newstudent.stuid = result.data[result.data.length - 1].stuid + 1;
+					}).catch(function(err) {
+						console.log(err)
+					});
+				},
+				//添加
+				add: function() {
+					// 拼接地区
+					vue.newstudent.addr = vue.city.shengfen + vue.chengshi + "市";
+					if (vue.newstudent.stuid == "") {
+						vue.msg = "学号不能为空";
+					} else if (vue.newstudent.name == "") {
+						vue.msg = "姓名不能为空";
+					} else if (vue.newstudent.phone == "") {
+						vue.msg = "手机号不能为空";
+					} else if (vue.newstudent.phone.length < 11) {
+						vue.msg = "手机号格式错误";
+					} else if (vue.newstudent.pass == "") {
+						vue.msg = "密码不能为空";
+					} else if (vue.newstudent.pass.length < 6) {
+						vue.msg = "密码必须大于等于6位";
+					}  else if (vue.newstudent.xueid=="") {
+                        vue.msg = "学院不能为空";
+                    } else if (vue.newstudent.zhuanid=="") {
+                        vue.msg = "专业不能为空";
+                    } else if (vue.newstudent.banid=="") {
+                        vue.msg = "班级不能为空";
+                    }else {
+						axios.post('/admin/add', vue.newstudent).then(function(value) {
+
+							vue.msg = value.data;
+							vue.refresh();
+						}).catch(function(reason) {
+                            console.log(reason);
+						});
+					}
+				},
+				//修改
+				update: function() {
+                    // 拼接地区
+                    vue.newstudent.addr = vue.city.shengfen + vue.chengshi + "市";
+                    if (vue.newstudent.stuid != vue.snapid) {
+                        vue.msg = "修改学生时候不能修改学生的id,修改id请添加新的学生";
+                        vue.newstudent.stuid = vue.snapid;
+                    } else if (vue.newstudent.name == "") {
+                        vue.msg = "姓名不能为空";
+                    } else if (vue.newstudent.phone == "") {
+                        vue.msg = "手机号不能为空";
+                    } else if (vue.newstudent.phone.length < 11) {
+                        vue.msg = "手机号格式错误";
+                    } else if (vue.newstudent.pass == "") {
+                        vue.msg = "密码不能为空";
+                    } else if (vue.newstudent.pass.length < 6) {
+                        vue.msg = "密码必须大于等于6位";
+                    }  else if (vue.newstudent.xueid=="") {
+                        vue.msg = "学院不能为空";
+                    } else if (vue.newstudent.zhuanid=="") {
+                        vue.msg = "专业不能为空";
+                    } else if (vue.newstudent.banid=="") {
+                        vue.msg = "班级不能为空";
+                    }else {
+                        axios.post('/admin/modifyStudent', vue.newstudent).then(function(value) {
+                            vue.msg = value.data;
+                            vue.refresh();
+                        }).catch(function(reason) {
+                            console.log(reason);
+                        });
+                    }
+				},
+                //修改页面
+                updatehtml:function(item){
+				    vue.newstudent.stuid=item.stuid;
+				    vue.snapid=item.stuid;
+				    vue.newstudent.name=item.name;
+				    vue.newstudent.sex=item.sex;
+				    vue.newstudent.nation=item.nation;
+				    vue.newstudent.birth=item.birth;
+				    vue.newstudent.addr="";
+				    vue.city.shengfen="";
+				    vue.chengshi="";
+				    vue.newstudent.phone=item.phone;
+				    vue.newstudent.xueid="";
+				    vue.newstudent.xuename="";
+				    vue.newstudent.zhuanid="";
+				    vue.newstudent.zhuanname="";
+				    vue.newstudent.banname="";
+				    vue.newstudent.banid="";
+				    vue.newstudent.enrol=item.enrol;
+				    vue.newstudent.pass=item.pass;
+				},
+				//删除
+				remove:function(item){
+					if(vue.msg=="确认删除,学号:"+item.stuid+",姓名:"+item.name+"?"){
+						axios.post('/admin/delete',item).then(function (value) {
+							vue.msg = value.data;
+							vue.clear();
+						}).catch(function (reason) {
+							console.log(reason);
+						});
+					}else{
+						vue.msg="确认删除,学号:"+item.stuid+",姓名:"+item.name+"?";
+					}
+				},
+				//清除
+				clear: function() {
+					window.location.href = "/admin/managingStudents";
+				},
+				//拼接生日
+				spliceBirthday: function() {
+					vue.newstudent.birth = vue.birthyear + "-" + vue.birthmonth + "-" + vue.birthday;
+					vue.day = vue.dateCalculationbirth(vue.birthyear, vue.birthmonth);
+
+				},
+				//拼接入学日期
+				spliceadmission: function() {
+					vue.newstudent.enrol = vue.rxyear + "-" + vue.rxyue + "-" + vue.rxday;
+					vue.rday = vue.dateCalculationbirth(vue.rxyear, vue.rxyue);
+
+				},
+				//计算日期
+				dateCalculationbirth: function(birthyear, birthmonth) {
+					var d = new Date();
+					d.setFullYear(birthyear, parseInt(birthmonth), 0);
+					var c = d.getDate();
+					if (c == 30) {
+						var day = ['01', '02', '03', '04', '05', '06', '07', '08', '09', 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+							21, 22,
+							23, 24, 25, 26, 27, 28, 29,
+							30
+						];
+						return day;
+					} else if (c == 31) {
+						var day = ['01', '02', '03', '04', '05', '06', '07', '08', '09', 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+							21, 22,
+							23, 24, 25, 26, 27, 28, 29,
+							30, 31
+						];
+						return day;
+					} else if (c == 29) {
+						var day = ['01', '02', '03', '04', '05', '06', '07', '08', '09', 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+							21, 22,
+							23, 24, 25, 26, 27, 28, 29
+						];
+						return day;
+					} else if (c == 28) {
+						var day = ['01', '02', '03', '04', '05', '06', '07', '08', '09', 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+							21, 22,
+							23, 24, 25, 26, 27, 28
+						];
+						return day;
+					}
+				},
+				//获取学院列表
+				getAListOfColleges: function() {
+					vue.xuelist = [];
+					axios.get('/admin/allColleges').then(function(value) {
+						for (var i = 0; i < value.data.length; i++) {
+							vue.xuelist.push(value.data[i]);
+						}
+						vue.newstudent.xuename = value.data[0].xuename;
+						vue.packagingCollege();
+					}).catch(function(reason) {
+						console.log(reason);
+					});
+				},
+				//封装学院对象给学院id赋值
+				packagingCollege: function() {
+					// 通过学院名获取学院id
+					axios.get('/admin/allColleges').then(function(value) {
+						for (var i = 0; i < value.data.length; i++) {
+							if (value.data[i].xuename == vue.newstudent.xuename) {
+								vue.newstudent.xueid = value.data[i].xueid;
+								vue.xueyuan = value.data[i];
+								vue.professionalList();
+							}
+						}
+					}).catch(function(reason) {
+						console.log(reason);
+					});
+
+				},
+				//获取专业列表
+				professionalList: function() {
+					vue.zhuanlist = [];
+					axios.post('/admin/xuetozhuan', vue.xueyuan).then(function(value) {
+						for (var i = 0; i < value.data.length; i++) {
+							vue.zhuanlist.push(value.data[i]);
+						}
+						vue.newstudent.zhuanname = value.data[0].zhuanname;
+						//通过专业名查找专业id,赋值给newstudent和专业对象
+						vue.packagingSpecialty();
+					}).catch(function(reason) {
+						console.log(reason);
+					});
+				},
+				//封装专业id
+				packagingSpecialty: function() {
+					axios.post('/admin/xuetozhuan', vue.xueyuan).then(function(value) {
+						for (var i = 0; i < value.data.length; i++) {
+							if (value.data[i].zhuanname == vue.newstudent.zhuanname) {
+								vue.newstudent.zhuanid = value.data[i].zhuanid;
+								vue.zhuanye = value.data[i];
+								vue.getClassList();
+							}
+						}
+					}).catch(function(reason) {
+						console.log(reason);
+					});
+
+				},
+				//获取班级列表
+				getClassList: function() {
+					vue.banlist = [];
+					axios.post('/admin/zhuantoban', vue.zhuanye).then(function(value) {
+						for (var i = 0; i < value.data.length; i++) {
+							vue.banlist.push(value.data[i]);
+						}
+						vue.newstudent.banname = value.data[0].banname;
+						//通过班级名查找班级id,赋值给newstudent和班级对象
+						vue.packageClass();
+					}).catch(function(reason) {
+						console.log(reason);
+					});
+
+				},
+				//封装班级id
+				packageClass: function() {
+					axios.post('/admin/zhuantoban', vue.zhuanye).then(function(value) {
+						for (var i = 0; i < value.data.length; i++) {
+							if (value.data[i].banname == vue.newstudent.banname) {
+								vue.newstudent.banid = value.data[i].banid;
+								vue.banji = value.data[i];
+							}
+						}
+					}).catch(function(reason) {
+						console.log(reason);
+					});
+				},
+				getsheng: function() {
+					axios.get('/city/sheng').then(function(value) {
+						for (var i = 0; i < value.data.length; i++) {
+							vue.sheng.push(value.data[i]);
+						}
+						vue.getshi();
+					}).catch(function(reason) {
+						console.log(reason);
+					});
+				},
+				getshi: function() {
+					vue.shi = [];
+					axios.post('/city/shi', vue.city).then(function(value) {
+						for (var i = 0; i < value.data.length; i++) {
+							vue.shi.push(value.data[i]);
+						}
+						vue.chengshi = value.data[0];
+						//拼接
+					}).catch(function(reason) {
+						console.log(reason);
+					});
+				}
+			},
+			mounted: function() {
+				this.$nextTick(function() {
+					// 代码保证 this.$el 在 document 中
+					vue.refresh();
+					vue.day = vue.dateCalculationbirth(vue.birthyear, vue.birthmonth);
+					vue.rday = vue.dateCalculationbirth(vue.rxyear, vue.rxyue);
+					vue.getAListOfColleges();
+					vue.professionalList();
+					vue.getClassList();
+					vue.getsheng();
+				})
+
+			}
+		});
+	</script>
+
+</html>

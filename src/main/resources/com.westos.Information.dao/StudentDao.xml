@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.westos.Information.dao.StudentDao">
+
+    <select id="listAllStudent" resultType="com.westos.Information.bean.Student">
+        select * from student
+    </select>
+    <!--通过学号查找单个学生-->
+    <select id="currentStudent" resultType="com.westos.Information.bean.Student">
+        select * from student where stuid=#{stuid}
+    </select>
+    <!--修改当前学生的密码-->
+    <update id="changePass" parameterType="com.westos.Information.bean.Student">
+        update student
+        <set>
+            pass=#{pass}
+        </set>
+          <where>
+              stuid=#{stuid}
+          </where>
+    </update>
+    <!--修改学生-->
+    <update id="modifyStudent" parameterType="com.westos.Information.bean.Student">
+        update student
+        <set>
+            name=#{name},
+            sex=#{sex},
+            nation=#{nation},
+            birth=#{birth},
+            addr=#{addr},
+            phone=#{phone},
+            xueid=#{xueid},
+            zhuanid=#{zhuanid},
+            banid=#{banid},
+            enrol=#{enrol}
+        </set>
+        <where>
+            stuid=#{stuid}
+        </where>
+    </update>
+
+    <!--添加学生-->
+    <insert id="addstudent" parameterType="com.westos.Information.bean.Student">
+        insert into student (stuid, name, sex, nation, birth, addr, phone, xueid, zhuanid, banid, enrol,pass)
+        values (
+        #{stuid},
+        #{name},
+        #{sex},
+        #{nation},
+        #{birth},
+        #{addr},
+        #{phone},
+        #{xueid},
+        #{zhuanid},
+        #{banid},
+        #{enrol},
+        #{pass}
+        )
+    </insert>
+
+    <delete id="deleteStudent" parameterType="com.westos.Information.bean.Student">
+        delete from student where stuid=#{stuid}
+    </delete>
+</mapper>
