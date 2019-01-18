@@ -3,7 +3,7 @@ server:
   port: 9090
 #管理员账户密码
 administrator-account:
-  account: 1234
+  account: 123
   password: admin
 #  配置mybatis
 spring:

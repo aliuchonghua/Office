@@ -2,6 +2,10 @@ html {
 	background-color: #3396fb;
 }
 
+#logozcqy {
+	padding-top: 20px;
+}
+
 .header {
 	width: 100%;
 	height: 63px;
@@ -19,18 +23,14 @@ html {
 	bottom: 0;
 }
 
-.image1 {
-	height: 63px;
-	margin-left: 20px
-}
-
 .image2 {
-	width: 300px;
-	height: 300px;
+	width: 400px;
+	height: 400px;
+	margin-top: 80px;
 }
 
 .div1 {
-	padding-top: 150px;
+	/* padding-top: 150px; */
 	background: red linear-gradient(to bottom, #0469d1, #3396fb);
 }
 
@@ -42,6 +42,7 @@ p {
 	border: 1px solid #dde2e7;
 	border-radius: 4px;
 	background-color: #edf2f7;
+	margin-top: 150px;
 
 }
 
@@ -66,6 +67,15 @@ p {
 	margin-top: 20px;
 }
 
+#rem {
+	margin-top: 20px;
+	padding: 6px 12px 6px 12px;
+}
+
+#yzm {
+	margin-top: 20px;
+}
+
 .div5 {
 	margin-top: 15px;
 	width: 200px;
@@ -86,8 +96,44 @@ p {
 	font-family: 微软雅黑;
 }
 
-#app {
+#log {
 	margin: 0 auto;
 	width: 298px;
 	height: 278px
+}
+
+#image1 {
+	height: 63px;
+	margin-left: 20px;
+}
+#imageb{
+	height: 63px;
+	margin-left: 10px;
+	display: none;
+}
+#zcqy{
+	display: none;
+}
+
+@media only screen and (max-width:600px) {
+	#image1 {
+		display: none;
+	}
+	#imageb{
+		height: 63px;
+		margin-left: 10px;
+		display: inline;
+	}
+}
+@media only screen and (max-width:1000px) {
+	#logozcqy {
+		display: none;
+	}
+	#zcqy{
+		margin-left: 160px;
+		display: inline;
+	}
+	.div6 {
+		margin: 20px 0;
+	}
 }

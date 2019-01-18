@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Student {
-    private Integer stuid;
+    private String stuid;
     private String name;
     private String sex;
     private String nation;
@@ -63,11 +63,11 @@ public class Student {
         return Objects.hash(stuid, name, sex, nation, birth, addr, phone, xueid, zhuanid, banid, enrol, pass);
     }
 
-    public Integer getStuid() {
+    public String getStuid() {
         return stuid;
     }
 
-    public void setStuid(Integer stuid) {
+    public void setStuid(String stuid) {
         this.stuid = stuid;
     }
 
