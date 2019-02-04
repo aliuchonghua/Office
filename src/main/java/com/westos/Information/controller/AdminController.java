@@ -1,5 +1,6 @@
 package com.westos.Information.controller;
 
+import cn.hutool.core.util.XmlUtil;
 import com.westos.Information.bean.Banji;
 import com.westos.Information.bean.Student;
 import com.westos.Information.bean.Xueyuan;
@@ -9,14 +10,16 @@ import com.westos.Information.service.StudentService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/admin")
@@ -25,7 +28,6 @@ public class AdminController {
     private StudentService studentService;
     @Autowired
     private AdminService adminService;
-
     //跳转到学生管理页面
     @RequestMapping("/managingStudents")
     public void managingStudents(HttpServletResponse response) {
@@ -54,6 +56,8 @@ public class AdminController {
             return studentService.checkStudentConflict(student);
         }
     }
+
+
 
     //修改学生
     @RequestMapping(value = "/modifyStudent", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -84,5 +88,14 @@ public class AdminController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public String deleteStudent(@RequestBody Student student) {
         return studentService.deleteStudent(student);
+    }
+
+    public String[] parseXml(String xml){
+        String response[] = new String[2];
+        Document dom = XmlUtil.parseXml(xml);
+        Element rootElement = XmlUtil.getRootElement(dom);
+        response[0] = XmlUtil.elementText(XmlUtil.getElement(rootElement, "Header"), "RetuCode");//返回编码
+        response[1] = XmlUtil.elementText(XmlUtil.getElement(rootElement, "Header"), "RetuInfo");//返回信息
+        return response;
     }
 }

@@ -16,9 +16,27 @@
 				<!--item当前对象-->
 				<!--index下标-->
 				<li v-for="(item,index) in studentlist">
-					{{index}} {{item.stuid}} {{item.name}}
+					{{index}} {{item.stuid}} {{item.name}} {{item.dqbm}} 
 				</li>
 			</ul>
+			<hr >
+			
+				<ul>
+					<li v-for="(item,index) in studentlist" >
+						<a href="javascript:void(0);" v-on:click="hh(item.name)">{{item.name}}</a>
+					</li>
+				</ul>
+			
+			<hr >
+			v-if
+			<ul>
+				<!--item当前对象-->
+				<!--index下标-->
+				<li v-for="(item,index) in studentlist" v-if="item.name==dqbm">
+					{{index}} {{item.stuid}} {{item.name}}
+				</li>
+			</ul> 
+			<hr >
 			<input type="text" v-model="studentindex.stuid" />
 			<button type="button" v-on:click="chazhao()">查找</button>
 			<ul>
@@ -55,7 +73,8 @@
 					banid:'',
 					phone:'',	
 					pass:''
-				}
+				},
+				dqbm:'王萌'
 			},
 			methods:{
 				refresh:function(){
@@ -65,6 +84,7 @@
                             //注意vue下的数组操作一定使用push等
                             vue.studentlist.push(result.data[i]);
                         }
+
 					}).catch(function(err){
 						console.log(err)
 					});
@@ -76,6 +96,9 @@
 						console.log(err)
 					})
 				},
+				hh:function(obj){
+					console.log(obj);
+				}
 
 			},
 			mounted:function(){

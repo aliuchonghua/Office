@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/login")
@@ -28,6 +29,7 @@ public class LoginController {
     //登陆
     @RequestMapping(value = "/stulogin", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Map login(@RequestBody Student student, HttpServletRequest request) throws IOException {
+
         HttpSession session = request.getSession();
         Map msg=new HashMap();
         if (StringUtils.equals(student.getStuid().toString(),adminconfig.getAccount())) {
