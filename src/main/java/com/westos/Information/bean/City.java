@@ -3,33 +3,55 @@ package com.westos.Information.bean;
 import java.util.Objects;
 
 public class City {
-    private String shengfen;
+   private String sheng;
+   private String shi;
+   private String xian;
 
-    @Override
-    public String toString() {
-        return "City{" +
-                "shengfen='" + shengfen + '\'' +
-                '}';
-    }
+   public String getSheng() {
+      return sheng;
+   }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        City city = (City) o;
-        return Objects.equals(shengfen, city.shengfen);
-    }
+   public void setSheng(String sheng) {
+      this.sheng = sheng;
+   }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(shengfen);
-    }
+   public String getShi() {
+      return shi;
+   }
 
-    public String getShengfen() {
-        return shengfen;
-    }
+   public void setShi(String shi) {
+      this.shi = shi;
+   }
 
-    public void setShengfen(String shengfen) {
-        this.shengfen = shengfen;
-    }
+   public String getXian() {
+      return xian;
+   }
+
+   public void setXian(String xian) {
+      this.xian = xian;
+   }
+
+   @Override
+   public String toString() {
+      return "City{" +
+              "sheng='" + sheng + '\'' +
+              ", shi='" + shi + '\'' +
+              ", xian='" + xian + '\'' +
+              '}';
+   }
+
+   @Override
+   public boolean equals(Object o) {
+      if (this == o) return true;
+      if (o == null || getClass() != o.getClass()) return false;
+      City city = (City) o;
+      return Objects.equals(sheng, city.sheng) &&
+              Objects.equals(shi, city.shi) &&
+              Objects.equals(xian, city.xian);
+   }
+
+   @Override
+   public int hashCode() {
+      return Objects.hash(sheng, shi, xian);
+   }
 }

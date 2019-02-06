@@ -3,6 +3,7 @@ package com.westos.Information.controller;
 import com.westos.Information.bean.City;
 import com.westos.Information.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,14 +20,20 @@ public class CityController {
 
     //返回省份
     @RequestMapping(value = "/sheng", method = RequestMethod.GET)
-    public List<String> getProvinces() {
-        return cityService.getProvinces();
+    public List<String> getSheng() {
+        return cityService.getSheng();
     }
 
     //返回城市
-    @RequestMapping(value = "/shi", method = RequestMethod.POST)
-    public List<String> getCity(@RequestBody City city) {
-        return cityService.getCity(city);
+    @RequestMapping(value = "/shi", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<String> getshi(@RequestBody City city) {
+        return cityService.getShi(city);
+
+    }
+    //返回县
+    @RequestMapping(value = "/xian", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<String> getxian(@RequestBody City city) {
+        return cityService.getXian(city);
     }
 
 }

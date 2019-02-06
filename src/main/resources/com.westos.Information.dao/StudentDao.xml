@@ -18,9 +18,9 @@
         <set>
             pass=#{pass}
         </set>
-          <where>
-              stuid=#{stuid}
-          </where>
+        <where>
+            stuid=#{stuid}
+        </where>
     </update>
     <!--修改学生-->
     <update id="modifyStudent" parameterType="com.westos.Information.bean.Student">

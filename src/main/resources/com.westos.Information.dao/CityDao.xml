@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.westos.Information.dao.CityDao">
+    <!--获取省-->
+    <select id="getSheng" resultType="String">
+        SELECT cityname FROM city WHERE pid='1'
+    </select>
+    <!--获取市-->
+    <select id="getShi" resultType="String" parameterType="com.westos.Information.bean.City">
+        SELECT cityname FROM city WHERE pid=(SELECT id FROM city WHERE cityname=#{sheng})
+    </select>
+    <!--获取县-->
+    <select id="getXian" resultType="String" parameterType="com.westos.Information.bean.City">
+        SELECT cityname FROM city WHERE pid=(
+          SELECT id FROM city WHERE pid=(
+            SELECT id FROM city WHERE cityname=#{sheng}
+          ) AND cityname=#{shi}
+        )
+    </select>
+</mapper>

@@ -17,6 +17,8 @@ public class User {
     private Integer bm_id;        //部门id
     private String bm_name;        //部门名
     private String pass;        //密码
+    private Integer start;      //页码
+    private Integer limit;      //每页条数
 
     @Override
     public boolean equals(Object o) {
@@ -58,6 +60,22 @@ public class User {
                 ", bm_name='" + bm_name + '\'' +
                 ", pass='" + pass + '\'' +
                 '}';
+    }
+
+    public Integer getStart() {
+        return start;
+    }
+
+    public void setStart(Integer start) {
+        this.start = start;
+    }
+
+    public Integer getLimit() {
+        return limit;
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
     }
 
     public Integer getId() {
