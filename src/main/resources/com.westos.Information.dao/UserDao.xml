@@ -22,7 +22,7 @@
     </select>
     <!--添加用户-->
     <insert id="addUser" parameterType="com.westos.Information.bean.User" useGeneratedKeys="true" keyProperty="id">
-        insert into user (sjh,name,csny,xb,zhlx,dq,qy_id,qy_nam,bm_id,bm_nam,pass)value (
+        insert into user (sjh,name,csny,xb,zhlx,dq,qy_id,qy_name,bm_id,bm_name,pass)value (
         #{sjh},#{name},#{csny},#{xb},#{zhlx},#{dq},#{qy_id},#{qy_name},#{bm_id},#{bm_name},#{pass})
     </insert>
     <!--通过id修改用户-->

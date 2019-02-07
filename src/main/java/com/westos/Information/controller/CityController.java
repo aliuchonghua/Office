@@ -20,19 +20,19 @@ public class CityController {
 
     //返回省份
     @RequestMapping(value = "/sheng", method = RequestMethod.GET)
-    public List<String> getSheng() {
+    public List<City> getSheng() {
         return cityService.getSheng();
     }
 
     //返回城市
     @RequestMapping(value = "/shi", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public List<String> getshi(@RequestBody City city) {
+    public List<City> getshi(@RequestBody City city) {
         return cityService.getShi(city);
 
     }
     //返回县
     @RequestMapping(value = "/xian", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public List<String> getxian(@RequestBody City city) {
+    public List<City> getxian(@RequestBody City city) {
         return cityService.getXian(city);
     }
 

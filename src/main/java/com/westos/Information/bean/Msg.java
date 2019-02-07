@@ -9,7 +9,7 @@ public class Msg {
     private Qiye qiye;
     private User user;
 
-    private Msg() {
+    public Msg() {
     }
 
     public Msg(String mess) {

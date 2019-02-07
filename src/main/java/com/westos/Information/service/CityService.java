@@ -7,12 +7,12 @@ import java.util.List;
 public interface CityService {
 
     //获取省份
-    List<String> getSheng();
+    List<City> getSheng();
 
     //    获取城市
-    List<String> getShi(City city);
+    List<City> getShi(City city);
 
     //获取区县
-    List<String> getXian(City city);
+    List<City> getXian(City city);
 
 }

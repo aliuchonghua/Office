@@ -14,17 +14,17 @@ public class CityServiceimpl implements CityService {
     private CityDao cityDao;
 
     @Override
-    public List<String> getSheng() {
+    public List<City> getSheng() {
         return cityDao.getSheng();
     }
 
     @Override
-    public List<String> getShi(City city) {
+    public List<City> getShi(City city) {
         return cityDao.getShi(city);
     }
 
     @Override
-    public List<String> getXian(City city) {
+    public List<City> getXian(City city) {
         return cityDao.getXian(city);
     }
 }

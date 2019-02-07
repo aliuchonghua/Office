@@ -25,17 +25,7 @@ public class RegisteredController {
     //注册
     @RequestMapping(value = "/CreateQiye",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Msg CreateQiye(@RequestBody Msg msg){
-        User user = msg.getUser();
-        Qiye qiye = msg.getQiye();
-        System.out.println(user);
-        System.out.println(qiye);
-        //存储管理员
-
-
-
-
-
-        return new Msg("注册成功");
+        return registeredService.CreateQiye(msg);
     }
 
     //验证账户是否存在

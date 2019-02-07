@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface CityDao {
     //获取省份
-    List<String> getSheng();
+    List<City> getSheng();
     //获取市
-    List<String> getShi(City city);
+    List<City> getShi(City city);
     //获取县
-    List<String> getXian(City city);
+    List<City> getXian(City city);
 }

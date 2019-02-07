@@ -5,19 +5,15 @@
 
 <mapper namespace="com.westos.Information.dao.CityDao">
     <!--获取省-->
-    <select id="getSheng" resultType="String">
-        SELECT cityname FROM city WHERE pid='1'
+    <select id="getSheng" resultType="com.westos.Information.bean.City">
+        SELECT * FROM city WHERE pid='1'
     </select>
     <!--获取市-->
-    <select id="getShi" resultType="String" parameterType="com.westos.Information.bean.City">
-        SELECT cityname FROM city WHERE pid=(SELECT id FROM city WHERE cityname=#{sheng})
+    <select id="getShi" resultType="com.westos.Information.bean.City" parameterType="com.westos.Information.bean.City">
+        SELECT * FROM city WHERE pid=#{id}
     </select>
     <!--获取县-->
-    <select id="getXian" resultType="String" parameterType="com.westos.Information.bean.City">
-        SELECT cityname FROM city WHERE pid=(
-          SELECT id FROM city WHERE pid=(
-            SELECT id FROM city WHERE cityname=#{sheng}
-          ) AND cityname=#{shi}
-        )
+    <select id="getXian" resultType="com.westos.Information.bean.City" parameterType="com.westos.Information.bean.City">
+        SELECT * FROM city WHERE pid=#{id}
     </select>
 </mapper>

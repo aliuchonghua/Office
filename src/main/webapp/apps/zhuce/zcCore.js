@@ -33,6 +33,12 @@ var vue = new Vue({
 			shi: '',
 			xian: ''
 		},
+		shicity:{
+			id:2
+		},
+		xiancity:{
+			id:52
+		},
 		msg:{
 			qiye: {},
 			user: {}
@@ -51,7 +57,7 @@ var vue = new Vue({
 		//获取省份
 		getsheng: function() {
 			axios.get('/city/sheng').then(function(value) {
-				vue.city.sheng = value.data[0];
+				vue.city.sheng = value.data[0].cityname;
 				for (var i = 0; i < value.data.length; i++) {
 					vue.sheng.push(value.data[i]);
 				}
@@ -61,11 +67,14 @@ var vue = new Vue({
 			});
 		},
 		//获取城市
-		getshi: function() {
+		getshi: function(item) {
 			vue.shi = [];
 			vue.xian = [];
-			axios.post('/city/shi', vue.city).then(function(value) {
-				vue.city.shi = value.data[0];
+			if(item!=undefined){
+				vue.shicity=item;
+			}
+			axios.post('/city/shi', vue.shicity).then(function(value) {
+				vue.city.shi = value.data[0].cityname;
 				for (var i = 0; i < value.data.length; i++) {
 					vue.shi.push(value.data[i]);
 				}
@@ -75,10 +84,13 @@ var vue = new Vue({
 			});
 		},
 		//获取县
-		getxian: function() {
+		getxian: function(item) {
 			vue.xian = [];
-			axios.post('/city/xian', vue.city).then(function(value) {
-				vue.city.xian = value.data[0];
+			if(item!=undefined){
+				vue.xiancity=item;
+			}
+			axios.post('/city/xian', vue.xiancity).then(function(value) {
+				vue.city.xian = value.data[0].cityname;
 				for (var i = 0; i < value.data.length; i++) {
 					vue.xian.push(value.data[i]);
 				}
@@ -127,6 +139,9 @@ var vue = new Vue({
 				$("[name='sjh']").parent().addClass('has-error');
 				vue.i = false;
 			} else {
+				$("[name='sjh']").parent().removeClass('has-error');
+				$("[name='sjh']").parent().addClass('has-success');
+				vue.mess.sjh = '';
 				axios.post('/registered/yzsjhPresence', vue.user).then(function(value) {
 					if (value.data.mess == '1') {
 						vue.mess.sjh = '账户已存在';
@@ -241,6 +256,7 @@ var vue = new Vue({
 				vue.mess.clrq = '';
 			}
 		}
+		
 	},
 	mounted: function() {
 		//日期弹窗初始化
