@@ -36,7 +36,7 @@
             zhlx=#{zhlx},
             dq=#{dq},
             qy_id=#{qy_id},
-            qy_nam=#{qy_nam},
+            qy_name=#{qy_name},
             bm_id=#{bm_id},
             bm_name=#{bm_name},
             pass=#{pass}

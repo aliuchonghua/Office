@@ -33,12 +33,6 @@ var vue = new Vue({
 			shi: '',
 			xian: ''
 		},
-		shicity:{
-			id:2
-		},
-		xiancity:{
-			id:52
-		},
 		msg:{
 			qiye: {},
 			user: {}
@@ -46,7 +40,8 @@ var vue = new Vue({
 		sheng: [],
 		shi: [],
 		xian: [],
-		i: false
+		i: false,
+		Modal:''
 	},
 	methods: {
 		back: function() {
@@ -61,7 +56,7 @@ var vue = new Vue({
 				for (var i = 0; i < value.data.length; i++) {
 					vue.sheng.push(value.data[i]);
 				}
-				vue.getshi();
+				vue.getshi(value.data[0]);
 			}).catch(function(reason) {
 				console.log(reason);
 			});
@@ -70,15 +65,12 @@ var vue = new Vue({
 		getshi: function(item) {
 			vue.shi = [];
 			vue.xian = [];
-			if(item!=undefined){
-				vue.shicity=item;
-			}
-			axios.post('/city/shi', vue.shicity).then(function(value) {
+			axios.post('/city/shi', item).then(function(value) {
 				vue.city.shi = value.data[0].cityname;
 				for (var i = 0; i < value.data.length; i++) {
 					vue.shi.push(value.data[i]);
 				}
-				vue.getxian();
+				vue.getxian(value.data[0]);
 			}).catch(function(reason) {
 				console.log(reason);
 			});
@@ -86,10 +78,7 @@ var vue = new Vue({
 		//获取县
 		getxian: function(item) {
 			vue.xian = [];
-			if(item!=undefined){
-				vue.xiancity=item;
-			}
-			axios.post('/city/xian', vue.xiancity).then(function(value) {
+			axios.post('/city/xian', item).then(function(value) {
 				vue.city.xian = value.data[0].cityname;
 				for (var i = 0; i < value.data.length; i++) {
 					vue.xian.push(value.data[i]);
@@ -114,17 +103,18 @@ var vue = new Vue({
 			//拼接省市县
 			vue.qiye.dq=vue.city.sheng+vue.city.shi+vue.city.xian;
 			if (vue.i) {
-				console.log("提交")
 				vue.msg.qiye=vue.qiye;
 				vue.msg.user=vue.user;
-				console.log(vue.msg);
 				axios.post('/registered/CreateQiye', vue.msg).then(function(value) {
-					console.log(value.data.mess);
+					vue.Modal=value.data.mess
+					// 启动模态框
+					$('#zcModal').modal('show');
 				}).catch(function(reason) {
 					console.log(reason);
 				});
 			} else {
-
+				vue.Modal='填写有误请检查';
+				$('#zcModal').modal('show');
 				// 模态框
 			}
 		},
@@ -256,7 +246,6 @@ var vue = new Vue({
 				vue.mess.clrq = '';
 			}
 		}
-		
 	},
 	mounted: function() {
 		//日期弹窗初始化

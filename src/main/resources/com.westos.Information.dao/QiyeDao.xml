@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.westos.Information.dao.QiyeDao">
+
+    <!--添加企业-->
+    <insert id="addQiye" parameterType="com.westos.Information.bean.Qiye" useGeneratedKeys="true" keyProperty="id">
+        insert into qiye (name,hymc,gly_id,clrq,dq,xxdz,zczj,jyfw,qyjj)value (
+        #{name},#{hymc},#{gly_id},#{clrq},#{dq},#{xxdz},#{zczj},#{jyfw},#{qyjj})
+    </insert>
+    <!--通过id修改企业-->
+    <update id="modifyQiye" parameterType="com.westos.Information.bean.Qiye">
+        update qiye
+        <set>
+            name=#{name},
+            hymc=#{hymc},
+            gly_id=#{gly_id},
+            clrq=#{clrq},
+            dq=#{dq},
+            xxdz=#{xxdz},
+            zczj=#{zczj},
+            jyfw=#{jyfw},
+            qyjj=#{qyjj}
+        </set>
+        <where>
+            id=#{id}
+        </where>
+    </update>
+</mapper>
+

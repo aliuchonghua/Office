@@ -8,12 +8,26 @@ public class Msg {
     private String html;
     private Qiye qiye;
     private User user;
+    private Integer Type;
 
     public Msg() {
     }
 
     public Msg(String mess) {
         this.mess = mess;
+    }
+
+    public Msg(String mess, Integer type) {
+        this.mess = mess;
+        Type = type;
+    }
+
+    public Integer getType() {
+        return Type;
+    }
+
+    public void setType(Integer type) {
+        Type = type;
     }
 
     public Qiye getQiye() {
