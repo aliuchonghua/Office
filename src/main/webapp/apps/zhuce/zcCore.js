@@ -14,7 +14,8 @@ var vue = new Vue({
 		},
 		user: {
 			sjh: '', // 手机号
-			pass: '' //密码
+			pass: '', //密码
+			pass2: '' //密码
 		},
 		mess: {
 			sjh: '',
@@ -32,9 +33,14 @@ var vue = new Vue({
 			shi: '',
 			xian: ''
 		},
+		msg:{
+			qiye: {},
+			user: {}
+		},
 		sheng: [],
 		shi: [],
-		xian: []
+		xian: [],
+		i: false
 	},
 	methods: {
 		back: function() {
@@ -57,7 +63,7 @@ var vue = new Vue({
 		//获取城市
 		getshi: function() {
 			vue.shi = [];
-			vue.xian=[];
+			vue.xian = [];
 			axios.post('/city/shi', vue.city).then(function(value) {
 				vue.city.shi = value.data[0];
 				for (var i = 0; i < value.data.length; i++) {
@@ -79,8 +85,162 @@ var vue = new Vue({
 			}).catch(function(reason) {
 				console.log(reason);
 			});
-		}
+		},
+		//注册
+		registered: function() {
+			//验证
+			vue.i = true;
+			vue.yzsjh();
+			vue.yzpass();
+			vue.yzpass2();
+			vue.yzname();
+			vue.yzhymc();
+			vue.yzzczj();
+			vue.yzxxdz();
+			vue.yzjyfw();
+			vue.yzclrq();
+			//拼接省市县
+			vue.qiye.dq=vue.city.sheng+vue.city.shi+vue.city.xian;
+			if (vue.i) {
+				console.log("提交")
+				vue.msg.qiye=vue.qiye;
+				vue.msg.user=vue.user;
+				console.log(vue.msg);
+				axios.post('/registered/CreateQiye', vue.msg).then(function(value) {
+					console.log(value.data.mess);
+				}).catch(function(reason) {
+					console.log(reason);
+				});
+			} else {
 
+				// 模态框
+			}
+		},
+		//验证管理员账户
+		yzsjh: function() {
+			if (vue.user.sjh == '') {
+				vue.mess.sjh = '账户不能为空';
+				$("[name='sjh']").parent().addClass('has-error');
+				vue.i = false;
+			} else if (vue.user.sjh.length > 11 || vue.user.sjh.length < 6) {
+				vue.mess.sjh = '账户需要为6到11位';
+				$("[name='sjh']").parent().addClass('has-error');
+				vue.i = false;
+			} else {
+				axios.post('/registered/yzsjhPresence', vue.user).then(function(value) {
+					if (value.data.mess == '1') {
+						vue.mess.sjh = '账户已存在';
+						$("[name='sjh']").parent().addClass('has-error');
+						vue.i = false;
+					} else {
+						$("[name='sjh']").parent().removeClass('has-error');
+						$("[name='sjh']").parent().addClass('has-success');
+						vue.mess.sjh = '';
+					}
+				}).catch(function(reason) {
+					console.log(reason);
+				});
+			}
+		},
+		//验证密码
+		yzpass: function() {
+			if (vue.user.pass == '') {
+				vue.mess.pass = '密码不能为空';
+				$("[name='pass']").parent().addClass('has-error');
+				vue.i = false;
+			} else if (vue.user.pass.length > 11 || vue.user.pass.length < 6) {
+				vue.mess.pass = '密码需要为6到11位';
+				$("[name='pass']").parent().addClass('has-error');
+				vue.i = false;
+			} else {
+				$("[name='pass']").parent().removeClass('has-error');
+				$("[name='pass']").parent().addClass('has-success');
+				vue.mess.pass = '';
+			}
+		},
+		//验证密码
+		yzpass2: function() {
+			if (vue.user.pass2 == '') {
+				vue.mess.pass2 = '密码不能为空';
+				$("[name='pass2']").parent().addClass('has-error');
+				vue.i = false;
+			} else if (vue.user.pass != vue.user.pass2) {
+				vue.mess.pass2 = '两次密码不一致';
+				$("[name='pass2']").parent().addClass('has-error');
+				vue.i = false;
+			} else {
+				$("[name='pass2']").parent().removeClass('has-error');
+				$("[name='pass2']").parent().addClass('has-success');
+				vue.mess.pass2 = '';
+			}
+		},
+		yzname: function() {
+			if (vue.qiye.name == '') {
+				vue.mess.name = '企业名称不能为空';
+				$("[name='name']").parent().addClass('has-error');
+				vue.i = false;
+			} else {
+				$("[name='name']").parent().removeClass('has-error');
+				$("[name='name']").parent().addClass('has-success');
+				vue.mess.name = '';
+			}
+		},
+		yzhymc: function() {
+			if (vue.qiye.hymc == '') {
+				vue.mess.hymc = '行业名称不能为空';
+				$("[name='hymc']").parent().addClass('has-error');
+				vue.i = false;
+			} else {
+				$("[name='hymc']").parent().removeClass('has-error');
+				$("[name='hymc']").parent().addClass('has-success');
+				vue.mess.hymc = '';
+			}
+		},
+		yzzczj: function() {
+			if (vue.qiye.zczj == '') {
+				vue.mess.zczj = '注册资金不能为空';
+				$("[name='zczj']").parent().addClass('has-error');
+				vue.i = false;
+			} else {
+				$("[name='zczj']").parent().removeClass('has-error');
+				$("[name='zczj']").parent().addClass('has-success');
+				vue.mess.zczj = '';
+			}
+		},
+		yzxxdz: function() {
+			if (vue.qiye.xxdz == '') {
+				vue.mess.xxdz = '详细地址不能为空';
+				$("[name='xxdz']").parent().addClass('has-error');
+				vue.i = false;
+			} else {
+				$("[name='xxdz']").parent().removeClass('has-error');
+				$("[name='xxdz']").parent().addClass('has-success');
+				vue.mess.xxdz = '';
+			}
+		},
+		yzjyfw: function() {
+			if (vue.qiye.jyfw == '') {
+				vue.mess.jyfw = '经营范围不能为空';
+				$("[name='jyfw']").parent().addClass('has-error');
+				vue.i = false;
+			} else {
+				$("[name='jyfw']").parent().removeClass('has-error');
+				$("[name='jyfw']").parent().addClass('has-success');
+				vue.mess.jyfw = '';
+			}
+		},
+		yzclrq: function() {
+			vue.qiye.clrq = $("#clrq").val();
+			if (vue.qiye.clrq == '') {
+				vue.mess.clrq = '成立日期不能为空';
+				$("[name='clrq']").parent().addClass('has-error');
+				vue.i = false;
+			} else {
+				$("[name='clrq']").parent().removeClass('has-error');
+				$("[name='clrq']").parent().addClass('has-success');
+				vue.mess.clrq = '';
+			}
+		}
 	},
 	mounted: function() {
 		//日期弹窗初始化

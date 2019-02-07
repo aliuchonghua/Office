@@ -22,20 +22,20 @@
 										<div class="form-group">
 											<span class="zcx">*</span>
 											<label for="name">管理员账户</label>
-											<input name="sjh" v-model="qiye.sjh" type="text" class="form-control" placeholder="管理员账户,只限于数字" oninput="value=value.replace(/[^\d]/g,'')">
+											<input name="sjh" v-model="user.sjh" type="text" class="form-control" placeholder="管理员账户,只限于数字" oninput="value=value.replace(/[^\d]/g,'')">
 											<span class="zcx">{{mess.sjh}}</span>
 										</div>
 										<div class="form-group">
 											<span class="zcx">*</span>
 											<label for="name">密码</label>
-											<input name="pass" v-model="qiye.pass" type="password" class="form-control">
+											<input name="pass" v-model="user.pass" type="password" class="form-control">
 											<span class="zcx">{{mess.pass}}</span>
 
 										</div>
 										<div class="form-group">
 											<span class="zcx">*</span>
 											<label for="name">再次输入密码</label>
-											<input name="pass2" v-model="pass2" type="password" class="form-control">
+											<input name="pass2" v-model="user.pass2" type="password" class="form-control">
 											<span class="zcx">{{mess.pass2}}</span>
 										</div>
 										<div class="form-group">
@@ -106,7 +106,7 @@
 											<textarea v-model="qiye.qyjj" class="form-control" rows="3"></textarea>
 										</div>
 										<div class="form-group">
-											<button type="button" class="btn btn-info btn-block" v-on:click="register()">注册</button>
+											<button type="button" class="btn btn-info btn-block" v-on:click="registered()">注册</button>
 											<button type="button" class="btn btn-warning btn-block" v-on:click="back()">返回</button>
 										</div>
 									</form>
@@ -130,6 +130,6 @@
 	}
 
 	.zcx {
-		color: #FF0000;
+		color: #F66;
 	}
 </style>

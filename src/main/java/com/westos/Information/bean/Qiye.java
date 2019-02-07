@@ -3,7 +3,7 @@ package com.westos.Information.bean;
 import java.util.Date;
 import java.util.Objects;
 
-public class qiye {
+public class Qiye {
     private Integer id;
     private String name;	//企业名称
     private String hymc;	//行业名称
@@ -17,7 +17,7 @@ public class qiye {
 
     @Override
     public String toString() {
-        return "qiye{" +
+        return "Qiye{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", hymc='" + hymc + '\'' +
@@ -35,7 +35,7 @@ public class qiye {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        qiye qiye = (qiye) o;
+        Qiye qiye = (Qiye) o;
         return Objects.equals(id, qiye.id) &&
                 Objects.equals(name, qiye.name) &&
                 Objects.equals(hymc, qiye.hymc) &&
