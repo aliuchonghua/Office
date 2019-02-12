@@ -27,7 +27,7 @@ public class LoginController {
     @Autowired
     private Adminconfig adminconfig;
     //登陆
-    @RequestMapping(value = "/stulogin", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Map login(@RequestBody Student student, HttpServletRequest request) throws IOException {
 
         HttpSession session = request.getSession();
