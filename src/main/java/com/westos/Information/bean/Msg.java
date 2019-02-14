@@ -1,5 +1,7 @@
 package com.westos.Information.bean;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * 消息
  */
@@ -9,6 +11,8 @@ public class Msg {
     private Qiye qiye;
     private User user;
     private Integer Type;
+    private HttpSession session;
+
 
     public Msg() {
     }
@@ -61,5 +65,14 @@ public class Msg {
     public void setHtml(String html) {
         this.html = html;
     }
+
+    public HttpSession getSession() {
+        return session;
+    }
+
+    public void setSession(HttpSession session) {
+        this.session = session;
+    }
+
 
 }

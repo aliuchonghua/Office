@@ -2,39 +2,44 @@
 var vue = new Vue({
 	el: '#app',
 	data: {
-		msg: '',
-		student: {
-			stuid: '',
-			pass: ''
+		yzxx: '',
+		user:{
+			sjh:'',
+			pass:''
+		},
+		msg:{
+			user:'',
+			mess:''
 		},
 		yzm: ''
 	},
 	methods: {
 		login: function() {
-			if (vue.student.stuid == '') {
-				vue.msg = '手机号不能为空';
+			if (vue.user.sjh == '') {
+				vue.yzxx = '手机号不能为空';
 				$("#rem").show();
 				vue.yzm = '';
-			} else if (vue.student.pass == '') {
-				vue.msg = '密码不能为空';
+			} else if (vue.user.pass == '') {
+				vue.yzxx = '密码不能为空';
 				$("#rem").show();
 				vue.yzm = '';
 			} else if (vue.yzm != '1') {
-				vue.msg = '请滑动验证';
+				vue.yzxx = '请滑动验证';
 				$("#rem").show();
 			} else {
-				axios.post('/login/stulogin', this.student).then(function(result) {
-					if (result.data.msg.indexOf("登陆成功") != -1) {
+				vue.msg.user=vue.user;
+				axios.post('/login/login', vue.msg).then(function(result) {
+					if (result.data.Type== 1) {
 						$("#rem").hide();
 						$('#myModal').modal('show'); //触发模态框
-						window.location.href = result.data.html;
+						window.location.href = '/apps/dataIndex.html';
 					} else {
 						$("#rem").show();
-						vue.msg = result.data.msg;
+						vue.yzxx = result.data.mess;
 					}
 				}).catch(function(err) {
 					console.log(err);
-					vue.msg = '服务器错误';
+					vue.yzxx = '服务器错误';
 					$("#rem").show();
 				});
 			}
