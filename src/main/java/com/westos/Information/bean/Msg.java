@@ -10,7 +10,7 @@ public class Msg {
     private String html;
     private Qiye qiye;
     private User user;
-    private Integer Type;
+    private Integer type;
     private HttpSession session;
 
 
@@ -23,15 +23,15 @@ public class Msg {
 
     public Msg(String mess, Integer type) {
         this.mess = mess;
-        Type = type;
+        this.type = type;
     }
 
     public Integer getType() {
-        return Type;
+        return type;
     }
 
     public void setType(Integer type) {
-        Type = type;
+        this.type = type;
     }
 
     public Qiye getQiye() {

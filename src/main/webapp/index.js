@@ -29,7 +29,7 @@ var vue = new Vue({
 			} else {
 				vue.msg.user=vue.user;
 				axios.post('/login/login', vue.msg).then(function(result) {
-					if (result.data.Type== 1) {
+					if (result.data.type== 1) {
 						$("#rem").hide();
 						$('#myModal').modal('show'); //触发模态框
 						window.location.href = '/apps/dataIndex.html';
@@ -45,7 +45,10 @@ var vue = new Vue({
 			}
 		},
 		back: function() {
-			vue.msg = "";
+			vue.msg = {
+                user:'',
+                mess:''
+            };
 			$("#rem").hide();
 		},
 		zhuce: function() {
