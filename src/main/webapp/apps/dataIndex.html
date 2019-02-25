@@ -1,10 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8" name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <title>办公自动化事务督办系统</title>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script src="../css/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="../js/axios.min.js"></script>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="../js/verify-master/css/verify.css"/>
+    <script src="../js/verify-master/js/verify.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="../js/laydate/theme/default/laydate.css"/>
+
 </head>
-<body>
-主页面
+<body style="background-color: #eee;">
+<div id="app" class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div style="background-color: #fff;">
+                <!-- 顶部大图 -->
+                <div style="height: 220px; background-image: url(../img/wstop.jpg);" class="pm"></div>
+                <!-- 导航栏 -->
+                <nav class="navbar navbar-default" role="navigation" id="navigationBar">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <p class="navbar-text" >用户名</p>
+                        </div>
+                        <div class="collapse navbar-collapse" id="example-navbar-collapse">
+
+                        </div>
+                    </div>
+                </nav>
+
+                <!--内容-->
+
+                <!-- 页脚 -->
+                <div class="jumbotron text-center " id="footer">
+                    <a href="#">关于项目</a> |
+                    <a href="#">服务条款</a> |
+                    <a href="#">隐私政策</a> |
+                    <a href="#">客服中心</a> |
+                    <a href="#">联系我们</a> |
+                    <a href="#"> 帮助中心</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
+<style type="text/css">
+    #footer {
+        margin-bottom: 0;
+        margin-top: 35px;
+        background-color: #eff4fa;
+        padding-top: 12.5px;
+        padding-bottom: 12.5px;
+        border-radius:6px 6px 0 0;
+    }
+    #navigationBar{
+        border-radius:0 0 6px 6px;
+    }
+</style>
+<script src="dataIndex.js" type="text/javascript"></script>
