@@ -30,6 +30,7 @@ public class RegisteredServiceImpl implements RegisteredService {
         System.err.println("新用户=======>"+user);
         System.err.println("新企业=======>"+qiye);
 //        创建用户
+        user.setZhlx(0);
         userDao.addUser(user);
         qiye.setGly_id(user.getId());
         //创建企业
