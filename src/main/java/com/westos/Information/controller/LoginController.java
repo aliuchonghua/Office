@@ -27,7 +27,7 @@ public class LoginController {
 
     //登陆
     @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Msg login(@RequestBody Msg msg, HttpServletRequest request) throws IOException {
+    public Msg login(@RequestBody Msg msg, HttpServletRequest request)  {
         HttpSession session = request.getSession();
         msg.setSession(session);
         return loginService.loginmsg(msg);
@@ -40,7 +40,7 @@ public class LoginController {
         try {
             response.sendRedirect("/index.html");
         } catch (IOException e) {
-            System.out.println("index重定向失败");
+            System.err.println("index重定向失败");
         }
 
     }

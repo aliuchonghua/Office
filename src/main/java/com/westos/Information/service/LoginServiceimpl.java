@@ -22,6 +22,7 @@ public class LoginServiceimpl implements LoginService {
         HttpSession session = msg.getSession();
         //根据手机号，密码获取用户
         User userall = userDao.sjhAndPassToUser(user);
+        System.err.println("User==>"+userall);
         if (userall==null){
             return new Msg("账户错误");
         }
