@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.westos.Information.dao.UserDao">
-    <!--查找手机号-->
-    <select id="sjhToUser" resultType="com.westos.Information.bean.User">
+    <!--查找账户是否存在-->
+    <select id="findsjhToUser" resultType="com.westos.Information.bean.User">
         select * from user where sjh=#{sjh}
     </select>
     <!--通过手机号，密码获取用户-->
@@ -21,12 +21,12 @@
         select * from user limit (#{start}-1)*#{limit},#{limit};
     </select>
     <!--添加用户-->
-    <insert id="addUser" parameterType="com.westos.Information.bean.User" useGeneratedKeys="true" keyProperty="id">
-        insert into user (sjh,name,csny,xb,zhlx,dq,qy_id,qy_name,bm_id,bm_name,pass)value (
-        #{sjh},#{name},#{csny},#{xb},#{zhlx},#{dq},#{qy_id},#{qy_name},#{bm_id},#{bm_name},#{pass})
+    <insert id="addUser" parameterType="com.westos.Information.bean.User"  >
+        insert into user (id,sjh,name,csny,xb,zhlx,dq,qy_id,qy_name,bm_id,bm_name,pass)value (
+        #{id},#{sjh},#{name},#{csny},#{xb},#{zhlx},#{dq},#{qy_id},#{qy_name},#{bm_id},#{bm_name},#{pass})
     </insert>
     <!--通过id修改用户-->
-    <update id="modifyUser" parameterType="com.westos.Information.bean.User">
+    <update id="modifyUser" parameterType="com.westos.Information.bean.User" >
         update user
         <set>
             sjh=#{sjh},

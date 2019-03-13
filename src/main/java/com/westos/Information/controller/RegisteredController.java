@@ -33,6 +33,7 @@ public class RegisteredController {
     //验证账户是否存在
     @RequestMapping(value = "/yzsjhPresence",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Msg testSjh(@RequestBody User user){
-        return new Msg(registeredService.testSjh(user));
+        String msg = registeredService.testSjh(user);
+        return new Msg(msg);
     }
 }

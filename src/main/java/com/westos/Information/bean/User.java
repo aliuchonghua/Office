@@ -5,20 +5,40 @@ import java.util.Date;
 import java.util.Objects;
 
 public class User {
-    private Integer id;
+    private String id;
     private String sjh;            //手机号
     private String name;        //姓名
     private Date csny;        //出生年月
     private String xb;            //性别
     private Integer zhlx;        //账户类型0(管理员)1(领导)2(部门负责人)3(员工)
     private String dq;            //地区
-    private Integer qy_id;        //企业id
+    private String qy_id;        //企业id
     private String qy_name;        //企业名
     private Integer bm_id;        //部门id
     private String bm_name;        //部门名
     private String pass;        //密码
     private Integer start;      //页码
     private Integer limit;      //每页条数
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", sjh='" + sjh + '\'' +
+                ", name='" + name + '\'' +
+                ", csny=" + csny +
+                ", xb='" + xb + '\'' +
+                ", zhlx=" + zhlx +
+                ", dq='" + dq + '\'' +
+                ", qy_id='" + qy_id + '\'' +
+                ", qy_name='" + qy_name + '\'' +
+                ", bm_id=" + bm_id +
+                ", bm_name='" + bm_name + '\'' +
+                ", pass='" + pass + '\'' +
+                ", start=" + start +
+                ", limit=" + limit +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -44,45 +64,11 @@ public class User {
         return Objects.hash(id, sjh, name, csny, xb, zhlx, dq, qy_id, qy_name, bm_id, bm_name, pass);
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", sjh='" + sjh + '\'' +
-                ", name='" + name + '\'' +
-                ", csny=" + csny +
-                ", xb='" + xb + '\'' +
-                ", zhlx=" + zhlx +
-                ", dq='" + dq + '\'' +
-                ", qy_id=" + qy_id +
-                ", qy_name='" + qy_name + '\'' +
-                ", bm_id=" + bm_id +
-                ", bm_name='" + bm_name + '\'' +
-                ", pass='" + pass + '\'' +
-                '}';
-    }
-
-    public Integer getStart() {
-        return start;
-    }
-
-    public void setStart(Integer start) {
-        this.start = start;
-    }
-
-    public Integer getLimit() {
-        return limit;
-    }
-
-    public void setLimit(Integer limit) {
-        this.limit = limit;
-    }
-
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -134,11 +120,11 @@ public class User {
         this.dq = dq;
     }
 
-    public Integer getQy_id() {
+    public String getQy_id() {
         return qy_id;
     }
 
-    public void setQy_id(Integer qy_id) {
+    public void setQy_id(String qy_id) {
         this.qy_id = qy_id;
     }
 
@@ -172,5 +158,21 @@ public class User {
 
     public void setPass(String pass) {
         this.pass = pass;
+    }
+
+    public Integer getStart() {
+        return start;
+    }
+
+    public void setStart(Integer start) {
+        this.start = start;
+    }
+
+    public Integer getLimit() {
+        return limit;
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
     }
 }

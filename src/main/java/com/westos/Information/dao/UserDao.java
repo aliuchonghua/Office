@@ -6,8 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 @Mapper
 public interface UserDao {
-    //通过手机号获取用户
-    User sjhToUser(User user);
+    //查找账户是否存在
+    User findsjhToUser(User user);
     //通过手机号，密码获取用户
     User sjhAndPassToUser(User user);
     //通过id获取用户

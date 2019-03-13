@@ -9,4 +9,6 @@ public interface QiyeDao {
     Integer addQiye(Qiye qiye);
     //修改企业
     Integer modifyQiye(Qiye qiye);
+    //查找同名企业
+    Qiye findNameToQiye(Qiye qiye);
 }

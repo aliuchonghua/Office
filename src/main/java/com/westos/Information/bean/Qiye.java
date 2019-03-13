@@ -4,10 +4,10 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Qiye {
-    private Integer id;
+    private String id;
     private String name;	//企业名称
     private String hymc;	//行业名称
-    private Integer gly_id;	//管理员id
+    private String gly_id;	//管理员id
     private Date clrq;	//成立日期
     private String dq;		//地区
     private String xxdz;	//详细地址
@@ -18,10 +18,10 @@ public class Qiye {
     @Override
     public String toString() {
         return "Qiye{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", hymc='" + hymc + '\'' +
-                ", gly_id=" + gly_id +
+                ", gly_id='" + gly_id + '\'' +
                 ", clrq=" + clrq +
                 ", dq='" + dq + '\'' +
                 ", xxdz='" + xxdz + '\'' +
@@ -53,11 +53,11 @@ public class Qiye {
         return Objects.hash(id, name, hymc, gly_id, clrq, dq, xxdz, zczj, jyfw, qyjj);
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -77,11 +77,11 @@ public class Qiye {
         this.hymc = hymc;
     }
 
-    public Integer getGly_id() {
+    public String getGly_id() {
         return gly_id;
     }
 
-    public void setGly_id(Integer gly_id) {
+    public void setGly_id(String gly_id) {
         this.gly_id = gly_id;
     }
 

@@ -6,9 +6,9 @@
 <mapper namespace="com.westos.Information.dao.QiyeDao">
 
     <!--添加企业-->
-    <insert id="addQiye" parameterType="com.westos.Information.bean.Qiye" useGeneratedKeys="true" keyProperty="id">
-        insert into qiye (name,hymc,gly_id,clrq,dq,xxdz,zczj,jyfw,qyjj)value (
-        #{name},#{hymc},#{gly_id},#{clrq},#{dq},#{xxdz},#{zczj},#{jyfw},#{qyjj})
+    <insert id="addQiye" parameterType="com.westos.Information.bean.Qiye" >
+        insert into qiye (id,name,hymc,gly_id,clrq,dq,xxdz,zczj,jyfw,qyjj)value (
+        #{id},#{name},#{hymc},#{gly_id},#{clrq},#{dq},#{xxdz},#{zczj},#{jyfw},#{qyjj})
     </insert>
     <!--通过id修改企业-->
     <update id="modifyQiye" parameterType="com.westos.Information.bean.Qiye">
@@ -28,5 +28,10 @@
             id=#{id}
         </where>
     </update>
+    <!--查找同名企业-->
+    <select id="findNameToQiye" resultType="com.westos.Information.bean.Qiye"
+            parameterType="com.westos.Information.bean.Qiye">
+        select * from qiye where name like CONCAT('%',#{name},'%')
+    </select>
 </mapper>
 
