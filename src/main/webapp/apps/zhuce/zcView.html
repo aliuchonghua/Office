@@ -1,4 +1,4 @@
-<div id="zc">
+<div id="zc" xmlns:v-on="http://www.w3.org/1999/xhtml">
 	<div class="header">
 		<div class="container">
 			<div class="row">
@@ -22,7 +22,7 @@
 										<div class="form-group">
 											<span class="zcx">*</span>
 											<label for="name">管理员账户</label>
-											<input name="sjh" v-model="user.sjh" type="text" class="form-control" placeholder="管理员账户,只限于数字" oninput="value=value.replace(/[^\d]/g,'')">
+											<input name="sjh" v-model="user.sjh" type="text" class="form-control" placeholder="管理员账户,只限于数字" oninput="value=value.replace(/[^\d]/g,'')" >
 											<span class="zcx">{{mess.sjh}}</span>
 										</div>
 										<div class="form-group">

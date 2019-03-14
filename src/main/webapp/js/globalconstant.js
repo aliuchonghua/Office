@@ -1,0 +1,2 @@
+var Global={};
+Global.user={};

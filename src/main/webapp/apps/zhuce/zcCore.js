@@ -106,20 +106,19 @@ var zc = new Vue({
                 zc.msg.qiye = zc.qiye;
                 zc.msg.user = zc.user;
                 axios.post('/registered/CreateQiye', zc.msg).then(function (value) {
-                    zc.Modal = value.data.mess
-                    // 启动模态框
                     $('#zcModal').modal('show');
-                    $('#zcModal').on('hide.bs.modal',
-                        function () {
+                    zc.Modal = value.data.mess;
+                    if (value.data.type != -1) {
+                        $('#zcModal').on('hide.bs.modal',function () {
                             zc.back();
                         });
+                    }
                 }).catch(function (reason) {
                     console.log(reason);
                 });
             } else {
-                zc.Modal = value.data.mess;
+                zc.Modal = '格式有误请检查';
                 $('#zcModal').modal('show');
-                // 模态框
             }
         },
         //验证管理员账户

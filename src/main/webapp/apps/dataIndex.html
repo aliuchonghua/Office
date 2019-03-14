@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="utf-8" name="viewport"
           content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
@@ -14,7 +15,11 @@
     <script src="../js/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="../js/laydate/theme/default/laydate.css"/>
     <link rel="stylesheet" type="text/css" href="../css/util.css">
+    <script src="../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/macarons.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/globalconstant.js" type="text/javascript" charset="utf-8"></script>
 </head>
+
 <body style="background-color: #eee;">
 <div id="app" class="container">
     <div class="row">
@@ -22,126 +27,125 @@
             <div style="background-color: #fff;">
                 <!-- 顶部大图 -->
                 <div style="height: 155px; background-image: url(../img/wstop.png); " class="pm">
-					<span id="qiye">
+							<span id="qiye">
 						{{user.qy_name}}
 					</span>
-				</div>
+                </div>
                 <!-- 导航栏 -->
-				<nav class="navbar navbar-default" role="navigation">
-					<div class="container-fluid">
-						<div class="navbar-header">
-							<p class="navbar-text yhm">{{user.name}}</p>
-						</div>
-						<div class="collapse navbar-collapse" id="example-navbar-collapse">
-							<ul class="nav navbar-nav">
-								<li>
-									<a href="javascript:void(0)">工作台</a>
-								</li>
-								<li class="dropdown">
-									<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-										公告
-										<b class="caret"></b>
-									</a>
-									<ul class="dropdown-menu">
-										<li>
-											<a href="javascript:void(0)">班级管理</a>
-										</li>
-										<li class="divider"></li>
-										<li>
-											<a href="javascript:void(0)">专业管理</a>
-										</li>
-										<li class="divider"></li>
-										<li>
-											<a href="javascript:void(0)">学院管理</a>
-										</li>
-									</ul>
-								</li>
-								<li class="dropdown">
-									<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-										审批
-										<b class="caret"></b>
-									</a>
-									<ul class="dropdown-menu">
-										<li>
-											<a href="javascript:void(0)">班级管理</a>
-										</li>
-										<li class="divider"></li>
-										<li>
-											<a href="javascript:void(0)">专业管理</a>
-										</li>
-										<li class="divider"></li>
-										<li>
-											<a href="javascript:void(0)">学院管理</a>
-										</li>
-									</ul>
-								</li>
-								<li class="dropdown">
-									<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-										任务
-										<b class="caret"></b>
-									</a>
-									<ul class="dropdown-menu">
-										<li>
-											<a href="javascript:void(0)">班级管理</a>
-										</li>
-										<li class="divider"></li>
-										<li>
-											<a href="javascript:void(0)">专业管理</a>
-										</li>
-										<li class="divider"></li>
-										<li>
-											<a href="javascript:void(0)">学院管理</a>
-										</li>
-									</ul>
-								</li>
-								<li class="dropdown">
-									<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-										组织架构
-										<b class="caret"></b>
-									</a>
-									<ul class="dropdown-menu">
-										<li>
-											<a href="javascript:void(0)">班级管理</a>
-										</li>
-										<li class="divider"></li>
-										<li>
-											<a href="javascript:void(0)">专业管理</a>
-										</li>
-										<li class="divider"></li>
-										<li>
-											<a href="javascript:void(0)">学院管理</a>
-										</li>
-									</ul>
-								</li>
-								<li class="dropdown">
-									<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-										个人中心
-										<b class="caret"></b>
-									</a>
-									<ul class="dropdown-menu">
-										<li>
-											<a href="javascript:void(0)">班级管理</a>
-										</li>
-										<li class="divider"></li>
-										<li>
-											<a href="javascript:void(0)">专业管理</a>
-										</li>
-										<li class="divider"></li>
-										<li>
-											<a href="javascript:void(0)">学院管理</a>
-										</li>
-									</ul>
-								</li>
-								<li>
-									<a href="/login/logout">注销</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</nav>
-
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <p class="navbar-text yhm">{{user.name}}</p>
+                        </div>
+                        <div class="collapse navbar-collapse" id="example-navbar-collapse">
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <a href="javascript:void(0)" v-on:click="gztinit()">工作台</a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                                        公告
+                                        <b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="javascript:void(0)">班级管理</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a href="javascript:void(0)">专业管理</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a href="javascript:void(0)">学院管理</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                                        审批
+                                        <b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="javascript:void(0)">班级管理</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a href="javascript:void(0)">专业管理</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a href="javascript:void(0)">学院管理</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                                        任务
+                                        <b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="javascript:void(0)">班级管理</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a href="javascript:void(0)">专业管理</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a href="javascript:void(0)">学院管理</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                                        组织架构
+                                        <b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="javascript:void(0)">班级管理</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a href="javascript:void(0)">专业管理</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a href="javascript:void(0)">学院管理</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                                        个人中心
+                                        <b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="javascript:void(0)">班级管理</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a href="javascript:void(0)">专业管理</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a href="javascript:void(0)">学院管理</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="/login/logout">注销</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
                 <!--内容-->
-
+                <div id="datacontent"></div>
                 <!-- 页脚 -->
                 <div class="jumbotron text-center " id="footer">
                     <a href="javascript:void(0)">关于项目</a> |
@@ -156,6 +160,17 @@
     </div>
 </div>
 </body>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">{{dataModal}}</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
 </html>
 <style type="text/css">
     #footer {
@@ -164,17 +179,15 @@
         background-color: #eff4fa;
         padding-top: 12.5px;
         padding-bottom: 12.5px;
-        border-radius:6px 6px 0 0;
+        border-radius: 6px 6px 0 0;
     }
-	#qiye{
-		font-size: 18px;
-		font-family: 微软雅黑;
-		padding: 92px 0 0 107px;
-		color: #f4f4f4;
-		float:left;
-	}
-	
-	
 
+    #qiye {
+        font-size: 18px;
+        font-family: 微软雅黑;
+        padding: 92px 0 0 107px;
+        color: #f4f4f4;
+        float: left;
+    }
 </style>
 <script src="dataIndex.js" type="text/javascript"></script>

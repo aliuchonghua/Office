@@ -1,7 +1,6 @@
 package com.westos.Information.service;
 
 import com.westos.Information.bean.Msg;
-import com.westos.Information.bean.Student;
 import com.westos.Information.bean.User;
 import com.westos.Information.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
