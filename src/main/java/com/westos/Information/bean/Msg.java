@@ -12,6 +12,7 @@ public class Msg {
     private User user;
     private Integer type;//状态码
     private HttpSession session;
+    private Module module;//模块
 
 
     public Msg() {
@@ -74,5 +75,11 @@ public class Msg {
         this.session = session;
     }
 
+    public Module getModule() {
+        return module;
+    }
 
+    public void setModule(Module module) {
+        this.module = module;
+    }
 }
