@@ -1,0 +1,128 @@
+<div id="mkglapp" xmlns:v-on="http://www.w3.org/1999/xhtml">
+	<div class="row">
+		<div class="row" style="margin: 0 10px;">
+			<div class="col-md-12">
+				<form class="form-inline">
+					<div class="form-group">
+						<label for="mdlx">所属分类</label>
+						<select id="mdlx" class="form-control" v-on:change="init()" v-model="module.mdlx">
+							<option selected="selected" value="公告">公告</option>
+							<option value="审批">审批</option>
+							<option value="任务">任务</option>
+							<option value="组织架构">组织架构</option>
+							<option value="个人中心">个人中心</option>
+						</select>
+					</div>
+					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#addModal">添加</button>
+				</form>
+			</div>
+		</div>
+		<div class="row" style="margin: 0 10px;">
+			<div class="table-responsive" style="padding-left: 20px;padding-right: 20px;">
+				<table class="table table-hover table-condensed">
+					<caption>模块</caption>
+					<thead>
+						<tr>
+							<th>模块名</th>
+							<th>代码</th>
+							<th>链接</th>
+							<th>账户类型</th>
+							<th>所属分类</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="(item,index) in modulelist">
+							<!--item当前对象-->
+							<!--index下标-->
+							<td v-on:click="updatemodule(item)">{{item.name}}</td>
+							<td v-on:click="updatemodule(item)">{{item.code}}</td>
+							<td v-on:click="updatemodule(item)">{{item.link}}</td>
+							<td v-on:click="updatemodule(item)">{{item.zhlx}}</td>
+							<td v-on:click="updatemodule(item)">{{item.mdlx}}</td>
+							<td v-on:click="remove(item)">
+								<span class="label label-danger">删除</span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="addModalLabel">模块</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="name" class="control-label">模块名</label>
+							<input type="text" class="form-control" id="name" v-model="addmodule.name">
+						</div>
+						<div class="form-group">
+							<label for="code" class="control-label">代码</label>
+							<input type="text" class="form-control" id="code" v-model="addmodule.code">
+						</div>
+						<div class="form-group">
+							<label for="link" class="control-label">链接</label>
+							<input type="text" class="form-control" id="link" v-model="addmodule.link">
+						</div>
+						<div>
+							<label class="checkbox-inline">
+								<input type="checkbox" id="gly"  v-model="zhlx.gly">管理员(0)
+							</label>
+							<label class="checkbox-inline">
+								<input type="checkbox" id="ld"  v-model="zhlx.ld">领导(1)
+							</label>
+							<label class="checkbox-inline">
+								<input type="checkbox" id="fzr"  v-model="zhlx.fzr">部门负责人(2)
+							</label>
+							<label class="checkbox-inline">
+								<input type="checkbox" id="yg"  v-model="zhlx.yg">员工(3)
+							</label>
+						</div>
+						<div class="form-group">
+							<label for="addmdlx">所属分类</label>
+							<select id="addmdlx" class="form-control" v-model="addmodule.mdlx">
+								<option selected="selected" value="公告">公告</option>
+								<option value="审批">审批</option>
+								<option value="任务">任务</option>
+								<option value="组织架构">组织架构</option>
+								<option value="个人中心">个人中心</option>
+							</select>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" v-on:click="add()">提交</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+	<!-- 消息模态框 -->
+	<div class="modal fade bs-example-modal-sm" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="msgModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="msgModalLabel">
+						服务器消息
+					</h4>
+				</div>
+				<div class="modal-body">
+					{{msg}}
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+</div>
