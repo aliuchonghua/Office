@@ -18,6 +18,10 @@ public class Msg {
     public Msg() {
     }
 
+    public Msg(HttpSession session) {
+        this.session = session;
+    }
+
     public Msg(String mess) {
         this.mess = mess;
     }

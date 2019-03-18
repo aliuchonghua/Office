@@ -1,6 +1,7 @@
 package com.westos.Information.dao;
 
 import com.westos.Information.bean.Module;
+import com.westos.Information.bean.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -26,5 +27,9 @@ public interface ModuleDao {
      * 删除
      */
     Integer remove(Module module);
+    /**
+     * 查找当前用户的模块
+     */
+    List<Module> findUserModule(User user);
 
 }

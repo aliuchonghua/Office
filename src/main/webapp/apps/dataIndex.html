@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="../css/util.css">
     <script src="../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../js/macarons.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../js/globalconstant.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/globalconstant.js" type="text/javascript" charset="utf-8"></script>
 </head>
 
 <body style="background-color: #eee;">
@@ -28,8 +28,8 @@
                 <!-- 顶部大图 -->
                 <div style="height: 155px; background-image: url(../img/wstop.png); " class="pm">
 							<span id="qiye">
-						{{user.qy_name}}
-					</span>
+								{{user.qy_name}}
+							</span>
                 </div>
                 <!-- 导航栏 -->
                 <nav class="navbar navbar-default" role="navigation">
@@ -40,100 +40,60 @@
                         <div class="collapse navbar-collapse" id="example-navbar-collapse">
                             <ul class="nav navbar-nav">
                                 <li>
-                                    <a href="javascript:void(0)" v-on:click="gztinit()">工作台</a>
+                                    <a href="javascript:void(0)" v-on:click="kztinit()">工作台</a>
                                 </li>
-                                <li class="dropdown">
+                                <li class="dropdown" id="gg">
                                     <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                                         公告
                                         <b class="caret"></b>
                                     </a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a href="javascript:void(0)">班级管理</a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                            <a href="javascript:void(0)">专业管理</a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                            <a href="javascript:void(0)">学院管理</a>
+                                    <ul class="dropdown-menu" >
+                                        <li v-for="(item,index) in gglist">
+                                            <a href="javascript:void(0)" v-on:click="loadapp(item)">{{item.name}}</a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="dropdown">
+                                <li class="dropdown" id="sp">
                                     <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                                         审批
                                         <b class="caret"></b>
                                     </a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a href="javascript:void(0)">班级管理</a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                            <a href="javascript:void(0)">专业管理</a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                            <a href="javascript:void(0)">学院管理</a>
+                                    <ul class="dropdown-menu" >
+                                        <li v-for="(item,index) in splist">
+                                            <a href="javascript:void(0)" v-on:click="loadapp(item)">{{item.name}}</a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="dropdown">
+                                <li class="dropdown" id="rw">
                                     <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                                         任务
                                         <b class="caret"></b>
                                     </a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a href="javascript:void(0)">班级管理</a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                            <a href="javascript:void(0)">专业管理</a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                            <a href="javascript:void(0)">学院管理</a>
+                                    <ul class="dropdown-menu" >
+                                        <li v-for="(item,index) in rwlist">
+                                            <a href="javascript:void(0)" v-on:click="loadapp(item)">{{item.name}}</a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="dropdown">
+                                <li class="dropdown" id="zzjg">
                                     <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                                         组织架构
                                         <b class="caret"></b>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li>
-                                            <a href="javascript:void(0)">班级管理</a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                            <a href="javascript:void(0)">专业管理</a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                            <a href="javascript:void(0)">学院管理</a>
+                                        <li v-for="(item,index) in zzjglist">
+                                            <a href="javascript:void(0)" v-on:click="loadapp(item)">{{item.name}}</a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="dropdown">
+                                <li class="dropdown" id="grzx">
                                     <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                                         个人中心
                                         <b class="caret"></b>
                                     </a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a href="javascript:void(0)">班级管理</a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                            <a href="javascript:void(0)">专业管理</a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                            <a href="javascript:void(0)">学院管理</a>
+                                    <ul class="dropdown-menu" >
+                                        <li v-for="(item,index) in grzxlist">
+                                            <a href="javascript:void(0)" v-on:click="loadapp(item)">{{item.name}}</a>
                                         </li>
                                     </ul>
                                 </li>

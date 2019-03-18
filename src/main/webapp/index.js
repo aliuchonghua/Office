@@ -54,8 +54,7 @@ var vue = new Vue({
 		zhuce: function() {
 			$("#app").hide();
 			$("#app2").show();
-			var url = "apps/zhuce/zcView.html";
-			$("#app2").load(url);
+			$("#app2").load("apps/zhuce/zcView.html");
 			$.getScript("apps/zhuce/zcCore.js");
 		}
 

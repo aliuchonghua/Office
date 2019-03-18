@@ -1,3 +1,4 @@
+
 var workbench = new Vue({
 	el: '#workbench',
 	data: {},
@@ -94,6 +95,5 @@ var workbench = new Vue({
 	},
 	mounted: function() {
 		this.inituser();
-		
 	}
 });
