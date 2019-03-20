@@ -12,7 +12,7 @@ public class Application {
 
     public static void main(String[] args) {
         //启动SpringBoot
-        SpringApplication.run(Application.class,args);
+        SpringApplication.run(Application.class, args);
 
         //自动打开浏览器
         /*String cmd = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe http://localhost:9090/index.html";
@@ -24,4 +24,5 @@ public class Application {
         }*/
 
     }
+
 }

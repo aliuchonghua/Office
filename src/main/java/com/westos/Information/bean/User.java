@@ -11,14 +11,13 @@ public class User {
     private Date csny;        //出生年月
     private String xb;            //性别
     private Integer zhlx;        //账户类型0(管理员)1(领导)2(部门负责人)3(员工)
+    private Integer zhlx_name;    //账户类型名称
     private String dq;            //地区
     private String qy_id;        //企业id
     private String qy_name;        //企业名
     private Integer bm_id;        //部门id
     private String bm_name;        //部门名
     private String pass;        //密码
-    private Integer start;      //页码
-    private Integer limit;      //每页条数
 
     @Override
     public String toString() {
@@ -29,14 +28,13 @@ public class User {
                 ", csny=" + csny +
                 ", xb='" + xb + '\'' +
                 ", zhlx=" + zhlx +
+                ", zhlx_name=" + zhlx_name +
                 ", dq='" + dq + '\'' +
                 ", qy_id='" + qy_id + '\'' +
                 ", qy_name='" + qy_name + '\'' +
                 ", bm_id=" + bm_id +
                 ", bm_name='" + bm_name + '\'' +
                 ", pass='" + pass + '\'' +
-                ", start=" + start +
-                ", limit=" + limit +
                 '}';
     }
 
@@ -51,6 +49,7 @@ public class User {
                 Objects.equals(csny, user.csny) &&
                 Objects.equals(xb, user.xb) &&
                 Objects.equals(zhlx, user.zhlx) &&
+                Objects.equals(zhlx_name, user.zhlx_name) &&
                 Objects.equals(dq, user.dq) &&
                 Objects.equals(qy_id, user.qy_id) &&
                 Objects.equals(qy_name, user.qy_name) &&
@@ -61,7 +60,7 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, sjh, name, csny, xb, zhlx, dq, qy_id, qy_name, bm_id, bm_name, pass);
+        return Objects.hash(id, sjh, name, csny, xb, zhlx, zhlx_name, dq, qy_id, qy_name, bm_id, bm_name, pass);
     }
 
     public String getId() {
@@ -112,6 +111,14 @@ public class User {
         this.zhlx = zhlx;
     }
 
+    public Integer getZhlx_name() {
+        return zhlx_name;
+    }
+
+    public void setZhlx_name(Integer zhlx_name) {
+        this.zhlx_name = zhlx_name;
+    }
+
     public String getDq() {
         return dq;
     }
@@ -158,21 +165,5 @@ public class User {
 
     public void setPass(String pass) {
         this.pass = pass;
-    }
-
-    public Integer getStart() {
-        return start;
-    }
-
-    public void setStart(Integer start) {
-        this.start = start;
-    }
-
-    public Integer getLimit() {
-        return limit;
-    }
-
-    public void setLimit(Integer limit) {
-        this.limit = limit;
     }
 }
