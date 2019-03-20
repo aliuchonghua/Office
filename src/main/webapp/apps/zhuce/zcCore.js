@@ -253,7 +253,10 @@ var zc = new Vue({
     mounted: function () {
         //日期弹窗初始化
         laydate.render({
-            elem: '#clrq'
+            elem: '#clrq',
+            done:function (value) {
+                zc.qiye.clrq=value;
+            }
         });
         //zc初始化
         this.$nextTick(function () {

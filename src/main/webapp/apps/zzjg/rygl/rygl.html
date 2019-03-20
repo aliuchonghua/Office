@@ -1,9 +1,9 @@
-<div id="bmglapp" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<div id="ryglapp" xmlns:v-on="http://www.w3.org/1999/xhtml">
 	<div class="row">
 		<div class="row" style="margin: 0 10px;">
 			<div class="col-md-10 col-md-offset-1">
 				<form class="form-inline">
-					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#add">添加</button>
+					<button type="button" class="btn btn-info"  v-on:click="addOpen()">添加</button>
 				</form>
 			</div>
 		</div>
@@ -13,24 +13,24 @@
 					<table class="table table-hover table-condensed">
 						<caption>人员管理</caption>
 						<thead>
-						<tr>
-							<th>姓名</th>
-							<th>手机号</th>
-							<th>部门</th>
-							<th>职位</th>
-							<th>操作</th>
-						</tr>
+							<tr>
+								<th>姓名</th>
+								<th>手机号</th>
+								<th>部门</th>
+								<th>职位</th>
+								<th>操作</th>
+							</tr>
 						</thead>
 						<tbody>
-						<tr v-for="(item,index) in userlist">
-							<td v-on:click="modify(item)">{{item.name}}</td>
-							<td v-on:click="modify(item)">{{item.sjh}}</td>
-							<td v-on:click="modify(item)">{{item.bm_name}}</td>
-							<td v-on:click="modify(item)">{{item.zhlx_name}}</td>
-							<td v-on:click="remove(item)">
-								<span class="label label-danger">删除</span>
-							</td>
-						</tr>
+							<tr v-for="(item,index) in userlist">
+								<td v-on:click="modify(item)">{{item.name}}</td>
+								<td v-on:click="modify(item)">{{item.sjh}}</td>
+								<td v-on:click="modify(item)">{{item.bm_name}}</td>
+								<td v-on:click="modify(item)">{{item.zhlx_name}}</td>
+								<td v-on:click="remove(item)">
+									<span class="label label-danger">删除</span>
+								</td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -48,8 +48,35 @@
 				<div class="modal-body">
 					<form id="userform">
 						<div class="form-group">
-							<label for="username" class="control-label">部门名</label>
-							<input type="text" class="form-control" id="username" name="username" v-model="user.name">
+							<label for="sjh" class="control-label">手机号</label>
+							<input type="text" class="form-control" id="sjh" name="sjh" v-model="user.sjh">
+						</div>
+						<div class="form-group">
+							<label for="name" class="control-label">姓名</label>
+							<input type="text" class="form-control" id="name" name="name" v-model="user.name">
+						</div>
+						<div class="form-group">
+							<label for="csny" class="control-label">出生年月</label>
+							<input type="text" class="form-control" id="csny" name="csny" v-model="user.csny">
+						</div>
+						<div class="form-group">
+							<label for="xb" class="control-label">性别</label>
+							<input type="text" class="form-control" id="xb" name="xb" v-model="user.xb">
+						</div>
+						<div class="form-group">
+							<label for="zhlx_name" class="control-label">账户类型名</label>
+							<input type="text" class="form-control" id="zhlx_name" name="zhlx_name" v-model="user.zhlx_name">
+						</div>
+						<div class="form-group" id="dq">
+
+						</div>
+						<div class="form-group">
+							<label for="bm_name" class="control-label">部门名</label>
+							<input type="text" class="form-control" id="bm_name" name="bm_name" v-model="user.bm_name">
+						</div>
+						<div class="form-group">
+							<label for="pass" class="control-label">密码</label>
+							<input type="text" class="form-control" id="pass" name="pass" v-model="user.pass">
 						</div>
 					</form>
 				</div>
@@ -62,7 +89,7 @@
 	</div>
 	<!-- 消息模态框 -->
 	<div class="modal fade bs-example-modal-sm" id="msg" tabindex="-1" role="dialog" aria-labelledby="msgLabel"
-		 aria-hidden="true">
+	 aria-hidden="true">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div class="modal-header">
