@@ -13,7 +13,20 @@ public class Msg {
     private Integer type;//状态码
     private HttpSession session;
     private Module module;//模块
+    private Bumen bumen;
 
+    public Msg(HttpSession session, Bumen bumen) {
+        this.session = session;
+        this.bumen = bumen;
+    }
+
+    public Bumen getBumen() {
+        return bumen;
+    }
+
+    public void setBumen(Bumen bumen) {
+        this.bumen = bumen;
+    }
 
     public Msg() {
     }

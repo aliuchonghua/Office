@@ -6,6 +6,7 @@
           content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
     <title>办公自动化事务督办系统</title>
     <link rel="stylesheet" type="text/css" href="../css/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../js/bootstrapvalidator-master/dist/css/bootstrapValidator.min.css">
     <script type="text/javascript" src="../js/jquery.min.js"></script>
     <script src="../css/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="../js/axios.min.js"></script>
@@ -18,6 +19,10 @@
     <script src="../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../js/macarons.js" type="text/javascript" charset="utf-8"></script>
     <script src="../js/globalconstant.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/bootstrapvalidator-master/dist/js/bootstrapValidator.min.js" type="text/javascript"
+            charset="utf-8"></script>
+    <script src="../js/bootstrapvalidator-master/dist/js/language/zh_CN.js" type="text/javascript"
+            charset="utf-8"></script>
 </head>
 
 <body style="background-color: #eee;">
@@ -35,6 +40,13 @@
                 <nav class="navbar navbar-default" role="navigation">
                     <div class="container-fluid">
                         <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                    data-target="#example-navbar-collapse">
+                                <span class="sr-only">切换导航</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
                             <p class="navbar-text yhm">{{user.name}}</p>
                         </div>
                         <div class="collapse navbar-collapse" id="example-navbar-collapse">
@@ -47,7 +59,7 @@
                                         公告
                                         <b class="caret"></b>
                                     </a>
-                                    <ul class="dropdown-menu" >
+                                    <ul class="dropdown-menu">
                                         <li v-for="(item,index) in gglist">
                                             <a href="javascript:void(0)" v-on:click="loadapp(item)">{{item.name}}</a>
                                         </li>
@@ -58,7 +70,7 @@
                                         审批
                                         <b class="caret"></b>
                                     </a>
-                                    <ul class="dropdown-menu" >
+                                    <ul class="dropdown-menu">
                                         <li v-for="(item,index) in splist">
                                             <a href="javascript:void(0)" v-on:click="loadapp(item)">{{item.name}}</a>
                                         </li>
@@ -69,7 +81,7 @@
                                         任务
                                         <b class="caret"></b>
                                     </a>
-                                    <ul class="dropdown-menu" >
+                                    <ul class="dropdown-menu">
                                         <li v-for="(item,index) in rwlist">
                                             <a href="javascript:void(0)" v-on:click="loadapp(item)">{{item.name}}</a>
                                         </li>
@@ -91,7 +103,7 @@
                                         个人中心
                                         <b class="caret"></b>
                                     </a>
-                                    <ul class="dropdown-menu" >
+                                    <ul class="dropdown-menu">
                                         <li v-for="(item,index) in grzxlist">
                                             <a href="javascript:void(0)" v-on:click="loadapp(item)">{{item.name}}</a>
                                         </li>

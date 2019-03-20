@@ -1,6 +1,6 @@
 package com.westos.Information.service;
 
-import com.westos.Information.Util.ID;
+import com.westos.Information.util.ID;
 import com.westos.Information.bean.Msg;
 import com.westos.Information.bean.Qiye;
 import com.westos.Information.bean.User;

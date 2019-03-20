@@ -1,31 +1,33 @@
 <div id="bmglapp" xmlns:v-on="http://www.w3.org/1999/xhtml">
 	<div class="row">
 		<div class="row" style="margin: 0 10px;">
-			<div class="col-md-12">
+			<div class="col-md-10 col-md-offset-1">
 				<form class="form-inline">
 					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#add">添加</button>
 				</form>
 			</div>
 		</div>
-		<div class="row" style="margin: 0 10px;">
-			<div class="table-responsive" style="padding-left: 20px;padding-right: 20px;">
-				<table class="table table-hover table-condensed">
-					<caption>部门</caption>
-					<thead>
-						<tr>
-							<th>部门</th>
-							<th>操作</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr v-for="(item,index) in modulelist">
-							<td v-on:click="modify(item)">{{item.name}}</td>
-							<td v-on:click="remove(item)">
-								<span class="label label-danger">删除</span>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+		<div class="row" style="margin: 10px;">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="table-responsive" style="padding-left: 20px;padding-right: 20px;">
+					<table class="table table-hover table-condensed">
+						<caption>部门</caption>
+						<thead>
+							<tr>
+								<th>部门</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr v-for="(item,index) in bmlist">
+								<td v-on:click="modify(item)">{{item.name}}</td>
+								<td v-on:click="remove(item)">
+									<span class="label label-danger">删除</span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -38,10 +40,10 @@
 					<h4 class="modal-title" id="addLabel">新增</h4>
 				</div>
 				<div class="modal-body">
-					<form>
+					<form id="addform">
 						<div class="form-group">
 							<label for="addname" class="control-label">部门名</label>
-							<input type="text" class="form-control" id="addname" v-model="addbm.name">
+							<input type="text" class="form-control" id="addname" name="addname" v-model="addbm.name">
 						</div>
 					</form>
 				</div>
@@ -61,22 +63,23 @@
 					<h4 class="modal-title" id="addbmLabel">修改</h4>
 				</div>
 				<div class="modal-body">
-					<form>
+					<form id="modifyform">
 						<div class="form-group">
 							<label for="modifyname" class="control-label">部门名</label>
-							<input type="text" class="form-control" id="modifyname" v-model="modifybm.name">
+							<input type="text" class="form-control" id="modifyname" name="modifyname" v-model="modifybm.name">
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" v-on:click="modify()">确定</button>
+					<button type="button" class="btn btn-primary" v-on:click="modifySubmit()">确定</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- 消息模态框 -->
-	<div class="modal fade bs-example-modal-sm" id="msg" tabindex="-1" role="dialog" aria-labelledby="msgLabel" aria-hidden="true">
+	<div class="modal fade bs-example-modal-sm" id="msg" tabindex="-1" role="dialog" aria-labelledby="msgLabel"
+	 aria-hidden="true">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div class="modal-header">

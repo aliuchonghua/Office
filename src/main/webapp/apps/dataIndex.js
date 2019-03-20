@@ -111,5 +111,13 @@ var dataIndex = new Vue({
     mounted: function () {
         this.init();
         this.loadModel();
+
+    }
+});
+$(document).keydown(function(event){
+    if (event.keyCode == 13) {
+        $('form').each(function() {
+            event.preventDefault();
+        });
     }
 });

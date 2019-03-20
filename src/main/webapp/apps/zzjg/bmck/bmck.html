@@ -1,0 +1,23 @@
+<div id="bmckapp" xmlns:v-on="http://www.w3.org/1999/xhtml">
+	<div class="row">
+		<div class="row" style="margin: 0 10px;">
+			<div class="col-md-10 col-md-offset-1" >
+				<div class="table-responsive" style="padding-left: 20px;padding-right: 20px;">
+					<table class="table table-hover">
+						<caption>部门</caption>
+						<thead>
+							<tr>
+								<th>部门</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr v-for="(item,index) in bmlist">
+								<td>{{item.name}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

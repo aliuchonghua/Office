@@ -1,7 +1,8 @@
 package com.westos.Information.service.impl.mkgl;
 
-import com.westos.Information.Util.ID;
-import com.westos.Information.Util.Str;
+import com.westos.Information.util.Cons;
+import com.westos.Information.util.ID;
+import com.westos.Information.util.Str;
 import com.westos.Information.bean.Module;
 import com.westos.Information.bean.Msg;
 import com.westos.Information.bean.User;
@@ -33,10 +34,10 @@ public class MkglServiceImpl implements MkglService {
             module.setQy_id(user.getQy_id());
             module.setId(ID.getID());
             moduleDao.add(module);
-            return new Msg("添加成功", 1);
+            return new Msg("添加成功", Cons.add);
         } else {
             moduleDao.modify(module);
-            return new Msg("修改成功", 2);
+            return new Msg("修改成功", Cons.modify);
         }
     }
 
