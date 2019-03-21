@@ -11,11 +11,11 @@ public class User {
     private Date csny;        //出生年月
     private String xb;            //性别
     private Integer zhlx;        //账户类型0(管理员)1(领导)2(部门负责人)3(员工)
-    private Integer zhlx_name;    //账户类型名称
+    private String zhlx_name;    //账户类型名称
     private String dq;            //地区
     private String qy_id;        //企业id
     private String qy_name;        //企业名
-    private Integer bm_id;        //部门id
+    private String bm_id;        //部门id
     private String bm_name;        //部门名
     private String pass;        //密码
 
@@ -111,11 +111,12 @@ public class User {
         this.zhlx = zhlx;
     }
 
-    public Integer getZhlx_name() {
+
+    public String getZhlx_name() {
         return zhlx_name;
     }
 
-    public void setZhlx_name(Integer zhlx_name) {
+    public void setZhlx_name(String zhlx_name) {
         this.zhlx_name = zhlx_name;
     }
 
@@ -143,11 +144,11 @@ public class User {
         this.qy_name = qy_name;
     }
 
-    public Integer getBm_id() {
+    public String getBm_id() {
         return bm_id;
     }
 
-    public void setBm_id(Integer bm_id) {
+    public void setBm_id(String bm_id) {
         this.bm_id = bm_id;
     }
 

@@ -1,7 +1,9 @@
 
 var workbench = new Vue({
 	el: '#rygl',
-	data: {},
+	data: {
+
+	},
 	methods: {
 		inti:function(){
 			

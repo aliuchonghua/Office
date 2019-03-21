@@ -15,6 +15,12 @@ public class Msg {
     private Module module;//模块
     private Bumen bumen;
 
+
+    public Msg( HttpSession session,User user) {
+        this.user = user;
+        this.session = session;
+    }
+
     public Msg(HttpSession session, Bumen bumen) {
         this.session = session;
         this.bumen = bumen;

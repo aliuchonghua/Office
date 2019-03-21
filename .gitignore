@@ -5,6 +5,7 @@
 # IntelliJ project files
 .idea
 *.iml
+*.yml
 out
 gen
 src/main/java/com/westos/Office/

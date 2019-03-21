@@ -31,7 +31,12 @@
     <!--查找同名企业-->
     <select id="findNameToQiye" resultType="com.westos.Information.bean.Qiye"
             parameterType="com.westos.Information.bean.Qiye">
-        select * from qiye where name like CONCAT('%',#{name},'%')
+        select * from qiye where name = #{name}
+    </select>
+    <!--根据id查企业-->
+    <select id="findQiyeById" resultType="com.westos.Information.bean.Qiye"
+            parameterType="com.westos.Information.bean.User">
+        select * from qiye where id = #{qy_id}
     </select>
 </mapper>
 

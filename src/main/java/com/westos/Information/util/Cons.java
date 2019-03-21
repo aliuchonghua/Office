@@ -6,4 +6,7 @@ public class Cons {
     public static final int modify=2;//修改
     public static final int delete=3;//删除
     public static final int err=-1;//异常
+    //用户
+    public static final String user="Auth_user";
+    public static final String qiye="Auth_qiye";
 }

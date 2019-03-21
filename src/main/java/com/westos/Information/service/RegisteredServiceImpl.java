@@ -9,6 +9,9 @@ import com.westos.Information.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * 注册
+ */
 @Service
 public class RegisteredServiceImpl implements RegisteredService {
     @Autowired
@@ -43,7 +46,6 @@ public class RegisteredServiceImpl implements RegisteredService {
         qiyeDao.addQiye(qiye);
         //创建用户
         user.setQy_id(qiye.getId());
-        user.setQy_name(qiye.getName());
         user.setName("管理员");
         userDao.addUser(user);
         return new Msg("成功注册" + qiye.getName(),1);

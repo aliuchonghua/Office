@@ -48,15 +48,17 @@ var dataIndex = new Vue({
          * 控制台初始化
          */
         kztinit: function () {
-            $("#datacontent").load("workbench/workbench.html");
-            $.getScript("workbench/workCore.js");
+            $("#datacontent").load("workbench/workbench.html",function () {
+                $.getScript("workbench/workCore.js");
+            });
         },
         /**
          * 加载模块管理模块
          */
         mkgl: function () {
-            $("#datacontent").load("mkgl/mkgl.html");
-            $.getScript("mkgl/mkglCore.js");
+            $("#datacontent").load("mkgl/mkgl.html",function () {
+                $.getScript("mkgl/mkglCore.js");
+            });
         },
         /**
          * 获取当前用户全部的模块
@@ -104,8 +106,9 @@ var dataIndex = new Vue({
          * @param item 模块对象
          */
 		loadapp:function(item){
-            $("#datacontent").load(item.link+item.code+".html");
-            $.getScript(item.link+item.code+"Core.js");
+            $("#datacontent").load(item.link+item.code+".html",function () {
+                $.getScript(item.link+item.code+"Core.js");
+            });
 		}
     },
     mounted: function () {

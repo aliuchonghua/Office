@@ -5,28 +5,61 @@
 
 <mapper namespace="com.westos.Information.dao.UserDao">
     <!--查找账户是否存在-->
-    <select id="findsjhToUser" resultType="com.westos.Information.bean.User">
-        select * from user where sjh=#{sjh}
+    <select id="findsjhToUser" resultType="com.westos.Information.bean.User" parameterType="com.westos.Information.bean.User">
+  SELECT
+  u.*,
+  (SELECT
+    q.name
+  FROM
+    qiye q
+  WHERE q.id = u.`qy_id`) qy_name,
+  (SELECT
+    b.name
+  FROM
+    bumen b
+  WHERE b.id = u.`bm_id`) bm_name
+FROM
+  USER u
+WHERE u.sjh = #{sjh}
     </select>
     <!--通过手机号，密码获取用户-->
-    <select id="sjhAndPassToUser" resultType="com.westos.Information.bean.User">
-        select * from user where sjh=#{sjh} and pass=#{pass}
+    <select id="sjhAndPassToUser" resultType="com.westos.Information.bean.User" parameterType="com.westos.Information.bean.User">
+  select u.*,(SELECT
+    q.name
+  FROM
+    qiye q
+  WHERE q.id = u.`qy_id`) qy_name,
+  (SELECT
+    b.name
+  FROM
+    bumen b
+  WHERE b.id = u.`bm_id`) bm_name  from user u where u.sjh=#{sjh} and u.pass=#{pass}
     </select>
-    <!--通过id获取用户-->
-    <select id="idToUser" resultType="com.westos.Information.bean.User">
-        select * from user where id=#{id}
-    </select>
-    <!--分页获取所有用户-->
-    <select id="PaginationUserAll" resultType="com.westos.Information.bean.User">
-        select * from user limit (#{start}-1)*#{limit},#{limit};
+    <select id="findList" resultType="com.westos.Information.bean.User" parameterType="com.westos.Information.bean.Bumen">
+  SELECT
+  u.*,
+  (SELECT
+    q.name
+  FROM
+    qiye q
+  WHERE q.id = u.`qy_id`) qy_name,
+  (SELECT
+    b.name
+  FROM
+    bumen b
+  WHERE b.id = u.`bm_id`) bm_name
+FROM
+  USER u
+WHERE u.`bm_id` = #{id}
+  AND u.`qy_id` = #{qy_id}
     </select>
     <!--添加用户-->
-    <insert id="addUser" parameterType="com.westos.Information.bean.User"  >
-        insert into user (id,sjh,name,csny,xb,zhlx,dq,qy_id,qy_name,bm_id,bm_name,pass)value (
-        #{id},#{sjh},#{name},#{csny},#{xb},#{zhlx},#{dq},#{qy_id},#{qy_name},#{bm_id},#{bm_name},#{pass})
+    <insert id="addUser" parameterType="com.westos.Information.bean.User">
+        insert into user (id,sjh,name,csny,xb,zhlx,zhlx_name,dq,qy_id,bm_id,pass)value (
+        #{id},#{sjh},#{name},#{csny},#{xb},#{zhlx},#{zhlx_name},#{dq},#{qy_id},#{bm_id},#{pass})
     </insert>
     <!--通过id修改用户-->
-    <update id="modifyUser" parameterType="com.westos.Information.bean.User" >
+    <update id="modifyUser" parameterType="com.westos.Information.bean.User">
         update user
         <set>
             sjh=#{sjh},
@@ -36,9 +69,7 @@
             zhlx=#{zhlx},
             dq=#{dq},
             qy_id=#{qy_id},
-            qy_name=#{qy_name},
             bm_id=#{bm_id},
-            bm_name=#{bm_name},
             pass=#{pass}
         </set>
         <where>

@@ -28,10 +28,10 @@ var vue = new Vue({
 				$("#rem").show();
 			} else {
 				vue.msg.user=vue.user;
+				$('#myModal').modal('show'); //触发模态框
 				axios.post('/login/login', vue.msg).then(function(result) {
 					if (result.data.type== 1) {
 						$("#rem").hide();
-						$('#myModal').modal('show'); //触发模态框
 						window.location.href = '/apps/dataIndex.html';
 					} else {
 						$("#rem").show();
@@ -39,6 +39,7 @@ var vue = new Vue({
 					}
 				}).catch(function(err) {
 					console.log(err);
+					$('#myModal').modal('hide');
 					vue.yzxx = '服务器错误';
 					$("#rem").show();
 				});

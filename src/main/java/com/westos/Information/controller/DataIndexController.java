@@ -30,7 +30,6 @@ public class DataIndexController {
     public Msg finduser(HttpServletRequest request)  {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("Auth_user");
-        System.err.println(user);
         Msg msg=new Msg();
         msg.setUser(user);
         return msg;

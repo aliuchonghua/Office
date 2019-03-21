@@ -1,4 +1,3 @@
-
 var workbench = new Vue({
 	el: '#workbench',
 	data: {},
