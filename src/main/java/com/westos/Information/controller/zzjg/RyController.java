@@ -6,6 +6,7 @@ import com.westos.Information.bean.User;
 import com.westos.Information.service.service.zzjg.RyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,6 +34,7 @@ public class RyController {
      * 添加
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @Transactional//事务
     public Msg add(@RequestBody User user, HttpServletRequest request) {
         return service.add(new Msg(request.getSession(), user));
     }
@@ -41,6 +43,7 @@ public class RyController {
      * 修改
      */
     @RequestMapping(value = "/modify", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @Transactional//事务
     public Msg modify(@RequestBody User user, HttpServletRequest request) {
         return service.modify(new Msg(request.getSession(), user));
     }
@@ -49,6 +52,7 @@ public class RyController {
      * 删除
      */
     @RequestMapping(value = "/remove", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @Transactional//事务
     public Msg remove(@RequestBody User user, HttpServletRequest request) {
         return service.remove(new Msg(request.getSession(), user));
     }

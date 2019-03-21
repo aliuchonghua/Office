@@ -37,6 +37,21 @@ var mkgl = new Vue({
         },
         updatemodule: function (module) {
             $('#addModal').modal('show');
+            var split = module.zhlx.split(',');
+            for (var i = 0; i < split.length; i++) {
+                if (split[i]==='0') {
+                    mkgl.zhlx.gly = true;
+                }
+                if (split[i]==='1') {
+                    mkgl.zhlx.ld = true;
+                }
+                if (split[i]==='2') {
+                    mkgl.zhlx.fzr = true;
+                }
+                if (split[i]==='3') {
+                    mkgl.zhlx.yg = true;
+                }
+            }
             this.addmodule = module;
         },
         remove: function (module) {
@@ -50,16 +65,16 @@ var mkgl = new Vue({
         },
         add: function () {
             var zhlxstr = "";
-            if (this.zhlx.gly == true) {
+            if (mkgl.zhlx.gly === true) {
                 zhlxstr += '0,';
             }
-            if (this.zhlx.ld == true) {
+            if (mkgl.zhlx.ld === true) {
                 zhlxstr += '1,';
             }
-            if (this.zhlx.fzr == true) {
+            if (mkgl.zhlx.fzr === true) {
                 zhlxstr += '2,';
             }
-            if (this.zhlx.yg == true) {
+            if (mkgl.zhlx.yg === true) {
                 zhlxstr += '3,';
             }
             zhlxstr = zhlxstr.substr(0, zhlxstr.length - 1);

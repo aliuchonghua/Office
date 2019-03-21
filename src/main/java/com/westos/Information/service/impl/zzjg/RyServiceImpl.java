@@ -1,6 +1,5 @@
 package com.westos.Information.service.impl.zzjg;
 
-import com.westos.Information.bean.Bumen;
 import com.westos.Information.bean.Msg;
 import com.westos.Information.bean.Qiye;
 import com.westos.Information.bean.User;
@@ -45,11 +44,22 @@ public class RyServiceImpl implements RyService {
 
     @Override
     public Msg modify(Msg msg) {
-        return null;
+        //查重复
+        if (dao.findRepeatBySjh(msg.getUser())!=null){
+            return new Msg("手机号重复", Cons.err);
+        }else {
+            Integer integer = dao.modifyUser(msg.getUser());
+            if (integer>0){
+                return new Msg("修改成功", Cons.modify);
+            }else {
+                return new Msg("修改失败", Cons.err);
+            }
+        }
     }
 
     @Override
     public Msg remove(Msg msg) {
-        return null;
+        dao.deleteUser(msg.getUser());
+        return new Msg("删除成功",Cons.delete);
     }
 }

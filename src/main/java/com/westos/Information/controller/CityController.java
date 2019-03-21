@@ -23,11 +23,22 @@ public class CityController {
     public List<City> getSheng() {
         return cityService.getSheng();
     }
+    //返回省份
+    @RequestMapping(value = "/getShengByName", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public City getSheng(@RequestBody City city) {
+        return cityService.getShengByName(city);
+    }
 
     //返回城市
     @RequestMapping(value = "/shi", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<City> getshi(@RequestBody City city) {
         return cityService.getShi(city);
+
+    }
+    //返回城市
+    @RequestMapping(value = "/getshiByName", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public City getshiByName(@RequestBody City city) {
+        return cityService.getshiByName(city);
 
     }
     //返回县

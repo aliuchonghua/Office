@@ -17,10 +17,20 @@ public class CityServiceimpl implements CityService {
     public List<City> getSheng() {
         return cityDao.getSheng();
     }
+    @Override
+    public City getShengByName(City city) {
+        return cityDao.getShengByName(city);
+    }
+
 
     @Override
     public List<City> getShi(City city) {
         return cityDao.getShi(city);
+    }
+
+    @Override
+    public City getshiByName(City city) {
+        return cityDao.getshiByName(city);
     }
 
     @Override

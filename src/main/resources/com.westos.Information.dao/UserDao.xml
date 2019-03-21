@@ -5,7 +5,8 @@
 
 <mapper namespace="com.westos.Information.dao.UserDao">
     <!--查找账户是否存在-->
-    <select id="findsjhToUser" resultType="com.westos.Information.bean.User" parameterType="com.westos.Information.bean.User">
+    <select id="findsjhToUser" resultType="com.westos.Information.bean.User"
+            parameterType="com.westos.Information.bean.User">
   SELECT
   u.*,
   (SELECT
@@ -22,8 +23,29 @@ FROM
   USER u
 WHERE u.sjh = #{sjh}
     </select>
+    <!--手机号查重-->
+    <select id="findRepeatBySjh" resultType="com.westos.Information.bean.User"
+            parameterType="com.westos.Information.bean.User">
+  SELECT
+  u.*,
+  (SELECT
+    q.name
+  FROM
+    qiye q
+  WHERE q.id = u.`qy_id`) qy_name,
+  (SELECT
+    b.name
+  FROM
+    bumen b
+  WHERE b.id = u.`bm_id`) bm_name
+FROM
+  USER u
+WHERE u.sjh = #{sjh}
+and id !=#{id}
+    </select>
     <!--通过手机号，密码获取用户-->
-    <select id="sjhAndPassToUser" resultType="com.westos.Information.bean.User" parameterType="com.westos.Information.bean.User">
+    <select id="sjhAndPassToUser" resultType="com.westos.Information.bean.User"
+            parameterType="com.westos.Information.bean.User">
   select u.*,(SELECT
     q.name
   FROM
@@ -35,7 +57,8 @@ WHERE u.sjh = #{sjh}
     bumen b
   WHERE b.id = u.`bm_id`) bm_name  from user u where u.sjh=#{sjh} and u.pass=#{pass}
     </select>
-    <select id="findList" resultType="com.westos.Information.bean.User" parameterType="com.westos.Information.bean.Bumen">
+    <select id="findList" resultType="com.westos.Information.bean.User"
+            parameterType="com.westos.Information.bean.Bumen">
   SELECT
   u.*,
   (SELECT
@@ -52,6 +75,7 @@ FROM
   USER u
 WHERE u.`bm_id` = #{id}
   AND u.`qy_id` = #{qy_id}
+  and zhlx!=0
     </select>
     <!--添加用户-->
     <insert id="addUser" parameterType="com.westos.Information.bean.User">
@@ -67,6 +91,7 @@ WHERE u.`bm_id` = #{id}
             csny=#{csny},
             xb=#{xb},
             zhlx=#{zhlx},
+            zhlx_name=#{zhlx_name},
             dq=#{dq},
             qy_id=#{qy_id},
             bm_id=#{bm_id},

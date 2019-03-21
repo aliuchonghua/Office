@@ -23,6 +23,10 @@ var rygl = new Vue({
             id: '',
             name: ''
         },
+        frombm: {
+            id: '',
+            name: ''
+        },
         msg: {
             mess: ''
         },
@@ -46,7 +50,11 @@ var rygl = new Vue({
         getbm: function () {
             axios.get('/zzjg/bmgl/findlist').then(function (result) {
                 rygl.bmlist = result.data;
+                rygl.frombm=result.data;
                 rygl.bm=result.data[0];
+                rygl.user.bm_id=result.data[0].id;
+                rygl.user.bm_name=result.data[0].name;
+                rygl.init();
             }).catch(function (err) {
                 console.log(err);
             });
@@ -80,7 +88,34 @@ var rygl = new Vue({
             });
             rygl.formTitle = '修改';
             rygl.user = item;
-            rygl.getsheng();
+            //回填日期
+            rygl.user.csny=Global.Fun.Format(item.csny,"yyyy-MM-dd");
+            //回填部门
+            rygl.frombm.id=item.bm_id;
+            rygl.frombm.name=item.bm_name;
+            //回填省市县
+            Global.Fun.ajaxGet('/city/sheng',function (value) {
+                rygl.sheng=value;
+            });
+            rygl.city.sheng=item.dq.split(",")[0];
+            Global.Fun.ajaxPost('/city/getShengByName',{cityname:rygl.city.sheng},function (data) {
+                rygl.shi = [];
+                rygl.xian = [];
+                Global.Fun.ajaxPost('/city/shi',data,function (data) {
+                    rygl.shi=data;
+                    rygl.city.shi=item.dq.split(",")[1];
+                    Global.Fun.ajaxPost('/city/getshiByName',{cityname:rygl.city.shi},function (data) {
+                        rygl.xian = [];
+                        Global.Fun.ajaxPost('/city/xian',data,function (data) {
+                            rygl.xian=data;
+                            rygl.city.xian=item.dq.split(",")[2];
+                        });
+                    });
+
+                })
+
+            })
+
         },
         submit: function () {
             var modifyform = $("#userform").data('bootstrapValidator');
@@ -115,21 +150,19 @@ var rygl = new Vue({
 
         },
         remove: function (bm) {
-            /*axios.post('/zzjg/bmgl/remove', bm).then(function (result) {
-                bmgl.msg.mess = result.data.mess;
+            axios.post('/zzjg/rygl/remove', bm).then(function (result) {
+                rygl.msg.mess = result.data.mess;
                 $('#msg').modal('show');
-                bmgl.init();
+                rygl.init();
             }).catch(function (err) {
                 console.log(err);
-            });*/
+            });
         },
         //获取省份
         getsheng: function () {
             axios.get('/city/sheng').then(function (value) {
                 rygl.city.sheng = value.data[0].cityname;
-                for (var i = 0; i < value.data.length; i++) {
-                    rygl.sheng.push(value.data[i]);
-                }
+                rygl.sheng=value.data;
                 rygl.getshi(value.data[0]);
             }).catch(function (reason) {
                 console.log(reason);
@@ -141,9 +174,7 @@ var rygl = new Vue({
             rygl.xian = [];
             axios.post('/city/shi', item).then(function (value) {
                 rygl.city.shi = value.data[0].cityname;
-                for (var i = 0; i < value.data.length; i++) {
-                    rygl.shi.push(value.data[i]);
-                }
+                rygl.shi=value.data;
                 rygl.getxian(value.data[0]);
             }).catch(function (reason) {
                 console.log(reason);
@@ -153,10 +184,8 @@ var rygl = new Vue({
         getxian: function (item) {
             rygl.xian = [];
             axios.post('/city/xian', item).then(function (value) {
+                rygl.xian=value.data;
                 rygl.city.xian = value.data[0].cityname;
-                for (var i = 0; i < value.data.length; i++) {
-                    rygl.xian.push(value.data[i]);
-                }
             }).catch(function (reason) {
                 console.log(reason);
             });
@@ -164,7 +193,6 @@ var rygl = new Vue({
     },
     mounted: function () {
         this.getbm();
-        this.init();
         $('#ryglform').on('hide.bs.modal',
             function () {
                 rygl.user = {
@@ -178,11 +206,12 @@ var rygl = new Vue({
                     dq: '',
                     qy_id: '',
                     qy_name: '',
-                    bm_id: '',
-                    bm_name: '',
+                    bm_id: rygl.bm.id,
+                    bm_name: rygl.bm.name,
                     pass: ''
                 };
                 $("#userform").data("bootstrapValidator").resetForm();
+                rygl.init();
             }
         );
 
