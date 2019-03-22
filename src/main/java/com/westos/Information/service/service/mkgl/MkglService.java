@@ -13,6 +13,10 @@ public interface MkglService {
      * @return
      */
     List<Module> findlist(Module module, HttpSession session);
+    /**
+     * 当前企业的所有模块
+     */
+    List<Module> findMk(Msg msg);
 
     /**
      * 添加

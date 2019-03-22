@@ -8,6 +8,13 @@
 *.yml
 out
 gen
-src/main/java/com/westos/Office/
-
-src/test/
+target/Office-1.0-SNAPSHOT.jar
+target/Office-1.0-SNAPSHOT.jar.original
+target/classes/META-INF/
+target/classes/com.westos.Information.dao/
+target/classes/com/
+target/classes/form.txt
+target/classes/test.xml
+target/generated-sources/
+target/maven-archiver/
+target/maven-status/

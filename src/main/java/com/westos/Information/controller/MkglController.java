@@ -27,6 +27,11 @@ public class MkglController {
     public List<Module> findList(@RequestBody Module module , HttpServletRequest request)  {
         return mkglService.findlist(module,request.getSession());
     }
+    //获取当前企业所有模块
+    @RequestMapping(value = "/findMk", method = RequestMethod.GET)
+    public List<Module> findMk( HttpServletRequest request)  {
+        return mkglService.findMk(new Msg(request.getSession()));
+    }
     //新增
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @Transactional//事务

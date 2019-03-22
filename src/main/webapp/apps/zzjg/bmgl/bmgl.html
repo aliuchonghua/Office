@@ -3,7 +3,7 @@
 		<div class="row" style="margin: 0 10px;">
 			<div class="col-md-10 col-md-offset-1">
 				<form class="form-inline">
-					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#add">添加</button>
+					<button type="button" class="btn btn-info" v-on:click="addopen()">添加</button>
 				</form>
 			</div>
 		</div>
@@ -15,12 +15,14 @@
 						<thead>
 							<tr>
 								<th>部门名</th>
+								<th>附加权限</th>
 								<th>操作</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr v-for="(item,index) in bmlist">
-								<td v-on:click="modify(item)">{{item.name}}</td>
+								<td v-on:click="modifyopen(item)">{{item.name}}</td>
+								<td v-on:click="modifyopen(item)">{{item.fjqx}}</td>
 								<td v-on:click="remove(item)">
 									<span class="label label-danger">删除</span>
 								</td>
@@ -37,13 +39,17 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="addLabel">新增</h4>
+					<h4 class="modal-title" id="addLabel">{{formTitle}}</h4>
 				</div>
 				<div class="modal-body">
 					<form id="addform">
 						<div class="form-group">
 							<label for="addname" class="control-label">部门名</label>
-							<input type="text" class="form-control" id="addname" name="addname" v-model="addbm.name">
+							<input type="text" class="form-control" id="addname" name="addname" v-model="bm.name">
+						</div>
+						<div class="form-group">
+							<label for="fjqx">附加权限</label>
+							<select id="fjqx" class="selectpicker form-control" data-live-search="true" multiple></select>
 						</div>
 					</form>
 				</div>
@@ -55,7 +61,7 @@
 		</div>
 	</div>
 	<!-- 修改 -->
-	<div class="modal fade" id="modify" tabindex="-1" role="dialog" aria-labelledby="addbmLabel" aria-hidden="true">
+	<!--<div class="modal fade" id="modify" tabindex="-1" role="dialog" aria-labelledby="addbmLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -76,7 +82,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>-->
 	<!-- 消息模态框 -->
 	<div class="modal fade bs-example-modal-sm" id="msg" tabindex="-1" role="dialog" aria-labelledby="msgLabel"
 	 aria-hidden="true">

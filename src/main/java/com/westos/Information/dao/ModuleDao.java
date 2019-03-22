@@ -16,6 +16,11 @@ public interface ModuleDao {
     List<Module> findlist(Module module);
 
     /**
+     * 查找当前企业所有模块
+     */
+    List<Module> findModuleByQiye(User user);
+
+    /**
      * 添加
      */
     Integer add(Module module);

@@ -1,16 +1,11 @@
 var bmgl = new Vue({
     el: '#bmglapp',
     data: {
+        formTitle: '',
         bmlist: [],
         bm: {
             id: '',
-            name: ''
-        },
-        addbm: {
-            name: ''
-        },
-        modifybm: {
-            id: '',
+            fjqx: '',
             name: ''
         },
         msg: {
@@ -26,11 +21,26 @@ var bmgl = new Vue({
             });
 
         },
+        addopen: function () {
+            bmgl.formTitle = '新增';
+            $('#add').modal('show');
+        },
+        modifyopen: function () {
+            bmgl.formTitle = '编辑';
+            $('#add').modal('show');
+        },
         add: function () {
             var addform = $("#addform").data('bootstrapValidator');
             addform.validate();
             if (addform.isValid()) {
-                axios.post('/zzjg/bmgl/add', bmgl.addbm).then(function (result) {
+                var qx = [];
+                $("#fjqx:selected").each(function(){
+                    qx.push($(this).val());
+                });
+                for (var i = 0; i <qx.length; i++) {
+                    bmgl.bm.fjqx+=qx[i];
+                }
+                axios.post('/zzjg/bmgl/add', bmgl.bm).then(function (result) {
                     bmgl.msg.mess = result.data.mess;
                     $('#add').modal('hide');
                     $('#msg').modal('show');
@@ -42,9 +52,9 @@ var bmgl = new Vue({
         },
         modify: function (bm) {
             $('#modify').modal('show');
-            bmgl.modifybm=bm
+            bmgl.modifybm = bm
         },
-        modifySubmit:function(){
+        modifySubmit: function () {
             var modifyform = $("#modifyform").data('bootstrapValidator');
             modifyform.validate();
             if (modifyform.isValid()) {
@@ -73,13 +83,16 @@ var bmgl = new Vue({
         this.init();
         $('#add').on('hide.bs.modal',
             function () {
-                bmgl.addbm = {
+                bmgl.bm = {
+                    id: '',
+                    fjqx: '',
                     name: ''
                 };
                 $("#addform").data("bootstrapValidator").resetForm();
+                $('.selectpicker').selectpicker('val', []);
             }
         );
-        $('#modify').on('hide.bs.modal',
+        /*$('#modify').on('hide.bs.modal',
             function () {
                 bmgl.modifybm = {
                     id: '',
@@ -88,9 +101,23 @@ var bmgl = new Vue({
                 $("#modifyform").data("bootstrapValidator").resetForm();
 
             }
-        );
+        );*/
 
     }
+});
+$(function () {
+    $(".selectpicker").selectpicker({
+        noneSelectedText: '请选择'//默认显示内容
+    });
+    var select = $("#fjqx");
+    Global.Fun.ajaxGet("/mkgl/findMk", function (data) {
+        for (var i = 0; i < data.length; i++) {
+            select.append("<option value=" + data[i].id + ">" + data[i].name + "</option>");
+        }
+    });
+    $(window).on('load', function () {
+        $('.selectpicker').selectpicker('refresh');
+    });
 });
 //表单验证
 $(document).ready(function () {
@@ -133,3 +160,4 @@ $(document).ready(function () {
         }
     });
 })
+

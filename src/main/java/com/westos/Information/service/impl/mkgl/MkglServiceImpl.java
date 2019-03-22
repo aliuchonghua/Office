@@ -1,5 +1,6 @@
 package com.westos.Information.service.impl.mkgl;
 
+import com.westos.Information.util.Auth;
 import com.westos.Information.util.Cons;
 import com.westos.Information.util.ID;
 import com.westos.Information.util.Str;
@@ -21,14 +22,19 @@ public class MkglServiceImpl implements MkglService {
 
     @Override
     public List<Module> findlist(Module module, HttpSession session) {
-        User user = (User) session.getAttribute("Auth_user");
+        User user = (User) session.getAttribute(Cons.user);
         module.setQy_id(user.getQy_id());
         return moduleDao.findlist(module);
     }
 
     @Override
+    public List<Module> findMk(Msg msg) {
+        return moduleDao.findModuleByQiye(Auth.getUser(msg));
+    }
+
+    @Override
     public Msg add(Module module, HttpSession session) {
-        User user = (User) session.getAttribute("Auth_user");
+        User user = (User) session.getAttribute(Cons.user);
         System.err.println("module====>"+module);
         if (Str.isAnyEmpty(module.getId())) {
             module.setQy_id(user.getQy_id());
