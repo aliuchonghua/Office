@@ -1,5 +1,5 @@
 var Global = {};
-Global.user = {};
+Global.Validator = {};
 Global.path = {};
 Global.Fun = {};
 // 路径
@@ -82,27 +82,28 @@ Global.Fun.Format = function (now, mask) {
  * @param params
  * @param call
  */
-Global.Fun.ajaxGet = function(url,call){
+Global.Fun.ajaxGet = function (url, call) {
     $.ajax({
-        type:'GET',
-        async:false,
-        url:url,
-        dataType:'json',
-        success:function(data){
+        type: 'GET',
+        async: false,
+        url: url,
+        dataType: 'json',
+        success: function (data) {
             call(data);
         }
     });
 }
-Global.Fun.ajaxPost = function(url,params,call){
+Global.Fun.ajaxPost = function (url, params, call) {
     $.ajax({
-        type:'POST',
-        async:false,
-        url:url,
-        data:JSON.stringify(params?params:{}),
-        dataType:'json',
-        contentType:'application/json',
-        success:function(data){
+        type: 'POST',
+        async: false,
+        url: url,
+        data: JSON.stringify(params ? params : {}),
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
             call(data);
         }
     });
 }
+

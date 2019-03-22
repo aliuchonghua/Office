@@ -1,5 +1,6 @@
 package com.westos.Information.service.service.mkgl;
 
+import com.westos.Information.bean.Bumen;
 import com.westos.Information.bean.Module;
 import com.westos.Information.bean.Msg;
 
@@ -14,9 +15,13 @@ public interface MkglService {
      */
     List<Module> findlist(Module module, HttpSession session);
     /**
-     * 当前企业的所有模块
+     * 获取当前企业部门可选的附加模块
      */
     List<Module> findMk(Msg msg);
+    /**
+     * 根据名称串获取id串
+     */
+    Bumen fingModuleByname(Msg msg);
 
     /**
      * 添加

@@ -6,7 +6,8 @@ import java.io.IOException;
 
 public class Test {
     public static void main(String[] args) throws Exception {
-        form("user");
+//        form("user");\
+
     }
 
     public static void form(String s) throws IOException {

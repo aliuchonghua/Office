@@ -7,49 +7,102 @@
     <!--查找模块-->
     <select id="findlist" resultType="com.westos.Information.bean.Module"
             parameterType="com.westos.Information.bean.Module">
-        select * from module_configuration where mdlx=#{mdlx} and qy_id=#{qy_id}
+        select *
+        from module_configuration
+        where mdlx = #{mdlx}
+          and qy_id = #{qy_id}
     </select>
-    <!--查找当前企业的模块-->
+    <!--获取当前企业部门可选的附加模块-->
     <select id="findModuleByQiye" resultType="com.westos.Information.bean.Module"
             parameterType="com.westos.Information.bean.User">
-        select * from module_configuration where qy_id=#{qy_id}
+        select *
+        from module_configuration
+        where qy_id = #{qy_id}
+          and id not in (
+            select id
+            from module_configuration
+            where zhlx LIKE '%2%'
+        )
+    </select>
+    <!--根据id串查模块-->
+    <select id="findlistById" resultType="com.westos.Information.bean.Module"
+            parameterType="com.westos.Information.bean.Module">
+        select *
+        from office_automation.module_configuration
+        where name = #{name}
+          and qy_id = #{qy_id}
     </select>
     <!--查找当前用户的模块-->
     <select id="findUserModule" resultType="com.westos.Information.bean.Module"
             parameterType="com.westos.Information.bean.User">
-        SELECT
-          m.`name`,
-          m.`code`,
-          m.`link`,
-          m.`zhlx`,
-          m.`mdlx`
-        FROM
-          module_configuration m
+        SELECT m.`name`,
+               m.`code`,
+               m.`link`,
+               m.`zhlx`,
+               m.`mdlx`
+        FROM module_configuration m
         WHERE m.`qy_id` = #{qy_id}
-          AND m.`zhlx` LIKE CONCAT('%',#{zhlx},'%')
+          AND m.`zhlx` LIKE CONCAT('%', #{zhlx}, '%')
+        union all
+        SELECT c.`name`,
+               c.`code`,
+               c.`link`,
+               c.`zhlx`,
+               c.`mdlx`
+        FROM module_configuration c
+        where c.id in (select md_id from bm_qx where bm_id = #{bm_id})
+
     </select>
     <!--添加-->
     <insert id="add" parameterType="com.westos.Information.bean.Module">
-        insert into module_configuration(id,name,code,link,zhlx,mdlx,qy_id)value (
-        #{id},#{name},#{code},#{link},#{zhlx},#{mdlx},#{qy_id})
+        insert into module_configuration(id, name, code, link, zhlx, mdlx, qy_id
+        )
+        value
+        (
+        #{id}
+        ,
+        #{name}
+        ,
+        #{code}
+        ,
+        #{link}
+        ,
+        #{zhlx}
+        ,
+        #{mdlx}
+        ,
+        #{qy_id}
+        )
     </insert>
     <!--修改-->
     <update id="modify" parameterType="com.westos.Information.bean.Module">
         update module_configuration
         <set>
-            name=#{name},
-            code=#{code},
-            link=#{link},
-            zhlx=#{zhlx},
-            mdlx=#{mdlx}
+            name=
+            #{name},
+            code
+            =
+            #{code},
+            link
+            =
+            #{link},
+            zhlx
+            =
+            #{zhlx},
+            mdlx
+            =
+            #{mdlx}
         </set>
         <where>
-            id=#{id}
+            id=
+            #{id}
         </where>
     </update>
     <!--删除-->
     <delete id="remove" parameterType="com.westos.Information.bean.Module">
-        delete from module_configuration where id=#{id}
+        delete
+        from module_configuration
+        where id = #{id}
     </delete>
 </mapper>
 

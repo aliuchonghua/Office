@@ -7,37 +7,61 @@
     <!--查找模块-->
     <select id="findlist" resultType="com.westos.Information.bean.Bumen"
             parameterType="com.westos.Information.bean.User">
-        select * from bumen where qy_id=#{qy_id} UNION ALL
-SELECT
-  '' id,
-  #{qy_id} qy_id,
-  '领导' NAME
-FROM
-  DUAL
+        select t.*,
+               (select count(u.id) from user u where u.bm_id = t.id and u.qy_id = #{qy_id} and u.zhlx != '0') rs,
+               (select GROUP_CONCAT(m.name)
+                from bm_qx b
+                         left join module_configuration m on b.md_id = m.id
+                where t.id = b.bm_id
+                GROUP BY b.bm_id)                                                                             fjqx
+        from (
+                 select *
+                 from bumen
+                 where qy_id = #{qy_id}
+                 UNION ALL
+                 SELECT ''       id,
+                        #{qy_id} qy_id,
+                        '领导'     NAME
+                 FROM DUAL) t
     </select>
     <!--查找-->
     <select id="findName" resultType="com.westos.Information.bean.Bumen"
             parameterType="com.westos.Information.bean.Bumen">
-        select * from bumen where name=#{name} and qy_id=#{qy_id}
+        select *
+        from bumen
+        where 1 = 1
+        and qy_id = #{qy_id}
+        and name = #{name}
+        <if test="id != null">
+            and id !=
+            #{id}
+        </if>
+
+
     </select>
     <!--添加-->
     <insert id="add" parameterType="com.westos.Information.bean.Bumen">
-        insert into bumen(id,qy_id,name)value (
-        #{id},#{qy_id},#{name})
+        insert into bumen(id, qy_id, name
+        )
+        values (#{id}, #{qy_id}, #{name})
     </insert>
     <!--修改-->
     <update id="modify" parameterType="com.westos.Information.bean.Bumen">
         update bumen
         <set>
-            name=#{name}
+            name=
+            #{name}
         </set>
         <where>
-            id=#{id}
+            id=
+            #{id}
         </where>
     </update>
     <!--删除-->
     <delete id="remove" parameterType="com.westos.Information.bean.Bumen">
-        delete from bumen where id=#{id}
+        delete
+        from bumen
+        where id = #{id}
     </delete>
 </mapper>
 

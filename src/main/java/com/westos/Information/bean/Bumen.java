@@ -9,6 +9,15 @@ public class Bumen {
   private String qy_id;
   private String name;
   private String fjqx;//附加权限
+  private String rs;//人数
+
+    public String getRs() {
+        return rs;
+    }
+
+    public void setRs(String rs) {
+        this.rs = rs;
+    }
 
     public String getFjqx() {
         return fjqx;

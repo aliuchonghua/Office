@@ -34,6 +34,7 @@ var vue = new Vue({
 						$("#rem").hide();
 						window.location.href = '/apps/dataIndex.html';
 					} else {
+                        $('#myModal').modal('hide');
 						$("#rem").show();
 						vue.yzxx = result.data.mess;
 					}

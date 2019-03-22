@@ -23,59 +23,77 @@ var bmgl = new Vue({
         },
         addopen: function () {
             bmgl.formTitle = '新增';
+            $("#qxfrom").show();
             $('#add').modal('show');
         },
-        modifyopen: function () {
+        modifyopen: function (bm) {
+            if (bm.id === '') {
+                $("#qxfrom").hide();
+            } else {
+                $("#qxfrom").show();
+            }
             bmgl.formTitle = '编辑';
+            bmgl.bm = bm;
+            if (bm.fjqx !== null) {
+                //回填多选下拉框
+                Global.Fun.ajaxPost('/mkgl/fingModuleByname', bm, function (data) {
+                    var arr = data.fjqx.split(',');
+                    $('.selectpicker').selectpicker('val', arr);
+                })
+            }
             $('#add').modal('show');
         },
+        /**
+         * 新增方法
+         */
         add: function () {
             var addform = $("#addform").data('bootstrapValidator');
             addform.validate();
             if (addform.isValid()) {
-                var qx = [];
-                $("#fjqx:selected").each(function(){
-                    qx.push($(this).val());
-                });
-                for (var i = 0; i <qx.length; i++) {
-                    bmgl.bm.fjqx+=qx[i];
+                var qx = $("#fjqx").val();
+                //拼接附加权限id
+                if (qx !== null) {
+                    bmgl.bm.fjqx='';
+                    for (var i = 0; i < qx.length; i++) {
+                        bmgl.bm.fjqx += qx[i];
+                        bmgl.bm.fjqx += ',';
+                    }
+                    bmgl.bm.fjqx = bmgl.bm.fjqx.substr(0, bmgl.bm.fjqx.length - 1);
                 }
-                axios.post('/zzjg/bmgl/add', bmgl.bm).then(function (result) {
-                    bmgl.msg.mess = result.data.mess;
-                    $('#add').modal('hide');
-                    $('#msg').modal('show');
-                    bmgl.init();
-                }).catch(function (err) {
-                    console.log(err);
-                });
-            }
-        },
-        modify: function (bm) {
-            $('#modify').modal('show');
-            bmgl.modifybm = bm
-        },
-        modifySubmit: function () {
-            var modifyform = $("#modifyform").data('bootstrapValidator');
-            modifyform.validate();
-            if (modifyform.isValid()) {
-                axios.post('/zzjg/bmgl/modify', bmgl.modifybm).then(function (result) {
-                    bmgl.msg.mess = result.data.mess;
-                    $('#modify').modal('hide');
-                    $('#msg').modal('show');
-                    bmgl.init();
-                }).catch(function (err) {
-                    console.log(err);
-                });
+                if (bmgl.bm.id===''){//新增
+                    axios.post('/zzjg/bmgl/add', bmgl.bm).then(function (result) {
+                        bmgl.msg.mess = result.data.mess;
+                        $('#add').modal('hide');
+                        $('#msg').modal('show');
+                        bmgl.init();
+                    }).catch(function (err) {
+                        console.log(err);
+                    });
+                }else {//编辑
+                    axios.post('/zzjg/bmgl/modify', bmgl.bm).then(function (result) {
+                        bmgl.msg.mess = result.data.mess;
+                        $('#add').modal('hide');
+                        $('#msg').modal('show');
+                        bmgl.init();
+                    }).catch(function (err) {
+                        console.log(err);
+                    });
+                }
             }
         },
         remove: function (bm) {
-            axios.post('/zzjg/bmgl/remove', bm).then(function (result) {
-                bmgl.msg.mess = result.data.mess;
+            if(bm.rs!=='0'){
+                bmgl.msg.mess='无法删除,还存在绑定的员工';
                 $('#msg').modal('show');
-                bmgl.init();
-            }).catch(function (err) {
-                console.log(err);
-            });
+            }else {
+                axios.post('/zzjg/bmgl/remove', bm).then(function (result) {
+                    bmgl.msg.mess = result.data.mess;
+                    $('#msg').modal('show');
+                    bmgl.init();
+                }).catch(function (err) {
+                    console.log(err);
+                });
+            }
         },
 
     },
@@ -88,23 +106,17 @@ var bmgl = new Vue({
                     fjqx: '',
                     name: ''
                 };
+                //表单验证初始化
                 $("#addform").data("bootstrapValidator").resetForm();
+                //多选下拉框初始化
                 $('.selectpicker').selectpicker('val', []);
             }
         );
-        /*$('#modify').on('hide.bs.modal',
-            function () {
-                bmgl.modifybm = {
-                    id: '',
-                    name: ''
-                }
-                $("#modifyform").data("bootstrapValidator").resetForm();
-
-            }
-        );*/
-
     }
 });
+/**
+ * 下拉多选框初始化
+ */
 $(function () {
     $(".selectpicker").selectpicker({
         noneSelectedText: '请选择'//默认显示内容
@@ -119,28 +131,11 @@ $(function () {
         $('.selectpicker').selectpicker('refresh');
     });
 });
-//表单验证
+/**
+ * 加载表单验证配置
+ */
 $(document).ready(function () {
     $("#addform").bootstrapValidator({
-        message: 'This value is not valid',
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-            addname: {
-                message: '部门名错误',
-                validators: {
-                    notEmpty: {
-                        message: '部门名不能为空'
-                    }
-                }
-            }
-
-        }
-    });
-    $("#modifyform").bootstrapValidator({
         message: 'This value is not valid',
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',

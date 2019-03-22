@@ -5,7 +5,6 @@
 # IntelliJ project files
 .idea
 *.iml
-*.yml
 out
 gen
 target/Office-1.0-SNAPSHOT.jar
@@ -18,3 +17,4 @@ target/classes/test.xml
 target/generated-sources/
 target/maven-archiver/
 target/maven-status/
+src/test/

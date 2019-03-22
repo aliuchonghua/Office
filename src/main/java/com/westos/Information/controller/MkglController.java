@@ -1,5 +1,6 @@
 package com.westos.Information.controller;
 
+import com.westos.Information.bean.Bumen;
 import com.westos.Information.bean.Module;
 import com.westos.Information.bean.Msg;
 import com.westos.Information.service.service.mkgl.MkglService;
@@ -27,10 +28,17 @@ public class MkglController {
     public List<Module> findList(@RequestBody Module module , HttpServletRequest request)  {
         return mkglService.findlist(module,request.getSession());
     }
-    //获取当前企业所有模块
+    //获取当前企业部门可选的附加模块
     @RequestMapping(value = "/findMk", method = RequestMethod.GET)
     public List<Module> findMk( HttpServletRequest request)  {
         return mkglService.findMk(new Msg(request.getSession()));
+    }
+    /**
+     * 根据模块名获取id串
+     */
+    @RequestMapping(value = "/fingModuleByname", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Bumen add(@RequestBody Bumen bumen, HttpServletRequest request) {
+        return mkglService.fingModuleByname(new Msg(request.getSession(),bumen));
     }
     //新增
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)

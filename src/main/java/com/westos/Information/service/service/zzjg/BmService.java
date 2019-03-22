@@ -3,14 +3,13 @@ package com.westos.Information.service.service.zzjg;
 import com.westos.Information.bean.Bumen;
 import com.westos.Information.bean.Msg;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public interface BmService {
     /**
      * 主列表加载
      */
-    List<Bumen> findlist(HttpSession session);
+    List<Bumen> findlist(Msg msg);
     /**
      * 新增
      */

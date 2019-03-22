@@ -9,7 +9,8 @@
         SELECT * FROM city WHERE pid='1'
     </select>
     <!--获取省-->
-    <select id="getShengByName" resultType="com.westos.Information.bean.City" parameterType="com.westos.Information.bean.City">
+    <select id="getShengByName" resultType="com.westos.Information.bean.City"
+            parameterType="com.westos.Information.bean.City">
         SELECT * FROM city WHERE cityname=#{cityname}
     </select>
     <!--获取市-->
@@ -17,7 +18,8 @@
         SELECT * FROM city WHERE pid=#{id}
     </select>
     <!--获取市-->
-    <select id="getshiByName" resultType="com.westos.Information.bean.City" parameterType="com.westos.Information.bean.City">
+    <select id="getshiByName" resultType="com.westos.Information.bean.City"
+            parameterType="com.westos.Information.bean.City">
         SELECT * FROM city WHERE cityname=#{cityname} and type=2
     </select>
     <!--获取县-->
