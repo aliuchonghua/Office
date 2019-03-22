@@ -1,0 +1,43 @@
+<div id="ryckapp" xmlns:v-on="http://www.w3.org/1999/xhtml">
+    <div class="row">
+        <div class="row" style="margin: 0 10px;">
+            <div class="col-md-10 col-md-offset-1">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="bm">部门</label>
+                        <select id="bm" class="form-control">
+                            <option v-for="(item,index) in bmlist" v-on:click="setbm(item)">{{item.name}}</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row" style="margin: 10px;">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="table-responsive" style="padding-left: 20px;padding-right: 20px;">
+                    <table class="table table-hover table-condensed">
+                        <caption>通讯录</caption>
+                        <thead>
+                        <tr>
+                            <th>姓名</th>
+                            <th>手机号</th>
+                            <th>部门</th>
+                            <th>职位</th>
+                            <th>所在地区</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="(item,index) in userlist">
+                            <td>{{item.name}}</td>
+                            <td>{{item.sjh}}</td>
+                            <td>{{item.bm_name}}</td>
+                            <td>{{item.zhlx_name}}</td>
+                            <td>{{item.dq}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
