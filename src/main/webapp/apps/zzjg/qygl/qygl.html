@@ -1,0 +1,87 @@
+<div id="qyglapp" xmlns:v-on="http://www.w3.org/1999/xhtml">
+	<div class="row">
+		<div class="row" style="margin: 0 10px;">
+			<div class="col-md-10 col-md-offset-1">
+				<form class="form-inline">
+					<button type="button" class="btn btn-info" v-on:click="addopen()">添加</button>
+				</form>
+			</div>
+		</div>
+		<div class="row" style="margin: 10px;">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="table-responsive" style="padding-left: 20px;padding-right: 20px;">
+					<table class="table table-hover ">
+						<caption>部门管理</caption>
+						<thead>
+							<tr>
+								<th>部门名</th>
+								<th>附加权限</th>
+								<th>人员数量</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr v-for="(item,index) in bmlist">
+								<td v-on:click="modifyopen(item)">{{item.name}}</td>
+								<td v-on:click="modifyopen(item)">{{item.fjqx}}</td>
+								<td v-on:click="modifyopen(item)">{{item.rs}}</td>
+								<td v-on:click="remove(item)">
+									<span class="label label-danger">删除</span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 新增 -->
+	<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="addLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="addLabel">{{formTitle}}</h4>
+				</div>
+				<div class="modal-body">
+					<form id="addform">
+						<div class="form-group">
+							<label for="addname" class="control-label">部门名</label>
+							<input type="text" class="form-control" id="addname" name="addname" v-model="bm.name">
+						</div>
+						<div class="form-group" id="qxfrom">
+							<label for="fjqx">附加权限</label>
+							<select id="fjqx" class="selectpicker form-control" data-live-search="true" multiple></select>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" v-on:click="add()">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 消息模态框 -->
+	<div class="modal fade bs-example-modal-sm" id="msg" tabindex="-1" role="dialog" aria-labelledby="msgLabel"
+	 aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="msgLabel">
+						服务器消息
+					</h4>
+				</div>
+				<div class="modal-body">
+					{{msg.mess}}
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
