@@ -1,7 +1,7 @@
 <div id="mkglapp" xmlns:v-on="http://www.w3.org/1999/xhtml">
 	<div class="row">
 		<div class="row" style="margin: 0 10px;">
-			<div class="col-md-12">
+			<div class="col-md-10 col-md-offset-1">
 				<form class="form-inline">
 					<div class="form-group">
 						<label for="mdlx">所属分类</label>
@@ -18,10 +18,11 @@
 			</div>
 		</div>
 		<div class="row" style="margin: 0 10px;">
-			<div class="table-responsive" style="padding-left: 20px;padding-right: 20px;">
-				<table class="table table-hover table-condensed">
-					<caption>模块</caption>
-					<thead>
+			<div class="col-md-offset-1 col-md-10">
+				<div class="table-responsive" style="padding-left: 20px;padding-right: 20px;">
+					<table class="table table-hover table-condensed">
+						<caption>模块</caption>
+						<thead>
 						<tr>
 							<th>模块名</th>
 							<th>代码</th>
@@ -30,8 +31,8 @@
 							<th>所属分类</th>
 							<th>操作</th>
 						</tr>
-					</thead>
-					<tbody>
+						</thead>
+						<tbody>
 						<tr v-for="(item,index) in modulelist">
 							<!--item当前对象-->
 							<!--index下标-->
@@ -44,8 +45,9 @@
 								<span class="label label-danger">删除</span>
 							</td>
 						</tr>
-					</tbody>
-				</table>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -6,7 +6,7 @@
 <mapper namespace="com.westos.Information.dao.QiyeDao">
 
     <!--添加企业-->
-    <insert id="addQiye" parameterType="com.westos.Information.bean.Qiye" >
+    <insert id="addQiye" parameterType="com.westos.Information.bean.Qiye">
         insert into qiye (id,name,hymc,gly_id,clrq,dq,xxdz,zczj,jyfw,qyjj)value (
         #{id},#{name},#{hymc},#{gly_id},#{clrq},#{dq},#{xxdz},#{zczj},#{jyfw},#{qyjj})
     </insert>
@@ -36,7 +36,19 @@
     <!--根据id查企业-->
     <select id="findQiyeById" resultType="com.westos.Information.bean.Qiye"
             parameterType="com.westos.Information.bean.User">
-        select * from qiye where id = #{qy_id}
+        select id, name, hymc, gly_id, clrq, dq, xxdz, zczj, jyfw, qyjj  from qiye  where id = #{qy_id}
     </select>
+
+    <delete id="emptyFirm" parameterType="com.westos.Information.bean.Qiye">
+        delete from gg_weidu where u_id in (select id from user where qy_id=#{id});
+        delete from gonggao where qy_id=#{id};
+        delete from renwu where qy_id=#{id};
+        delete from shenpi where qy_id=#{id};
+        delete from module_configuration where qy_id=#{id};
+        delete from bm_qx where bm_id in (select id from bumen where qy_id=#{id});
+        delete from bumen where qy_id=#{id};
+        delete from user where qy_id=#{id};
+        delete from qiye where id=#{id};
+    </delete>
 </mapper>
 

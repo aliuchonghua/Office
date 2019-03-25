@@ -101,7 +101,7 @@ var zc = new Vue({
             zc.yzjyfw();
             zc.yzclrq();
             //拼接省市县
-            zc.qiye.dq = zc.city.sheng + zc.city.shi + zc.city.xian;
+            zc.qiye.dq = zc.city.sheng + "," + zc.city.shi + "," + zc.city.xian;
             if (zc.i) {
                 zc.msg.qiye = zc.qiye;
                 zc.msg.user = zc.user;
@@ -109,7 +109,7 @@ var zc = new Vue({
                     $('#zcModal').modal('show');
                     zc.Modal = value.data.mess;
                     if (value.data.type != -1) {
-                        $('#zcModal').on('hide.bs.modal',function () {
+                        $('#zcModal').on('hide.bs.modal', function () {
                             zc.back();
                         });
                     }
@@ -254,8 +254,8 @@ var zc = new Vue({
         //日期弹窗初始化
         laydate.render({
             elem: '#clrq',
-            done:function (value) {
-                zc.qiye.clrq=value;
+            done: function (value) {
+                zc.qiye.clrq = value;
             }
         });
         //zc初始化

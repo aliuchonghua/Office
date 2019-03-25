@@ -87,6 +87,7 @@ var rygl = new Vue({
                 }
             });
             rygl.formTitle = '修改';
+
             rygl.user = item;
             //回填日期
             rygl.user.csny=Global.Fun.Format(item.csny,"yyyy-MM-dd");
@@ -193,6 +194,7 @@ var rygl = new Vue({
     },
     mounted: function () {
         this.getbm();
+        this.getsheng();
         $('#ryglform').on('hide.bs.modal',
             function () {
                 rygl.user = {

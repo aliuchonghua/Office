@@ -3,13 +3,77 @@
 		<div class="row" style="margin: 0 10px;">
 			<div class="col-md-10 col-md-offset-1">
 				<form class="form-inline">
-					<button type="button" class="btn btn-info" v-on:click="addopen()">添加</button>
+					<button type="button" class="btn btn-info" v-on:click="editOpen()">编辑</button>
+					<button type="button" class="btn btn-danger" v-on:click="logoutOpen()">注销企业</button>
 				</form>
 			</div>
 		</div>
 		<div class="row" style="margin: 10px;">
 			<div class="col-md-10 col-md-offset-1">
-
+				<table class="table table-hover table-bordered">
+					<tbody>
+						<tr>
+							<td class="info">
+								企业名
+							</td>
+							<td>
+								{{qiye.name}}
+							</td>
+							<td class="info">
+								行业名称
+							</td>
+							<td>
+								{{qiye.hymc}}
+							</td>
+						</tr>
+						<tr >
+							<td class="info">
+								成立日期
+							</td>
+							<td>
+								{{qiye.clrq}}
+							</td>
+							<td class="info">
+								地区
+							</td>
+							<td>
+								{{qiye.dq}}
+							</td>
+						</tr>
+						<tr >
+							<td class="info">
+								详细地址
+							</td>
+							<td>
+								{{qiye.xxdz}}
+							</td>
+							<td class="info">
+								注册资金
+							</td>
+							<td>
+								{{qiye.zczj}}
+							</td>
+						</tr>
+						<tr >
+							<td class="info">
+								经营范围
+							</td>
+							<td colspan="3">
+								{{qiye.jyfw}}
+							</td>
+						</tr>
+						<tr >
+							<td colspan="4" class="info">
+								企业简介
+							</td>
+						</tr>
+                        <tr >
+                            <td colspan="4" >
+                                {{qiye.qyjj}}
+                            </td>
+                        </tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
@@ -19,13 +83,62 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="editLabel">{{formTitle}}</h4>
+					<h4 class="modal-title" id="editLabel">编辑</h4>
 				</div>
 				<div class="modal-body">
 					<form id="editform">
 						<div class="form-group">
-							<label for="editname" class="control-label">部门名</label>
-							<input type="text" class="form-control" id="editname" name="editname" v-model="bm.name">
+							<span class="zcx">*</span>
+							<label for="name">企业名称</label>
+							<input id="name" name="name" v-model="editqiye.name" type="text" class="form-control">
+						</div>
+						<div class="form-group">
+							<span class="zcx">*</span>
+							<label for="hymc">行业名称</label>
+							<input id="hymc" name="hymc" v-model="editqiye.hymc" type="text" class="form-control">
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="name">省份/地区：</label>
+									<select class="form-control" v-model="city.sheng">
+										<option v-for="item in sheng" v-on:click="getshi(item)">{{item.cityname}}
+										</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="name">城市：</label>
+									<select class="form-control" v-model="city.shi">
+										<option v-for="item in shi" v-on:click="getxian(item)">{{item.cityname}}
+										</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="name">区/县：</label>
+									<select class="form-control" v-model="city.xian">
+										<option v-for="item in xian">{{item.cityname}}</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<span class="zcx">*</span>
+							<label for="xxdz">详细地址</label>
+							<input id="xxdz" name="xxdz" v-model="editqiye.xxdz" type="text" class="form-control" placeholder="详细地址">
+						</div>
+
+						<div class="form-group">
+							<span class="zcx">*</span>
+							<label for="jyfw">经营范围</label>
+							<input id="jyfw" name="jyfw" v-model="editqiye.jyfw" type="text" class="form-control" placeholder="经营范围">
+						</div>
+						<div class="form-group">
+							<label for="qyjj">企业简介</label>
+							<textarea id="qyjj" v-model="editqiye.qyjj" class="form-control" rows="3"></textarea>
 						</div>
 
 					</form>
@@ -33,6 +146,23 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 					<button type="button" class="btn btn-primary" v-on:click="edit()">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="logoutLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="logoutLabel">企业注销</h4>
+				</div>
+				<div class="modal-body">
+					你确定要 注销当前企业吗?这将会删除企业的所有数据!
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-danger" v-on:click="logout()">注销</button>
 				</div>
 			</div>
 		</div>
@@ -60,3 +190,8 @@
 		</div>
 	</div>
 </div>
+<style type="text/css">
+	.zcx {
+		color: #FF6666;
+	}
+</style>

@@ -14,4 +14,7 @@ public interface QiyeDao {
     Qiye findNameToQiye(Qiye qiye);
     //根据id查企业
     Qiye findQiyeById(User user);
+    //注销企业
+    Integer emptyFirm(Qiye qiye);
+
 }

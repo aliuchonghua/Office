@@ -2,6 +2,7 @@ package com.westos.Information.controller;
 
 import com.westos.Information.bean.Msg;
 import com.westos.Information.service.LoginService;
+import com.westos.Information.util.Cons;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +33,8 @@ public class LoginController {
     @RequestMapping("/logout")
     public void logout(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        session.removeAttribute("Auth_user");
+        session.removeAttribute(Cons.user);
+        session.removeAttribute(Cons.qiye);
         try {
             response.sendRedirect("/index.html");
         } catch (IOException e) {
