@@ -57,6 +57,9 @@ and id !=#{id}
     bumen b
   WHERE b.id = u.`bm_id`) bm_name  from user u where u.sjh=#{sjh} and u.pass=#{pass}
     </select>
+    <select id="findUserById" resultType="com.westos.Information.bean.User" parameterType="com.westos.Information.bean.User">
+        select * from user where id=#{id}
+    </select>
     <select id="findList" resultType="com.westos.Information.bean.User"
             parameterType="com.westos.Information.bean.Bumen">
   SELECT

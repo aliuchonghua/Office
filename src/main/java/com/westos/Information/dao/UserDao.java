@@ -17,6 +17,8 @@ public interface UserDao {
     User findRepeatBySjh(User user);
     //通过手机号，密码获取用户
     User sjhAndPassToUser(User user);
+    //通过id查用户
+    User findUserById(User user);
     //添加用户
     Integer addUser(User user);
     //通过id修改用户

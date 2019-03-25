@@ -14,8 +14,17 @@ public class Msg {
     private HttpSession session;
     private Module module;//模块
     private Bumen bumen;
+    private String valid;//表单验证
 
-    public Msg(HttpSession session,Qiye qiye) {
+    public String getValid() {
+        return valid;
+    }
+
+    public void setValid(String valid) {
+        this.valid = valid;
+    }
+
+    public Msg(HttpSession session, Qiye qiye) {
         this.qiye = qiye;
         this.session = session;
     }
