@@ -1,13 +1,13 @@
-var wdck = new Vue({
-    el: '#wdckapp',
+var ydck = new Vue({
+    el: '#ydckapp',
     data: {
 		gglist:[],
 		gg:{}
     },
     methods: {
         init: function () {
-            axios.get('/gg/gggl/findWdList').then(function (result) {
-                wdck.gglist = result.data;
+            axios.get('/gg/gggl/findYdList').then(function (result) {
+                ydck.gglist = result.data;
             }).catch(function (err) {
                 console.log(err);
             });
@@ -23,27 +23,19 @@ var wdck = new Vue({
         //详情
         detail:function(item){
 			$('#ggform').modal('show');
-			wdck.gg=item;
-        },
-        //已读
-        haveRead:function(){
-			axios.post('/gg/gggl/haveRead',wdck.gg).then(function (result) {
-			    $('#ggform').modal('hide');
-				wdck.gg={};
-			}).catch(function (err) {
-			    console.log(err);
-			});
+			ydck.gg=item;
         },
         format:function (cjsj) {
             return Global.Fun.Format(cjsj,'yyyy-MM-dd HH:mm:ss');
         }
+
     },
     mounted: function () {
         this.init();
         $('#ggform').on('hide.bs.modal',
             function () {
-				wdck.gg={};
-                wdck.init();
+				ydck.gg={};
+                ydck.init();
             }
         );
     }

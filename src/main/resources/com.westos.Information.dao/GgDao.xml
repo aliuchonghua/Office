@@ -8,34 +8,50 @@
     <!--未读列表加载-->
     <select id="findWdList" resultType="com.westos.Information.bean.Gonggao"
             parameterType="com.westos.Information.bean.User">
-        select * from gonggao where qy_id=#{qy_id}
-        and u_id!=#{id}
-        and id not in (select g_id from gg_weidu where u_id=#{id})
+        select *
+        from gonggao
+        where qy_id = #{qy_id}
+          and u_id != #{id}
+          and id not in (select g_id from gg_weidu where u_id = #{id})
+        order by cjsj
     </select>
     <!--已读列表加载-->
     <select id="findYdList" resultType="com.westos.Information.bean.Gonggao"
             parameterType="com.westos.Information.bean.User">
-        select * from gonggao where qy_id=#{qy_id} and id in (select g_id from gg_weidu where u_id=#{id})
+        select *
+        from gonggao
+        where qy_id = #{qy_id}
+          and id in (select g_id
+                     from gg_weidu
+                     where u_id = #{id})
+        order by cjsj
+        limit 0,30
     </select>
     <!--自己发出的公告-->
     <select id="findZjList" resultType="com.westos.Information.bean.Gonggao"
             parameterType="com.westos.Information.bean.User">
-        select * from gonggao where qy_id=#{qy_id} and u_id=#{id}
+        select *
+        from gonggao
+        where qy_id = #{qy_id}
+          and u_id = #{id}
     </select>
     <!--添加公告-->
     <insert id="add" parameterType="com.westos.Information.bean.Gonggao">
-        insert into gonggao (id, bt, nr, u_id, cjsj, u_name, qy_id) value (
-        #{id},#{bt},#{nr},#{u_id},#{cjsj},#{u_name},#{qy_id})
+        insert into gonggao (id, bt, nr, u_id, cjsj, u_name, qy_id) value (#{id}, #{bt}, #{nr}, #{u_id}, #{cjsj},
+                                                                           #{u_name}, #{qy_id})
     </insert>
     <!--设置已读-->
     <insert id="haveRead" parameterType="com.westos.Information.bean.GgWeidu">
-        insert into gg_weidu (id, g_id, u_id)  value (
-        #{id},#{g_id},#{u_id})
+        insert into gg_weidu (id, g_id, u_id) value (#{id}, #{g_id}, #{u_id})
     </insert>
     <!--删除公告-->
     <delete id="delete" parameterType="com.westos.Information.bean.Gonggao">
-        delete from gonggao where id=#{id};
-        delete from gg_weidu where g_id=#{id};
+        delete
+        from gonggao
+        where id = #{id};
+        delete
+        from gg_weidu
+        where g_id = #{id};
     </delete>
 </mapper>
 

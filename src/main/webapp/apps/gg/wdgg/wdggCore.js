@@ -1,21 +1,24 @@
-var wdck = new Vue({
-    el: '#wdckapp',
+var wdgg = new Vue({
+    el: '#wdggapp',
     data: {
 		gglist:[],
-		gg:{}
+		gg:{},
+        msg: {
+            mess:''
+        }
     },
     methods: {
         init: function () {
-            axios.get('/gg/gggl/findWdList').then(function (result) {
-                wdck.gglist = result.data;
+            axios.get('/gg/gggl/findZjList').then(function (result) {
+                wdgg.gglist = result.data;
             }).catch(function (err) {
                 console.log(err);
             });
         },
         //简介
         summary:function(nr){
-            if (nr.length>15){
-                return nr.substr(0,15)+"...";
+            if (nr.length>18){
+                return nr.substr(0,18)+"...";
             }else {
                 return nr;
             }
@@ -23,13 +26,14 @@ var wdck = new Vue({
         //详情
         detail:function(item){
 			$('#ggform').modal('show');
-			wdck.gg=item;
+			wdgg.gg=item;
         },
-        //已读
-        haveRead:function(){
-			axios.post('/gg/gggl/haveRead',wdck.gg).then(function (result) {
-			    $('#ggform').modal('hide');
-				wdck.gg={};
+        //删除
+        remove:function(){
+			axios.post('/gg/gggl/delete',wdgg.gg).then(function (result) {
+                wdgg.msg.mess = result.data.mess;
+                $('#ggform').modal('hide');
+                $('#msg').modal('show');
 			}).catch(function (err) {
 			    console.log(err);
 			});
@@ -42,8 +46,8 @@ var wdck = new Vue({
         this.init();
         $('#ggform').on('hide.bs.modal',
             function () {
-				wdck.gg={};
-                wdck.init();
+				wdgg.gg={};
+                wdgg.init();
             }
         );
     }
