@@ -2,7 +2,7 @@ var xgmm = new Vue({
     el: '#xgmmapp',
     data: {
         pass: {
-            yspass: '',
+            pass: '',
             xpass: '',
             xpass2: ''
         },
@@ -31,7 +31,17 @@ var xgmm = new Vue({
         },
     },
     mounted: function () {
-        $("#editform").data("bootstrapValidator").resetForm();
+        $('#msg').on('hide.bs.modal',
+            function () {
+                xgmm.pass = {
+                    pass: '',
+                    xpass: '',
+                    xpass2: ''
+                };
+                //表单验证初始化
+                $("#editform").data("bootstrapValidator").resetForm();
+            }
+        );
     }
 });
 /**
@@ -46,7 +56,7 @@ $(document).ready(function () {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            yspass: {
+            pass: {
                 message: '原始密码错误',
                 validators: {
                     notEmpty: {
@@ -56,6 +66,13 @@ $(document).ready(function () {
                         min: 4,
                         max: 30,
                         message: '密码长度必须在6到11之间'
+                    },
+                    remote: {
+                        url: '/grzx/grxx/verification',
+                        message: '原始密码错误',
+                        type: 'get',
+                        dataType: 'json',
+                        delay: 500
                     }
                 }
             },
@@ -69,6 +86,10 @@ $(document).ready(function () {
                         min: 4,
                         max: 30,
                         message: '密码长度必须在6到11之间'
+                    },
+                    different: {
+                        field: 'pass',
+                        message: '不能和原始密码相同'
                     }
                 }
             },
@@ -86,8 +107,9 @@ $(document).ready(function () {
                     identical: {
                         field: 'xpass',
                         message: '两次密码不一致'
-                    }, different: {
-                        field: 'yspass',
+                    },
+                    different: {
+                        field: 'pass',
                         message: '不能和原始密码相同'
                     }
                 }

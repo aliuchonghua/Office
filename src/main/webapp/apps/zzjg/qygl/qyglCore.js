@@ -137,7 +137,7 @@ var qygl = new Vue({
         this.init();
         $('#edit').on('hide.bs.modal',
             function () {
-                editqiye = {
+                qygl.editqiye = {
                     name: '', // 企业名称
                     hymc: '', // 行业名称
                     clrq: '', // 成立日期

@@ -1,9 +1,12 @@
 package com.westos.Information.controller.grzx;
 
 import com.westos.Information.bean.Msg;
-import com.westos.Information.bean.Qiye;
 import com.westos.Information.bean.User;
+import com.westos.Information.bean.Validator;
 import com.westos.Information.service.service.grzx.GrzxService;
+import com.westos.Information.util.Auth;
+import com.westos.Information.util.Str;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,12 +48,11 @@ public class GrzxController {
     /**
      * 密码验证
      */
-    @RequestMapping(value = "/verification", method = RequestMethod.POST,consumes = "application/json")
-    public Map verification(@RequestBody Map<String, String> pass, HttpServletRequest request) {
-        System.err.println(pass);
-        Map<String, Boolean> map = new HashMap<>();
-        map.put("valid", true);
-        return map;
+    @RequestMapping(value = "/verification", method = RequestMethod.GET)
+    public Validator verification( HttpServletRequest request) {
+        User user = new User();
+        user.setPass(request.getParameter("pass"));
+        return service.verification(new Msg(request.getSession(),user));
     }
 
 }

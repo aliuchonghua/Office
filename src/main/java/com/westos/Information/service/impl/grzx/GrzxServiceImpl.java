@@ -3,6 +3,7 @@ package com.westos.Information.service.impl.grzx;
 import com.westos.Information.bean.Msg;
 import com.westos.Information.bean.Qiye;
 import com.westos.Information.bean.User;
+import com.westos.Information.bean.Validator;
 import com.westos.Information.dao.QiyeDao;
 import com.westos.Information.dao.UserDao;
 import com.westos.Information.service.service.grzx.GrzxService;
@@ -42,5 +43,19 @@ public class GrzxServiceImpl implements GrzxService {
         return new Msg("修改成功", Cons.modify);
 
 
+    }
+
+    /**
+     * 密码验证
+     */
+    @Override
+    public Validator verification(Msg msg) {
+        String pass = msg.getUser().getPass();
+        User user = Auth.getUser(msg);
+        if (StringUtils.equals(pass,user.getPass())){
+            return new Validator(true);
+        }else {
+            return new Validator(false);
+        }
     }
 }
