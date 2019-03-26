@@ -17,6 +17,9 @@ public class Msg {
     private Bumen bumen;
     private String valid;//表单验证
     private Gonggao gonggao;//公告
+    private Shenpi shenpi;//审批
+
+
 
     public Msg(HttpSession session, Gonggao gonggao) {
         this.session = session;
@@ -38,9 +41,21 @@ public class Msg {
         this.bumen = bumen;
     }
 
+    public Msg(HttpSession session, Shenpi shenpi) {
+        this.session = session;
+        this.shenpi = shenpi;
+    }
+
     public Msg(String mess, Integer type) {
         this.mess = mess;
         this.type = type;
+    }
+    public Shenpi getShenpi() {
+        return shenpi;
+    }
+
+    public void setShenpi(Shenpi shenpi) {
+        this.shenpi = shenpi;
     }
 
     public Gonggao getGonggao() {

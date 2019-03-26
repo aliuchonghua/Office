@@ -1,0 +1,91 @@
+<div id="ccsqapp" xmlns:v-on="http://www.w3.org/1999/xhtml">
+    <div class="row">
+        <div class="row" style="margin: 0 10px;">
+            <div class="col-md-10 col-md-offset-1">
+                <h4>出差申请</h4>
+                <form id="add">
+
+                    <div class="row">
+                        <div class="col-md-3 ">
+                            <div class="form-group">
+                                <span style="color: #FF6666;">*</span>
+                                <label for="cfcs" class="control-label">出发城市</label>
+                                <input type="text" class="form-control" id="cfcs" name="cfcs" v-model="sp.cfcs">
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-md-offset-1">
+                            <div class="form-group">
+                                <span style="color: #FF6666;">*</span>
+                                <label for="mdcs" class="control-label">目的城市</label>
+                                <input type="text" class="form-control" id="mdcs" name="mdcs" v-model="sp.mdcs">
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-md-offset-1">
+                            <div class="form-group">
+                                <span style="color: #FF6666;">*</span>
+                                <label for="jtgj" class="control-label">交通工具</label>
+                                <input type="text" class="form-control" id="jtgj" name="jtgj" v-model="sp.jtgj">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 ">
+                            <div class="form-group">
+                                <span style="color: #FF6666;">*</span>
+                                <label for="kssj" class="control-label">开始时间</label>
+                                <input type="text" class="form-control" id="kssj" name="kssj" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-md-offset-1">
+                            <div class="form-group">
+                                <span style="color: #FF6666;">*</span>
+                                <label for="jssj" class="control-label">结束时间</label>
+                                <input type="text" class="form-control" id="jssj" name="jssj" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-md-offset-1">
+                            <div class="form-group">
+                                <span style="color: #FF6666;">*</span>
+                                <label for="spr">审批人</label>
+                                <select id="spr" name="spr" class="form-control">
+                                    <option v-for="(item,index) in sprlist" v-on:click="setspr(item)">{{item.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span style="color: #FF6666;">*</span>
+                        <label for="yy">出差原因</label>
+                        <textarea id="yy" name="yy" v-model="sp.yy" class="form-control" rows="3"></textarea>
+                    </div>
+                </form>
+                <form class="form-inline">
+                    <button type="button" class="btn btn-info" v-on:click="add()">提交</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- 消息模态框 -->
+    <div class="modal fade bs-example-modal-sm" id="msg" tabindex="-1" role="dialog" aria-labelledby="msgLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="msgLabel">
+                        服务器消息
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    {{msg.mess}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

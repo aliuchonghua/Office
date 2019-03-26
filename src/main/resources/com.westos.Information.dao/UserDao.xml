@@ -7,89 +7,78 @@
     <!--查找账户是否存在-->
     <select id="findsjhToUser" resultType="com.westos.Information.bean.User"
             parameterType="com.westos.Information.bean.User">
-  SELECT
-  u.*,
-  (SELECT
-    q.name
-  FROM
-    qiye q
-  WHERE q.id = u.`qy_id`) qy_name,
-  (SELECT
-    b.name
-  FROM
-    bumen b
-  WHERE b.id = u.`bm_id`) bm_name
-FROM
-  USER u
-WHERE u.sjh = #{sjh}
+        SELECT u.*,
+               (SELECT q.name
+                FROM qiye q
+                WHERE q.id = u.`qy_id`) qy_name,
+               (SELECT b.name
+                FROM bumen b
+                WHERE b.id = u.`bm_id`) bm_name
+        FROM USER u
+        WHERE u.sjh = #{sjh}
     </select>
     <!--手机号查重-->
     <select id="findRepeatBySjh" resultType="com.westos.Information.bean.User"
             parameterType="com.westos.Information.bean.User">
-  SELECT
-  u.*,
-  (SELECT
-    q.name
-  FROM
-    qiye q
-  WHERE q.id = u.`qy_id`) qy_name,
-  (SELECT
-    b.name
-  FROM
-    bumen b
-  WHERE b.id = u.`bm_id`) bm_name
-FROM
-  USER u
-WHERE u.sjh = #{sjh}
-and id !=#{id}
+        SELECT u.*,
+               (SELECT q.name
+                FROM qiye q
+                WHERE q.id = u.`qy_id`) qy_name,
+               (SELECT b.name
+                FROM bumen b
+                WHERE b.id = u.`bm_id`) bm_name
+        FROM USER u
+        WHERE u.sjh = #{sjh}
+          and id != #{id}
     </select>
     <!--通过手机号，密码获取用户-->
     <select id="sjhAndPassToUser" resultType="com.westos.Information.bean.User"
             parameterType="com.westos.Information.bean.User">
-  select u.*,(SELECT
-    q.name
-  FROM
-    qiye q
-  WHERE q.id = u.`qy_id`) qy_name,
-  (SELECT
-    b.name
-  FROM
-    bumen b
-  WHERE b.id = u.`bm_id`) bm_name  from user u where u.sjh=#{sjh} and u.pass=#{pass}
+        select u.*,
+               (SELECT q.name
+                FROM qiye q
+                WHERE q.id = u.`qy_id`) qy_name,
+               (SELECT b.name
+                FROM bumen b
+                WHERE b.id = u.`bm_id`) bm_name
+        from user u
+        where u.sjh = #{sjh}
+          and u.pass = #{pass}
     </select>
-    <select id="findUserById" resultType="com.westos.Information.bean.User" parameterType="com.westos.Information.bean.User">
-        select * from user where id=#{id}
+    <select id="findUserById" resultType="com.westos.Information.bean.User"
+            parameterType="com.westos.Information.bean.User">
+        select *
+        from user
+        where id = #{id}
     </select>
     <select id="findList" resultType="com.westos.Information.bean.User"
             parameterType="com.westos.Information.bean.Bumen">
-  SELECT
-  u.*,
-  (SELECT
-    q.name
-  FROM
-    qiye q
-  WHERE q.id = u.`qy_id`) qy_name,
-  (SELECT
-    b.name
-  FROM
-    bumen b
-  WHERE b.id = u.`bm_id`) bm_name
-FROM
-  USER u
-WHERE u.`bm_id` = #{id}
-  AND u.`qy_id` = #{qy_id}
-  and zhlx!=0
+        SELECT u.*,
+               (SELECT q.name
+                FROM qiye q
+                WHERE q.id = u.`qy_id`) qy_name,
+               (SELECT b.name
+                FROM bumen b
+                WHERE b.id = u.`bm_id`) bm_name
+        FROM USER u
+        WHERE u.`bm_id` = #{id}
+          AND u.`qy_id` = #{qy_id}
+          and zhlx != 0
     </select>
     <!--添加用户-->
     <insert id="addUser" parameterType="com.westos.Information.bean.User">
-        insert into user (id,sjh,name,csny,xb,zhlx,zhlx_name,dq,qy_id,bm_id,pass)value (
-        #{id},#{sjh},#{name},#{csny},#{xb},#{zhlx},#{zhlx_name},#{dq},#{qy_id},#{bm_id},#{pass})
+        insert into user (id, sjh, name, csny, xb, zhlx, zhlx_name, dq, qy_id, bm_id, pass) value (
+                                                                                                   #{id}, #{sjh},
+                                                                                                   #{name}, #{csny},
+                                                                                                   #{xb}, #{zhlx},
+                                                                                                   #{zhlx_name}, #{dq},
+                                                                                                   #{qy_id}, #{bm_id},
+                                                                                                   #{pass})
     </insert>
     <!--通过id修改用户-->
     <update id="modifyUser" parameterType="com.westos.Information.bean.User">
         update user
-        <set>
-            sjh=#{sjh},
+        set sjh=#{sjh},
             name=#{name},
             csny=#{csny},
             xb=#{xb},
@@ -99,14 +88,28 @@ WHERE u.`bm_id` = #{id}
             qy_id=#{qy_id},
             bm_id=#{bm_id},
             pass=#{pass}
-        </set>
-        <where>
-            id=#{id}
-        </where>
+        where id = #{id}
+
     </update>
     <!--通过id删除用户-->
     <delete id="deleteUser" parameterType="com.westos.Information.bean.User">
-        delete from user where id=#{id}
+        delete
+        from user
+        where id = #{id}
     </delete>
+    <select id="findLeader" parameterType="com.westos.Information.bean.User"
+            resultType="com.westos.Information.bean.User">
+        select *
+        from user
+        where bm_id = #{bm_id}
+          and zhlx = 2
+    </select>
+    <select id="findBoss" parameterType="com.westos.Information.bean.User"
+            resultType="com.westos.Information.bean.User">
+        select *
+        from user
+        where qy_id = #{qy_id}
+          and zhlx = 1
+    </select>
 </mapper>
 

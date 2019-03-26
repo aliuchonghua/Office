@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.westos.Information.dao.SpDao">
+
+    <select id="findMyWFQ" resultType="com.westos.Information.bean.Shenpi"
+            parameterType="com.westos.Information.bean.Shenpi">
+        select *
+        from shenpi
+        where u_id = #{u_id}
+          and type = #{type}
+        order by fqsj
+    </select>
+
+    <select id="findMyWsp" resultType="com.westos.Information.bean.Shenpi"
+            parameterType="com.westos.Information.bean.Shenpi">
+        select *
+        from shenpi
+        where spr_id = #{spr_id}
+          and type = #{type}
+        order by fqsj
+    </select>
+    <insert id="add" parameterType="com.westos.Information.bean.Shenpi">
+        insert into shenpi(id, splx, u_id, u_name, spr_id, spr_name, fqsj, start_time, end_time, type, yy, cfcs, mdcs,
+                           jtgj, qy_id, bm_id) value (
+                                                      #{id}, #{splx}, #{u_id}, #{u_name}, #{spr_id}, #{spr_name},
+                                                      #{fqsj}, #{start_time}, #{end_time}, #{type}, #{yy}, #{cfcs},
+                                                      #{mdcs}, #{jtgj}, #{qy_id}, #{bm_id}
+            )
+    </insert>
+    <delete id="remove" parameterType="com.westos.Information.bean.Shenpi">
+        delete
+        from shenpi
+        where id = #{id}
+    </delete>
+    <update id="update" parameterType="com.westos.Information.bean.Shenpi">
+        update shenpi
+        set type=#{type}
+        where id = #{id}
+    </update>
+</mapper>
+
