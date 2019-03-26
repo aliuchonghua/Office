@@ -1,6 +1,7 @@
 package com.westos.Information.bean;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * 消息
@@ -15,13 +16,11 @@ public class Msg {
     private Module module;//模块
     private Bumen bumen;
     private String valid;//表单验证
+    private Gonggao gonggao;//公告
 
-    public String getValid() {
-        return valid;
-    }
-
-    public void setValid(String valid) {
-        this.valid = valid;
+    public Msg(HttpSession session, Gonggao gonggao) {
+        this.session = session;
+        this.gonggao = gonggao;
     }
 
     public Msg(HttpSession session, Qiye qiye) {
@@ -38,6 +37,28 @@ public class Msg {
         this.session = session;
         this.bumen = bumen;
     }
+
+    public Msg(String mess, Integer type) {
+        this.mess = mess;
+        this.type = type;
+    }
+
+    public Gonggao getGonggao() {
+        return gonggao;
+    }
+
+    public void setGonggao(Gonggao gonggao) {
+        this.gonggao = gonggao;
+    }
+
+    public String getValid() {
+        return valid;
+    }
+
+    public void setValid(String valid) {
+        this.valid = valid;
+    }
+
 
     public Bumen getBumen() {
         return bumen;
@@ -58,10 +79,6 @@ public class Msg {
         this.mess = mess;
     }
 
-    public Msg(String mess, Integer type) {
-        this.mess = mess;
-        this.type = type;
-    }
 
     public Integer getType() {
         return type;

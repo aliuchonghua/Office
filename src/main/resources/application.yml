@@ -28,3 +28,9 @@ logging:
     com.westos.Information.dao: debug
 debug: true
 #debug: false
+#分页插件
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
