@@ -40,10 +40,19 @@ public class SpController {
         return service.findMyWsp(new Msg(request.getSession(), shenpi));
     }
     /**
-     * 审批
+     * 批准
      */
-    @RequestMapping(value = "/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Msg update(@RequestBody Shenpi shenpi, HttpServletRequest request) {
+    @RequestMapping(value = "/approve", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Msg approve(@RequestBody Shenpi shenpi, HttpServletRequest request) {
+        shenpi.setType("已通过");
+        return service.update(new Msg(request.getSession(), shenpi));
+    }
+    /**
+     * 拒绝
+     */
+    @RequestMapping(value = "/refuse", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Msg refuse(@RequestBody Shenpi shenpi, HttpServletRequest request) {
+        shenpi.setType("未通过");
         return service.update(new Msg(request.getSession(), shenpi));
     }
 
