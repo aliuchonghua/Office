@@ -18,8 +18,13 @@ public class Msg {
     private String valid;//表单验证
     private Gonggao gonggao;//公告
     private Shenpi shenpi;//审批
+    private Renwu renwu;//任务
 
 
+    public Msg(HttpSession session, Renwu renwu) {
+        this.session = session;
+        this.renwu = renwu;
+    }
 
     public Msg(HttpSession session, Gonggao gonggao) {
         this.session = session;
@@ -50,6 +55,15 @@ public class Msg {
         this.mess = mess;
         this.type = type;
     }
+
+    public Renwu getRenwu() {
+        return renwu;
+    }
+
+    public void setRenwu(Renwu renwu) {
+        this.renwu = renwu;
+    }
+
     public Shenpi getShenpi() {
         return shenpi;
     }

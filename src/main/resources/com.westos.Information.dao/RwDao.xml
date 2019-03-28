@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.westos.Information.dao.RwDao">
+
+    <select id="findMyRw" parameterType="com.westos.Information.bean.Renwu"
+            resultType="com.westos.Information.bean.Renwu">
+        select *
+        from renwu
+        where zx_id = #{zx_id}
+          and type = #{type}
+    </select>
+
+    <select id="findWXF" resultType="com.westos.Information.bean.Renwu"
+            parameterType="com.westos.Information.bean.Renwu">
+        select *
+        from renwu
+        where u_id = #{u_id}
+          and type = #{type};
+    </select>
+    <insert id="add" parameterType="com.westos.Information.bean.Renwu">
+        insert into renwu(id, name, ms, u_id, u_name, zx_id, zx_name, start_time, end_time, expected_time, type, yxj,
+                          qy_id, bm_id) value (
+                                               #{id}, #{name}, #{ms}, #{u_id}, #{u_name}, #{zx_id}, #{zx_name},
+                                               #{start_time}, #{end_time}, #{expected_time}, #{type}, #{yxj}, #{qy_id},
+                                               #{bm_id}
+            )
+    </insert>
+    <update id="modify" parameterType="com.westos.Information.bean.Renwu">
+        update renwu
+        set type=#{type},
+            end_time=#{end_time}
+        where id = #{id}
+    </update>
+    <delete id="delete" parameterType="com.westos.Information.bean.Renwu">
+        delete
+        from renwu
+        where id = #{id}
+          and type = '未开始'
+          and u_id = #{u_id}
+    </delete>
+</mapper>
+

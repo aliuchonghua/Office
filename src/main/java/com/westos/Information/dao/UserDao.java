@@ -38,5 +38,13 @@ public interface UserDao {
      * @return
      */
     List<User> findBoss(User user);
+    /**
+     * 查找部门负责人
+     */
+    List<User> findBmfzr(User user);
+    /**
+     * 查找下属员工
+     */
+    List<User> findYg(User user);
 
 }

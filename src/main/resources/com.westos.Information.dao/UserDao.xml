@@ -111,5 +111,19 @@
         where qy_id = #{qy_id}
           and zhlx = 1
     </select>
+    <select id="findBmfzr" parameterType="com.westos.Information.bean.User"
+            resultType="com.westos.Information.bean.User">
+        select *
+        from user
+        where qy_id = #{qy_id}
+          and zhlx = 2
+    </select>
+    <select id="findYg" parameterType="com.westos.Information.bean.User"
+            resultType="com.westos.Information.bean.User">
+        select *
+        from user
+        where bm_id = #{bm_id}
+          and zhlx = 3
+    </select>
 </mapper>
 
