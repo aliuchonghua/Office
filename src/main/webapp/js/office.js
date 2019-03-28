@@ -76,10 +76,13 @@ Global.Fun.Format = function (now, mask) {
         }
     });
 };
+Global.Fun.formatDate=function (value) {
+    time_date = value.replace(/-/g,"/");
+    return new Date(time_date);
+};
 /**
  * jquery ajax
  * @param url
- * @param params
  * @param call
  */
 Global.Fun.ajaxGet = function (url, call) {
@@ -92,7 +95,7 @@ Global.Fun.ajaxGet = function (url, call) {
             call(data);
         }
     });
-}
+};
 Global.Fun.ajaxPost = function (url, params, call) {
     $.ajax({
         type: 'POST',
@@ -105,5 +108,4 @@ Global.Fun.ajaxPost = function (url, params, call) {
             call(data);
         }
     });
-}
-
+};

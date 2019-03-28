@@ -1,18 +1,17 @@
 package com.westos.Information.service.impl.rw;
 
-import com.westos.Information.bean.*;
+import com.westos.Information.bean.Msg;
+import com.westos.Information.bean.Renwu;
+import com.westos.Information.bean.User;
 import com.westos.Information.dao.RwDao;
-import com.westos.Information.dao.SpDao;
 import com.westos.Information.dao.UserDao;
 import com.westos.Information.service.service.rw.RwService;
-import com.westos.Information.service.service.sp.SpService;
 import com.westos.Information.util.Auth;
 import com.westos.Information.util.Cons;
 import com.westos.Information.util.ID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -85,6 +84,10 @@ public class RwServiceImpl implements RwService {
 
     @Override
     public Msg delete(Msg msg) {
-        return null;
+        if (rwDao.delete(msg.getRenwu())>0){
+            return new Msg("撤销成功",Cons.delete);
+        }else{
+            return new Msg("撤销失败",Cons.err);
+        }
     }
 }

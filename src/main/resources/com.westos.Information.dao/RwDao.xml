@@ -39,7 +39,6 @@
         from renwu
         where id = #{id}
           and type = '未开始'
-          and u_id = #{u_id}
     </delete>
 </mapper>
 

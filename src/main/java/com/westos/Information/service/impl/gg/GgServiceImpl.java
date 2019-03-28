@@ -1,22 +1,15 @@
 package com.westos.Information.service.impl.gg;
 
-import com.github.pagehelper.PageHelper;
 import com.westos.Information.bean.GgWeidu;
 import com.westos.Information.bean.Gonggao;
 import com.westos.Information.bean.Msg;
-import com.westos.Information.bean.Qiye;
 import com.westos.Information.dao.GgDao;
-import com.westos.Information.dao.QiyeDao;
 import com.westos.Information.service.service.gg.GgService;
-import com.westos.Information.service.service.zzjg.QyService;
 import com.westos.Information.util.Auth;
 import com.westos.Information.util.Cons;
 import com.westos.Information.util.ID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.rmi.runtime.NewThreadAction;
-
-import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 
