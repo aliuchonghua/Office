@@ -10,7 +10,12 @@
         select *
         from renwu
         where zx_id = #{zx_id}
-          and type = #{type}
+        <if test="type != null and name != ''">
+            and
+            type like
+            #{type}
+        </if>
+        order by start_time, type
     </select>
 
     <select id="findWXF" resultType="com.westos.Information.bean.Renwu"
@@ -18,7 +23,12 @@
         select *
         from renwu
         where u_id = #{u_id}
-          and type = #{type};
+        <if test="type != null and name != ''">
+            and
+            type like
+            #{type}
+        </if>
+        order by start_time, type
     </select>
     <insert id="add" parameterType="com.westos.Information.bean.Renwu">
         insert into renwu(id, name, ms, u_id, u_name, zx_id, zx_name, start_time, end_time, expected_time, type, yxj,

@@ -1,0 +1,103 @@
+<div id="wdrwapp" xmlns:v-on="http://www.w3.org/1999/xhtml">
+	<div class="row" style="margin: 0 10px;">
+		<div class="col-md-10 col-md-offset-1">
+			<form class="form-inline">
+				<div class="form-group">
+					<label for="spzt">任务状态</label>
+					<select id="spzt" name="spzt" class="form-control" v-on:change="init()" v-model="rwzt.type">
+						<option selected="selected" value="">请选择</option>
+						<option value="未开始">未开始</option>
+						<option value="进行中">进行中</option>
+						<option value="已完成">已完成</option>
+					</select>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="row" style="margin: 10px;">
+		<div class="col-md-10 col-md-offset-1">
+			<div class="table-responsive" style="padding-left: 20px;padding-right: 20px;">
+				<table class="table table-hover table-condensed">
+					<caption>我的任务</caption>
+					<thead>
+						<tr>
+							<th>标题</th>
+							<th>描述</th>
+							<th>优先级</th>
+							<th>开始时间</th>
+							<th>预计结束时间</th>
+							<th>当前状态</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="(item,index) in rwlist">
+							<td v-on:click="detail(item)">{{item.name}}</td>
+							<td v-on:click="detail(item)">{{item.ms}}</td>
+							<td v-on:click="detail(item)">{{item.yxj}}</td>
+							<td v-on:click="detail(item)">{{item.start_time}}</td>
+							<td v-on:click="detail(item)">{{item.expected_time}}</td>
+							<td v-on:click="detail(item)">{{item.expected_time}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- 详情 -->
+	<div class="modal fade" id="xqform" tabindex="-1" role="dialog" aria-labelledby="xqformLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="xqformLabel">{{rw.name}}</h4>
+				</div>
+				<div class="modal-body">
+					<table class="table table-hover table-bordered" style="word-break: break-all;">
+						<tbody>
+							<tr>
+								<td class="info">
+									开始时间
+								</td>
+								<td>
+									{{sp.start_time}}
+								</td>
+								<td class="info">
+									结束时间
+								</td>
+								<td>
+									{{sp.end_time}}
+								</td>
+							</tr>
+							
+						</tbody>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button id="cancel" type="button" class="btn btn-primary" v-on:click="cancel()">撤销</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade bs-example-modal-sm" id="msg" tabindex="-1" role="dialog" aria-labelledby="msgLabel"
+	     aria-hidden="true">
+	    <div class="modal-dialog modal-sm">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+	                    &times;
+	                </button>
+	                <h4 class="modal-title" id="msgLabel">
+	                    服务器消息
+	                </h4>
+	            </div>
+	            <div class="modal-body">
+	                {{msg.mess}}
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</div>
