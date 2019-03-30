@@ -31,12 +31,12 @@
 					</thead>
 					<tbody>
 						<tr v-for="(item,index) in rwlist">
-							<td v-on:click="detail(item)">{{item.name}}</td>
-							<td v-on:click="detail(item)">{{item.ms}}</td>
+							<td v-on:click="detail(item)">{{summary(item.name)}}</td>
+							<td v-on:click="detail(item)">{{summary(item.ms)}}</td>
 							<td v-on:click="detail(item)">{{item.yxj}}</td>
-							<td v-on:click="detail(item)">{{item.start_time}}</td>
-							<td v-on:click="detail(item)">{{item.expected_time}}</td>
-							<td v-on:click="detail(item)">{{item.expected_time}}</td>
+							<td v-on:click="detail(item)">{{format(item.start_time)}}</td>
+							<td v-on:click="detail(item)">{{format(item.expected_time)}}</td>
+							<td v-on:click="detail(item)">{{expiredStatus(item.expected_time)}}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -59,22 +59,66 @@
 									开始时间
 								</td>
 								<td>
-									{{sp.start_time}}
+									{{format(rw.start_time)}}
 								</td>
 								<td class="info">
 									结束时间
 								</td>
 								<td>
-									{{sp.end_time}}
+									{{format(rw.end_time)}}
+								</td>
+								<td class="info">
+									预计结束时间
+								</td>
+								<td>
+									{{format(rw.expected_time)}}
 								</td>
 							</tr>
-							
+							<tr>
+								<td class="info">
+									创建人
+								</td>
+								<td>
+									{{rw.u_name}}
+								</td>
+								<td class="info">
+									优先级
+								</td>
+								<td>
+									{{rw.yxj}}
+								</td>
+								<td class="info">
+									状态
+								</td>
+								<td>
+									{{rw.type}}
+								</td>
+							</tr>
+							<tr>
+								<td class="info">
+									标题
+								</td>
+								<td colspan="5">
+									{{rw.name}}
+								</td>
+							</tr>
+							<tr>
+								<td class="info" colspan="6">
+									详细描述
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">
+									{{rw.ms}}
+								</td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button id="cancel" type="button" class="btn btn-primary" v-on:click="cancel()">撤销</button>
+					<button id="processing" type="button" class="btn btn-primary" v-on:click="processing()">进行中</button>
+					<button id="completed" type="button" class="btn btn-primary" v-on:click="completed()">已完成</button>
 				</div>
 			</div>
 		</div>
