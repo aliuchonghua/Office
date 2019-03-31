@@ -27,15 +27,11 @@ public interface UserDao {
     Integer deleteUser(User user);
     /**
      * 查找上级部门负责人
-     * @param user 当前用户
-     * @return
      */
     List<User> findLeader(User user);
 
     /**
      * 查找领导
-     * @param user
-     * @return
      */
     List<User> findBoss(User user);
     /**
