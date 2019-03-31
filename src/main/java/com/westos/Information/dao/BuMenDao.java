@@ -1,6 +1,7 @@
 package com.westos.Information.dao;
 
 import com.westos.Information.bean.Bumen;
+import com.westos.Information.bean.Qiye;
 import com.westos.Information.bean.User;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -28,4 +29,14 @@ public interface BuMenDao {
      * 删除
      */
     Integer remove(Bumen bumen);
+    /**
+     * 各部门员工统计
+     */
+    List<Bumen> gbmygtj(Qiye qiye);
+    /**
+     * 各部门完成任务量
+     */
+    List<Bumen> gbmwcrwl(Qiye qiye);
+
+
 }

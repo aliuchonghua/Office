@@ -10,7 +10,7 @@
         select *
         from renwu
         where zx_id = #{zx_id}
-        <if test="type != null and name != ''">
+        <if test="type != null and type != ''">
             and
             type like
             #{type}
@@ -23,7 +23,7 @@
         select *
         from renwu
         where u_id = #{u_id}
-        <if test="type != null and name != ''">
+        <if test="type != null and type != ''">
             and
             type like
             #{type}
@@ -35,7 +35,7 @@
                           qy_id, bm_id) value (
                                                #{id}, #{name}, #{ms}, #{u_id}, #{u_name}, #{zx_id}, #{zx_name},
                                                #{start_time}, #{end_time}, #{expected_time}, #{type}, #{yxj}, #{qy_id},
-                                               #{bm_id}
+                                               (select u.bm_id from user u where u.id = #{zx_id})
             )
     </insert>
     <update id="modify" parameterType="com.westos.Information.bean.Renwu">

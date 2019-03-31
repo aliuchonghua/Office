@@ -18,6 +18,33 @@ public class User {
     private String bm_id;        //部门id
     private String bm_name;        //部门名
     private String pass;        //密码
+    private String rwwks;//未开始
+    private String rwjxz;//进行中
+    private String rwywc;//已完成
+
+    public String getRwwks() {
+        return rwwks;
+    }
+
+    public void setRwwks(String rwwks) {
+        this.rwwks = rwwks;
+    }
+
+    public String getRwjxz() {
+        return rwjxz;
+    }
+
+    public void setRwjxz(String rwjxz) {
+        this.rwjxz = rwjxz;
+    }
+
+    public String getRwywc() {
+        return rwywc;
+    }
+
+    public void setRwywc(String rwywc) {
+        this.rwywc = rwywc;
+    }
 
     @Override
     public String toString() {

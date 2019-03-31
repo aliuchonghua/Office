@@ -60,7 +60,6 @@ public class RwServiceImpl implements RwService {
         rw.setU_name(Auth.getUser(msg).getName());
         rw.setType("未开始");
         rw.setQy_id(Auth.getQiye(msg).getId());
-        rw.setBm_id(Auth.getUser(msg).getBm_id());
         if (rwDao.add(rw)>0){
             return new Msg("下发成功",Cons.add);
         }else {

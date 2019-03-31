@@ -29,7 +29,7 @@
 							<th>链接</th>
 							<th>账户类型</th>
 							<th>所属分类</th>
-							<th>操作</th>
+
 						</tr>
 						</thead>
 						<tbody>
@@ -41,9 +41,6 @@
 							<td v-on:click="updatemodule(item)">{{item.link}}</td>
 							<td v-on:click="updatemodule(item)">{{item.zhlx}}</td>
 							<td v-on:click="updatemodule(item)">{{item.mdlx}}</td>
-							<td v-on:click="remove(item)">
-								<span class="label label-danger">删除</span>
-							</td>
 						</tr>
 						</tbody>
 					</table>
@@ -102,6 +99,7 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 					<button type="button" class="btn btn-primary" v-on:click="add()">提交</button>
+					<button type="button" style="display: none" id="remove" class="btn btn-danger" v-on:click="remove()">删除</button>
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal -->
@@ -127,4 +125,23 @@
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal -->
 	</div>
+<!--    删除确认-->
+    <div class="modal fade bs-example-modal-sm" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    你确定删除{{removemodule.name}}模块吗?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-danger" v-on:click="confirmDelete()">确定</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
 </div>

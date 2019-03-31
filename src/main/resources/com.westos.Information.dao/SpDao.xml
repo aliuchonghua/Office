@@ -40,5 +40,14 @@
         set type=#{type}
         where id = #{id}
     </update>
+    <select id="grspzl" resultType="com.westos.Information.bean.WorkSpzl"
+            parameterType="com.westos.Information.bean.User">
+        select u.name,
+               (select count(*) from shenpi where u_id = u.id and splx='加班')jb,
+               (select count(*) from shenpi where u_id = u.id and splx='请假')qj,
+               (select count(*) from shenpi where u_id = u.id and splx='出差')cc
+        from user u
+        where u.id = #{id}
+    </select>
 </mapper>
 

@@ -1,4 +1,4 @@
-<div id="wdrwapp" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<div id="wxfdapp" xmlns:v-on="http://www.w3.org/1999/xhtml">
 	<div class="row" style="margin: 0 10px;">
 		<div class="col-md-10 col-md-offset-1">
 			<form class="form-inline">
@@ -18,11 +18,11 @@
 		<div class="col-md-10 col-md-offset-1">
 			<div class="table-responsive" style="padding-left: 20px;padding-right: 20px;">
 				<table class="table table-hover table-condensed">
-					<caption>我的任务</caption>
+					<caption>我下发的任务</caption>
 					<thead>
 						<tr>
 							<th>标题</th>
-							<th>描述</th>
+							<th>执行人</th>
 							<th>优先级</th>
 							<th>开始时间</th>
 							<th>预计结束时间</th>
@@ -33,6 +33,7 @@
 					<tbody>
 						<tr v-for="(item,index) in rwlist">
 							<td v-on:click="detail(item)">{{summary(item.name)}}</td>
+							<td v-on:click="detail(item)">{{item.zx_name}}</td>
 							<td v-on:click="detail(item)">{{summary(item.ms)}}</td>
 							<td v-on:click="detail(item)">{{item.yxj}}</td>
 							<td v-on:click="detail(item)">{{format(item.start_time)}}</td>
@@ -78,10 +79,10 @@
 							</tr>
 							<tr>
 								<td class="info">
-									创建人
+									执行人
 								</td>
 								<td>
-									{{rw.u_name}}
+									{{rw.zx_name}}
 								</td>
 								<td class="info">
 									优先级
@@ -119,8 +120,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button id="processing" type="button" class="btn btn-info" v-on:click="processing()">进行中</button>
-					<button id="completed" type="button" class="btn btn-success" v-on:click="completed()">已完成</button>
+					<button id="cancel" type="button" class="btn btn-danger" v-on:click="cancel()">撤销</button>
 				</div>
 			</div>
 		</div>

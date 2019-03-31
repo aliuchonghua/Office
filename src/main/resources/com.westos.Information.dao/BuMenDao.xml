@@ -41,8 +41,7 @@
     </select>
     <!--添加-->
     <insert id="add" parameterType="com.westos.Information.bean.Bumen">
-        insert into bumen(id, qy_id, name
-        )
+        insert into bumen(id, qy_id, name)
         values (#{id}, #{qy_id}, #{name})
     </insert>
     <!--修改-->
@@ -63,5 +62,21 @@
         from bumen
         where id = #{id}
     </delete>
+    <!--    各部门员工统计-->
+    <select id="gbmygtj" parameterType="com.westos.Information.bean.Qiye"
+            resultType="com.westos.Information.bean.Bumen">
+        select b.name, (select count(*) from user u where u.bm_id = b.id) rs
+        from bumen b
+        where b.qy_id = #{id}
+    </select>
+    <!--各部门完成任务量-->
+    <select id="gbmwcrwl" parameterType="com.westos.Information.bean.Qiye"
+            resultType="com.westos.Information.bean.Bumen">
+        select b.name, (select count(*) from renwu r where r.bm_id = b.id and r.type='未开始') rwwks,
+               (select count(*) from renwu r where r.bm_id = b.id and r.type='进行中') rwjxz,
+               (select count(*) from renwu r where r.bm_id = b.id and r.type='已完成') rwywc
+        from bumen b
+        where b.qy_id = #{id}
+    </select>
 </mapper>
 

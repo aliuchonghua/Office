@@ -19,6 +19,7 @@ var mkgl = new Vue({
             mdlx: '',
             qy_id: ''
         },
+        removemodule: {},
         zhlx: {
             gly: '',
             ld: '',
@@ -36,26 +37,34 @@ var mkgl = new Vue({
             });
         },
         updatemodule: function (module) {
+            $('#remove').show();
             $('#addModal').modal('show');
             var split = module.zhlx.split(',');
             for (var i = 0; i < split.length; i++) {
-                if (split[i]==='0') {
+                if (split[i] === '0') {
                     mkgl.zhlx.gly = true;
                 }
-                if (split[i]==='1') {
+                if (split[i] === '1') {
                     mkgl.zhlx.ld = true;
                 }
-                if (split[i]==='2') {
+                if (split[i] === '2') {
                     mkgl.zhlx.fzr = true;
                 }
-                if (split[i]==='3') {
+                if (split[i] === '3') {
                     mkgl.zhlx.yg = true;
                 }
             }
-            this.addmodule = module;
+            mkgl.addmodule = module;
         },
-        remove: function (module) {
-            axios.post('/mkgl/remove', module).then(function (result) {
+        //删除
+        remove: function () {
+            mkgl.removemodule = mkgl.addmodule;
+            $('#addModal').modal('hide');
+            $('#deleteModal').modal('show');
+        },
+        confirmDelete: function () {
+            axios.post('/mkgl/remove', mkgl.removemodule).then(function (result) {
+                $('#deleteModal').modal('hide');
                 mkgl.msg = result.data.mess;
                 $('#msgModal').modal('show');
                 mkgl.init();
@@ -93,6 +102,7 @@ var mkgl = new Vue({
         this.init();
         $('#addModal').on('hide.bs.modal',
             function () {
+                $('#remove').hide();
                 mkgl.addmodule = {
                     id: '',
                     name: '',
@@ -107,6 +117,12 @@ var mkgl = new Vue({
                     fzr: '',
                     yg: ''
                 }
-            });
+            }
+        );
+        $('#deleteModal').on('hide.bs.modal',
+            function () {
+                mkgl.removemodule = {};
+            }
+        );
     }
 });

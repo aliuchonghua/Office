@@ -47,4 +47,13 @@ public interface UserDao {
      */
     List<User> findYg(User user);
 
+    /**
+     * 员工任务绩效
+     */
+    List<User> ygrwjx(User user);
+    /**
+     * 个人任务绩效
+     */
+    List<User> grrwjx(User user);
+
 }

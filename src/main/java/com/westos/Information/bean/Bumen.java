@@ -5,11 +5,47 @@ import java.util.Objects;
 
 public class Bumen {
 
-  private String id;
-  private String qy_id;
-  private String name;
-  private String fjqx;//附加权限
-  private String rs;//人数
+    private String id;
+    private String qy_id;
+    private String name;
+    private String fjqx;//附加权限
+    private String rs;//人数
+    private String num;//计数
+    private String rwwks;//未开始
+    private String rwjxz;//进行中
+    private String rwywc;//已完成
+
+    public String getRwwks() {
+        return rwwks;
+    }
+
+    public void setRwwks(String rwwks) {
+        this.rwwks = rwwks;
+    }
+
+    public String getRwjxz() {
+        return rwjxz;
+    }
+
+    public void setRwjxz(String rwjxz) {
+        this.rwjxz = rwjxz;
+    }
+
+    public String getRwywc() {
+        return rwywc;
+    }
+
+    public void setRwywc(String rwywc) {
+        this.rwywc = rwywc;
+    }
+
+    public String getNum() {
+        return num;
+    }
+
+    public void setNum(String num) {
+        this.num = num;
+    }
 
     public String getRs() {
         return rs;
@@ -26,7 +62,6 @@ public class Bumen {
     public void setFjqx(String fjqx) {
         this.fjqx = fjqx;
     }
-
 
 
     public String getId() {

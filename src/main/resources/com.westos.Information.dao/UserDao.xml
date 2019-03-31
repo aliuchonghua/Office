@@ -125,5 +125,27 @@
         where bm_id = #{bm_id}
           and zhlx = 3
     </select>
+    <!--员工任务绩效-->
+    <select id="ygrwjx" parameterType="com.westos.Information.bean.User"
+            resultType="com.westos.Information.bean.User">
+        select u.name,
+               (select count(*) from renwu r where r.zx_id = u.id and r.type = '未开始') rwwks,
+               (select count(*) from renwu r where r.zx_id = u.id and r.type = '进行中') rwjxz,
+               (select count(*) from renwu r where r.zx_id = u.id and r.type = '已完成') rwywc
+        from user u
+        where u.bm_id = (
+            select b.id
+            from bumen b
+            where id = #{bm_id} )
+          and u.zhlx = 3
+    </select>
+    <!--个人任务绩效-->
+    <select id="grrwjx" parameterType="com.westos.Information.bean.User"
+            resultType="com.westos.Information.bean.User">
+        select u.name,(select count(*) from renwu r where r.zx_id=u.id and r.type='未开始')rwwks,
+               (select count(*) from renwu r where r.zx_id=u.id and r.type='进行中')rwjxz,
+               (select count(*) from renwu r where r.zx_id=u.id and r.type='已完成')rwywc
+        from user u where id=#{id}
+    </select>
 </mapper>
 

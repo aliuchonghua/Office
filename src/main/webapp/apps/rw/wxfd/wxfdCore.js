@@ -1,5 +1,5 @@
-var wdrw = new Vue({
-    el: '#wdrwapp',
+var wxfd = new Vue({
+    el: '#wxfdapp',
     data: {
         rwlist: [],
         rw: {},
@@ -12,15 +12,15 @@ var wdrw = new Vue({
     },
     methods: {
         init: function () {
-            if (wdrw === undefined) {
-                axios.post('/rw/rwgl/findMyRw', {type: ''}).then(function (result) {
-                    wdrw.rwlist = result.data;
+            if (wxfd === undefined) {
+                axios.post('/rw/rwgl/findWXF', {type: ''}).then(function (result) {
+                    wxfd.rwlist = result.data;
                 }).catch(function (err) {
                     console.log(err);
                 });
             } else {
-                axios.post('/rw/rwgl/findMyRw', wdrw.rwzt).then(function (result) {
-                    wdrw.rwlist = result.data;
+                axios.post('/rw/rwgl/findWXF', wxfd.rwzt).then(function (result) {
+                    wxfd.rwlist = result.data;
                 }).catch(function (err) {
                     console.log(err);
                 });
@@ -36,17 +36,12 @@ var wdrw = new Vue({
         //详情
         detail: function (item) {
             if (item.type==='未开始') {
-                $('#processing').show();
-                $('#completed').hide();
-            }else if (item.type==='进行中') {
-                $('#processing').hide();
-                $('#completed').show();
+                $('#cancel').show();
             }else {
-                $('#processing').hide();
-                $('#completed').hide();
+                $('#cancel').hide();
             }
             $('#xqform').modal('show');
-            wdrw.rw = item;
+            wxfd.rw = item;
         },
         format: function (cjsj) {
             if (cjsj!=null&&cjsj!==''){
@@ -63,35 +58,23 @@ var wdrw = new Vue({
                 return '已过期';
             }
         },
-        //已完成
-        completed: function () {
-            axios.post('/rw/rwgl/fulfill', wdrw.rw).then(function (result) {
+        //撤销
+        cancel:function(){
+            axios.post('/rw/rwgl/delete', wxfd.rw).then(function (result) {
                 $('#xqform').modal('hide');
-                wdrw.msg.mess = result.data.mess;
-                $('#msg').modal('show');
-                wdrw.init();
-            }).catch(function (err) {
-                console.log(err);
-            });
-        },
-        //进行中
-        processing: function () {
-            axios.post('/rw/rwgl/hasNotStarted', wdrw.rw).then(function (result) {
-                $('#xqform').modal('hide');
-                wdrw.msg.mess = result.data.mess;
+                wxfd.msg.mess = result.data.mess;
                 $('#msg').modal('show');
             }).catch(function (err) {
                 console.log(err);
             });
         }
-
     },
     mounted: function () {
         this.init();
         $('#xqform').on('hide.bs.modal',
             function () {
-                wdrw.rw = {};
-                wdrw.init();
+                wxfd.rw = {};
+                wxfd.init();
             }
         );
 

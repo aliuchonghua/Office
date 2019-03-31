@@ -1,23 +1,56 @@
 <div class="container">
-	<div class="row" >
-		<div id="workbench">
-			<div id="gly">
-				<div class="col-md-6">
-					<div id="rytj" style="width: 100%;height:500px;"></div>
-				</div>
-				<div class="col-md-6 ">
-					<div id="jxtj" style="width: 100%;height:500px;"></div>
-				</div>
-			</div>
-			<div id="ld">
-
-			</div>
-			<div id="fzr">
-
-			</div>
-			<div id="yg">
-
-			</div>
-		</div>
-	</div>
+    <div class="row">
+        <div id="workbench">
+            <!--            消息计数-->
+            <div class="col-md-12 yc" id="wdjs">
+                <div class="row">
+                    <div class="col-md-4 yc" id="wdggjs">
+                        <!--未读公告-->
+                        <div id="wdgg" style="width: 100%;height:300px;"></div>
+                    </div>
+                    <div class="col-md-4 yc" id="dsprwjs">
+                        <!--待审批申请-->
+                        <div id="dsprw" style="width: 100%;height:300px;"></div>
+                    </div>
+                    <div class="col-md-4 yc" id="wwcrwjs">
+                        <!--未完成任务-->
+                        <div id="wwcrw" style="width: 100%;height:300px;"></div>
+                    </div>
+                    <div class="col-md-4 yc" id="wtgsp">
+                        <!--未通过审批-->
+                        <div id="wtgsptb" style="width: 100%;height:300px;"></div>
+                    </div>
+                </div>
+            </div>
+            <!--各部门员工统计-->
+            <div class="col-md-6 yc" id="gbmygtj">
+                <div id="rytj" style="width: 100%;height:500px;"></div>
+            </div>
+            <!--各部门绩效统计-->
+            <div class="col-md-6 yc" id="gbmjxtj">
+                <div id="jxtj" style="width: 100%;height:500px;"></div>
+            </div>
+            <!--各部门任务绩效-->
+            <div class="col-md-6 yc" id="gbmrwjx">
+                <div id="rwjx" style="width: 100%;height:500px;"></div>
+            </div>
+            <!--员工任务绩效-->
+            <div class="col-md-6 yc" id="xsrwjx">
+                <div id="xsrwjxtb" style="width: 100%;height:500px;"></div>
+            </div>
+            <!--个人任务绩效-->
+            <div class="col-md-6 yc" id="grrwjx">
+                <div id="grrwjxtb" style="width: 100%;height:500px;"></div>
+            </div>
+            <!--个人审批种类-->
+            <div class="col-md-6 yc" id="grspzl">
+                <div id="grspzltb" style="width: 100%;height:500px;"></div>
+            </div>
+        </div>
+    </div>
 </div>
+<style type="text/css">
+    .yc {
+        display: none;
+    }
+</style>
