@@ -36,43 +36,43 @@
     <select id="findUserModule" resultType="com.westos.Information.bean.Module"
             parameterType="com.westos.Information.bean.User">
         SELECT m.`name`,
-               m.`code`,
-               m.`link`,
-               m.`zhlx`,
-               m.`mdlx`
+        m.`code`,
+        m.`link`,
+        m.`zhlx`,
+        m.`mdlx`
         FROM module_configuration m
         WHERE m.`qy_id` = #{qy_id}
-          AND m.`zhlx` LIKE CONCAT('%', #{zhlx}, '%')
-        union all
-        SELECT c.`name`,
-               c.`code`,
-               c.`link`,
-               c.`zhlx`,
-               c.`mdlx`
-        FROM module_configuration c
-        where c.id in (select md_id from bm_qx where bm_id = #{bm_id})
+        AND m.`zhlx` LIKE CONCAT('%', #{zhlx}, '%')
+        <if test="zhlx == 2">
+            union all
+            SELECT c.`name`,
+                   c.`code`,
+                   c.`link`,
+                   c.`zhlx`,
+                   c.`mdlx`
+            FROM module_configuration c
+            where c.id in (select md_id from bm_qx where bm_id = #{bm_id})
+        </if>
+
 
     </select>
     <!--添加-->
     <insert id="add" parameterType="com.westos.Information.bean.Module">
-        insert into module_configuration(id, name, code, link, zhlx, mdlx, qy_id
-        )
-        value
-        (
-        #{id}
-        ,
-        #{name}
-        ,
-        #{code}
-        ,
-        #{link}
-        ,
-        #{zhlx}
-        ,
-        #{mdlx}
-        ,
-        #{qy_id}
-        )
+        insert into module_configuration(id, name, code, link, zhlx, mdlx, qy_id)
+            value
+        (#{id}
+            ,
+         #{name}
+            ,
+         #{code}
+            ,
+         #{link}
+            ,
+         #{zhlx}
+            ,
+         #{mdlx}
+            ,
+         #{qy_id})
     </insert>
     <!--修改-->
     <update id="modify" parameterType="com.westos.Information.bean.Module">
