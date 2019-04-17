@@ -58,7 +58,7 @@ var rwxf = new Vue({
 			type: 'datetime',
 			done: function(value) {
 				rwxf.rw.expected_time = value;
-			}
+            }
 		});
 		$('#msg').on('hide.bs.modal',
 			function() {
@@ -123,9 +123,30 @@ $(document).ready(function() {
 				validators: {
 					notEmpty: {
 						message: '描述不能为空'
+                    ,
+                    stringLength: {
+                        max: 2000,
+                        message: '描述内容字数不能大于2000'
+                    }
 					}
 				}
-			}
+			},
+            start_time: {
+                message: '内容错误',
+                validators: {
+                    notEmpty: {
+                        message: '开始时间不能为空'
+                    }
+                }
+            },
+            expected_time: {
+                message: '内容错误',
+                validators: {
+                    notEmpty: {
+                        message: '结束时间不能为空'
+                    }
+                }
+            }
 		}
 	});
 });
